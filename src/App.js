@@ -1,9 +1,12 @@
 import { Button, Checkbox, Form, Input } from "antd";
 import React from "react";
+import empHandler from "./lib/handler/EmpHander";
 
 function App() {
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     console.log("Success:", values);
+    const result = await empHandler.signIn(values);
+    console.log(result);
   };
 
   const onFinishFailed = (errorInfo) => {
