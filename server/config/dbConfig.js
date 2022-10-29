@@ -13,6 +13,4 @@ const dbInfo = {
 
 const pool = createPool(dbInfo);
 
-console.log(pool);
-
 module.exports = pool;
