@@ -10,10 +10,9 @@ router.post("/login", async (req, res) => {
   const body = req.body;
   try {
     const result = await empService.empLogin(body);
-    console.log(result);
     return res
       .status(200)
-      .json({ status: 200, data: result, message: "Success" });
+      .json({ status: 200, data: result[0], message: "Success" });
   } catch (err) {
     console.log(err);
   }

@@ -1,8 +1,10 @@
 import { Button, Checkbox, Form, Input } from "antd";
-import React from "react";
+import { useState, React } from "react";
 import empHandler from "./lib/handler/EmpHander";
 
 function App() {
+  const [isLoggedIn, setLogIn] = useState({ isAdmin: false });
+
   const onFinish = async (values) => {
     console.log("Success:", values);
     const result = await empHandler.signIn(values);
@@ -36,8 +38,8 @@ function App() {
           autoComplete="off"
         >
           <Form.Item
-            label="Username"
-            name="username"
+            label="사번"
+            name="emp_no"
             rules={[
               {
                 required: true,
@@ -49,7 +51,7 @@ function App() {
           </Form.Item>
 
           <Form.Item
-            label="Password"
+            label="비밀번호"
             name="password"
             rules={[
               {
