@@ -6,8 +6,7 @@ const empHandler = {
     const result = await EmpApi.empLogin(body);
     const signInRes = await result.json();
 
-    console.log(signInRes);
-    return;
+    return signInRes;
   },
 };
 

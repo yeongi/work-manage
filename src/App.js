@@ -3,11 +3,15 @@ import { useState, React } from "react";
 import empHandler from "./lib/handler/EmpHander";
 
 function App() {
-  const [isLoggedIn, setLogIn] = useState({ isAdmin: false });
+  const [isAdmin, setLogIn] = useState({ isAdmin: false });
 
   const onFinish = async (values) => {
-    console.log("Success:", values);
     const result = await empHandler.signIn(values);
+
+    if (result.status === 200) {
+      setLogIn(result.data.ADMIN);
+    }
+
     console.log(result);
   };
 
@@ -17,6 +21,11 @@ function App() {
 
   return (
     <div className="App">
+      {isAdmin ? (
+        <h1>어드민으로 로그인 하셨네요?</h1>
+      ) : (
+        <h1>사원으로 로그인 하셨네요?</h1>
+      )}
       <h1>Work-Manage with electron</h1>
       <p>일렉트론 웹 개발 언어로 데스크톱 프로그램을 개발할 수 있음</p>
       <p>이걸로 다 베포 해서 하나의 서버로 통신할 예정</p>
