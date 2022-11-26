@@ -3,7 +3,7 @@ import { useState, React } from "react";
 import empHandler from "./lib/handler/EmpHander";
 
 function App() {
-  const [isAdmin, setLogIn] = useState({ isAdmin: false });
+  const [isAdmin, setLogIn] = useState({ isAdmin: null });
 
   const onFinish = async (values) => {
     const result = await empHandler.signIn(values);
@@ -11,8 +11,6 @@ function App() {
     if (result.status === 200) {
       setLogIn(result.data.ADMIN);
     }
-
-    console.log(result);
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -21,15 +19,9 @@ function App() {
 
   return (
     <div className="App">
-      {isAdmin ? (
-        <h1>어드민으로 로그인 하셨네요?</h1>
-      ) : (
-        <h1>사원으로 로그인 하셨네요?</h1>
-      )}
       <h1>Work-Manage with electron</h1>
-      <p>일렉트론 웹 개발 언어로 데스크톱 프로그램을 개발할 수 있음</p>
-      <p>이걸로 다 베포 해서 하나의 서버로 통신할 예정</p>
-      <h1> 페이지 정의 </h1>
+      <h3>로그인 페이지 입니다.</h3>
+      <p> 사원 분들은 관리자님에게 아이디 생성을 요청해야 합니다.</p>
       <div>
         <Form
           name="basic"
