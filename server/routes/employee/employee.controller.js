@@ -10,9 +10,18 @@ router.post("/login", async (req, res) => {
   const body = req.body;
   try {
     const result = await empService.empLogin(body);
-    return res
-      .status(200)
-      .json({ status: 200, data: result[0], message: "Success" });
+    if (result.length === 0)
+      return res.status(200).json({
+        status: 200,
+        data: result[0],
+        message: "로그인 실패. 사번과 비밀번호를 확인 주세요.",
+      });
+    if (result.length === 1)
+      return res.status(200).json({
+        status: 200,
+        data: result[0],
+        message: "로그인 성공",
+      });
   } catch (err) {
     console.log(err);
   }
