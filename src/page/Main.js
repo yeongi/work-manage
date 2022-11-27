@@ -10,10 +10,10 @@ const Main = () => {
   return (
     <>
       <div className={classes.main}>
-        <h1> 메인 페이지 입니다.</h1>
-
+        <h1> WORK - MANAGE </h1>
         <Button onClick={loginCtx.onLogout}>로그아웃 하기</Button>
       </div>
+      <hr />
       {loginCtx.state.IS_ADMIN ? <Admin /> : <Employee />}
     </>
   );
