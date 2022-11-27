@@ -6,8 +6,10 @@ function App() {
   const loginCtx = useLoginCtx();
   return (
     <div className="App">
-      {!loginCtx.state.IS_LOGIN && <Login />}
-      {loginCtx.state.IS_LOGIN && <Main />}
+      <section>
+        {!loginCtx.state.IS_LOGIN && <Login />}
+        {loginCtx.state.IS_LOGIN && <Main />}
+      </section>
     </div>
   );
 }
