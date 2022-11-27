@@ -1,0 +1,15 @@
+.emp-wrapper {
+  display: flex;
+  padding: 10px;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.emp-main {
+  width: 50%;
+  padding: 10px;
+}
+.emp-calendar {
+  width: 50%;
+  padding: 10px;
+}
