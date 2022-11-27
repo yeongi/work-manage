@@ -1,24 +1,24 @@
 import { Button, Checkbox, Form, Input } from "antd";
-import { useState, React } from "react";
 import empHandler from "../lib/handler/EmpHander";
+import { useLoginCtx } from "../lib/store/LoginContext";
 
-const Login = (props) => {
-  //todo : 나중에 Redux로 변경
-  const [isAdmin, setLogIn] = useState({ isAdmin: null });
+const Login = () => {
+  const loginCtx = useLoginCtx();
 
   const onFinish = async (values) => {
     const result = await empHandler.signIn(values);
 
     if (result.status === 200) {
       alert(`로그인 결과 : ${result.message}`);
-      setLogIn(result.data.ADMIN);
-      props.loginHandelr();
+      const { ADMIN, EMP_NAME, EMP_NO } = result.data;
+      loginCtx.onLogin({ IS_LOGIN: true, EMP_NO, EMP_NAME, IS_ADMIN: ADMIN });
     }
   };
 
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+
   return (
     <div>
       <h1>Work-Manage with electron</h1>
