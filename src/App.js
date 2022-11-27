@@ -12,7 +12,7 @@ function App() {
   return (
     <div className="App">
       {!isLoggedIn && <Login loginHandelr={loginStateHandler} />}
-      {isLoggedIn && <Main />}
+      {isLoggedIn && <Main logoutHandler={loginStateHandler} />}
     </div>
   );
 }
