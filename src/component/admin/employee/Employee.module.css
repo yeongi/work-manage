@@ -1,0 +1,39 @@
+.emp-wrapper {
+  text-align: center;
+  padding: 2rem;
+  background-color: rgb(247, 247, 247);
+}
+
+.emp-item {
+  display: flex;
+  justify-content: space-around;
+  background-color: white;
+  padding: 30px;
+}
+
+.emp-add {
+  text-align: center;
+  border: 1px solid black;
+  width: 28%;
+  padding: 20px;
+  height: 700px;
+  border-radius: 50px;
+}
+
+.emp-list {
+  text-align: center;
+  border: 1px solid black;
+  width: 28%;
+  padding: 20px;
+  height: 700px;
+  border-radius: 50px;
+}
+
+.emp-info {
+  text-align: center;
+  border: 1px solid black;
+  width: 28%;
+  padding: 20px;
+  height: 700px;
+  border-radius: 50px;
+}

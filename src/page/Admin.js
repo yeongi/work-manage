@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Employee from "../component/admin/Employee";
+import Employee from "../component/admin/employee/Employee";
 import HullManage from "../component/admin/HullManage";
 import WorkRecord from "../component/admin/WorkRecord";
 import classes from "./Admin.module.css";
