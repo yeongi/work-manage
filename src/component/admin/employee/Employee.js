@@ -1,3 +1,4 @@
+import AddEmployeeForm from "./AddEmployeeForm";
 import classes from "./Employee.module.css";
 
 const Employee = () => {
@@ -7,7 +8,8 @@ const Employee = () => {
       <hr />
       <div className={classes["emp-item"]}>
         <section className={classes["emp-add"]}>
-          <h1>사원 추가</h1>
+          <h1>사원/관리자 추가</h1>
+          <AddEmployeeForm />
         </section>
         <section className={classes["emp-list"]}>
           <h1>사원 조회</h1>
