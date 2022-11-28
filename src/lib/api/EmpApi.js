@@ -1,9 +1,11 @@
-const CREATE_API = "http://localhost:5000/emp";
+import { CREATE_API } from "../createApi";
+
+const API = CREATE_API("emp");
 
 const EmpApi = {
   empLogin: (body) => {
     //id, password
-    return fetch(`${CREATE_API}/login`, {
+    return fetch(`${API}/login`, {
       method: "post",
       headers: {
         "Content-type": "application/json",

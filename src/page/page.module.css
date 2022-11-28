@@ -8,12 +8,13 @@
 
 .login-form {
   margin: 0 auto;
+  width: 500px;
   padding: 20px;
-  border: solid 1px black;
+  border: solid 1px rgb(215, 215, 215);
+  border-radius: 20px;
 }
 
 .main {
   display: flex;
   justify-content: space-around;
-  padding: 20px;
 }
