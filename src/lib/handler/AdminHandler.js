@@ -7,6 +7,13 @@ const AdminHandler = {
 
     return addResult;
   },
+
+  getEmployeeList: async () => {
+    const result = await AdminApi.getEmpList();
+    const empList = await result.json();
+
+    return empList.data;
+  },
 };
 
 export default AdminHandler;

@@ -12,6 +12,14 @@ const AdminApi = {
       body: JSON.stringify(body),
     });
   },
+  getEmpList: () => {
+    return fetch(`${API}/emp/list`, {
+      method: "get",
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+  },
 };
 
 export default AdminApi;

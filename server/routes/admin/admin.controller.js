@@ -27,6 +27,18 @@ router.post("/emp/add", async (req, res) => {
 });
 
 //사원 조회
+router.get("/emp/list", async (req, res) => {
+  try {
+    const result = await AdminService.getEmployeeList();
+    return res.status(200).json({
+      status: 200,
+      data: result,
+      message: "사원 넣기 성공",
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 //선체 추가
 router.post("/hull/add", async (req, res) => {});
