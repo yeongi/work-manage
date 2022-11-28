@@ -1,16 +1,18 @@
 import React from "react";
 import { Button, Checkbox, Form, Input } from "antd";
 import classes from "./Employee.module.css";
+import AdminHandler from "../../../lib/handler/AdminHandler";
 
 const AddEmployeeForm = () => {
-  //   EMP_NO;
-  //   EMP_NAME;
-  //   EMP_PW;
-  //   ADMIN;
+  const [form] = Form.useForm();
 
-  const onFinish = (values) => {
-    console.log("Success:", values);
+  const onFinish = async (values) => {
+    const result = await AdminHandler.addEmployee(values);
+    if (result.status === 203) alert(`${result.message}`);
+    if (result.status === 204) alert(`${result.message} : ${result.data}`);
+    form.resetFields();
   };
+
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
@@ -18,6 +20,7 @@ const AddEmployeeForm = () => {
   return (
     <div className={classes["emp-input"]}>
       <Form
+        form={form}
         name="basic"
         labelCol={{
           span: 8,
@@ -68,7 +71,7 @@ const AddEmployeeForm = () => {
             },
           ]}
         >
-          <Input />
+          <Input.Password />
         </Form.Item>
 
         <Form.Item

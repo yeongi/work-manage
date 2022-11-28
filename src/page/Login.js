@@ -11,7 +11,7 @@ const Login = () => {
 
     if (result.status === 200) {
       alert(`로그인 결과 : ${result.message}`);
-      const { ADMIN, EMP_NAME, EMP_NO } = result.data;
+      const { EMP_NAME, EMP_NO, ADMIN } = result.data;
       loginCtx.onLogin({ IS_LOGIN: true, EMP_NO, EMP_NAME, IS_ADMIN: ADMIN });
     }
   };

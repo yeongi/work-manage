@@ -14,7 +14,7 @@
 
 .emp-add {
   border: 1px solid black;
-  width: 30%;
+  width: 26%;
   padding: 20px;
   margin: 20px;
   height: 400px;
@@ -34,7 +34,7 @@
 .emp-list {
   text-align: center;
   border: 1px solid black;
-  width: 28%;
+  width: 26%;
   padding: 20px;
   height: 700px;
   border-radius: 50px;
@@ -43,7 +43,7 @@
 .emp-info {
   text-align: center;
   border: 1px solid black;
-  width: 28%;
+  width: 26%;
   padding: 20px;
   height: 700px;
   border-radius: 50px;
