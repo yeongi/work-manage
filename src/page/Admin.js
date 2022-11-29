@@ -1,6 +1,6 @@
 import { useState } from "react";
 import EmpManage from "../component/admin/employee/EmpManage";
-import HullManage from "../component/admin/HullManage";
+import HullManage from "../component/admin/hull/HullManage";
 import WorkRecord from "../component/admin/WorkRecord";
 import classes from "./Admin.module.css";
 
