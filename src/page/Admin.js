@@ -31,7 +31,6 @@ const Admin = () => {
 
   return (
     <>
-      <h1>어드민 페이지 입니다.</h1>
       <section className={classes["nav-wrapper"]}>
         {pageArr.map((item) => {
           return (

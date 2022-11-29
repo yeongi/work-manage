@@ -3,7 +3,7 @@ import { Button, Checkbox, Form, Input } from "antd";
 import classes from "./Employee.module.css";
 import AdminHandler from "../../../lib/handler/AdminHandler";
 
-const AddEmployeeForm = () => {
+const AddEmployeeForm = ({ refreshHandler }) => {
   const [form] = Form.useForm();
 
   const onFinish = async (values) => {
@@ -11,6 +11,7 @@ const AddEmployeeForm = () => {
     if (result.status === 203) alert(`${result.message}`);
     if (result.status === 204) alert(`${result.message} : ${result.data}`);
     form.resetFields();
+    refreshHandler();
   };
 
   const onFinishFailed = (errorInfo) => {
