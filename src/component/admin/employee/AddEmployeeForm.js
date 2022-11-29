@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Checkbox, Form, Input } from "antd";
-import classes from "./Employee.module.css";
+import classes from "./EmpManage.module.css";
 import AdminHandler from "../../../lib/handler/AdminHandler";
 
 const AddEmployeeForm = ({ refreshHandler }) => {
@@ -12,10 +12,6 @@ const AddEmployeeForm = ({ refreshHandler }) => {
     if (result.status === 204) alert(`${result.message} : ${result.data}`);
     form.resetFields();
     refreshHandler();
-  };
-
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
   };
 
   return (
@@ -33,7 +29,6 @@ const AddEmployeeForm = ({ refreshHandler }) => {
           remember: true,
         }}
         onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
         <Form.Item

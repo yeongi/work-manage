@@ -2,7 +2,7 @@ import LoginState from "../component/emp/LoginState";
 import WorkCalendar from "../component/emp/WorkCalendar";
 import classes from "./Employee.module.css";
 
-const Employee = (props) => {
+const EmpMain = (props) => {
   return (
     <>
       <div className={classes["emp-wrapper"]}>
@@ -19,4 +19,4 @@ const Employee = (props) => {
   );
 };
 
-export default Employee;
+export default EmpMain;

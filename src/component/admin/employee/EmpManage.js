@@ -1,10 +1,10 @@
+import { useEffect, useState } from "react";
 import AddEmployeeForm from "./AddEmployeeForm";
 import EmployeeList from "./EmployeeList";
-import { useEffect, useState } from "react";
 import AdminHandler from "../../../lib/handler/AdminHandler";
-import classes from "./Employee.module.css";
+import classes from "./EmpManage.module.css";
 
-const Employee = () => {
+const EmpManage = () => {
   const [empList, setEmpList] = useState({});
 
   const getEmpList = async () => {
@@ -37,4 +37,4 @@ const Employee = () => {
   );
 };
 
-export default Employee;
+export default EmpManage;

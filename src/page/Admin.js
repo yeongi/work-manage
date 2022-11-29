@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Employee from "../component/admin/employee/Employee";
+import EmpManage from "../component/admin/employee/EmpManage";
 import HullManage from "../component/admin/HullManage";
 import WorkRecord from "../component/admin/WorkRecord";
 import classes from "./Admin.module.css";
@@ -19,7 +19,7 @@ const Admin = () => {
       myPage = <WorkRecord />;
       break;
     case "EMPLOYEE":
-      myPage = <Employee />;
+      myPage = <EmpManage />;
       break;
     default:
       myPage = <h1>페이지를 선택 하세요.</h1>;

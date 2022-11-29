@@ -1,6 +1,6 @@
 import { Button } from "antd";
 import Admin from "./Admin";
-import Employee from "./Employee";
+import EmpMain from "./EmpMain";
 import { useLoginCtx } from "../lib/store/LoginContext";
 import classes from "./page.module.css";
 
@@ -14,7 +14,7 @@ const Main = () => {
         <Button onClick={loginCtx.onLogout}>로그아웃 하기</Button>
       </div>
       <hr />
-      {loginCtx.state.IS_ADMIN ? <Admin /> : <Employee />}
+      {loginCtx.state.IS_ADMIN ? <Admin /> : <EmpMain />}
     </>
   );
 };
