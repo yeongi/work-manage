@@ -14,6 +14,20 @@ const AdminHandler = {
 
     return empList.data;
   },
+
+  addHull: async (body) => {
+    const result = await AdminApi.addHull(body);
+    const addResult = await result.json();
+
+    return addResult;
+  },
+
+  getHullList: async () => {
+    const result = await AdminApi.getHullList();
+    const hullList = await result.json();
+
+    return hullList.data;
+  },
 };
 
 export default AdminHandler;

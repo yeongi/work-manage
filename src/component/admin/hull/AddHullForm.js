@@ -1,12 +1,15 @@
 import React from "react";
 import { Button, Form, Input, Space } from "antd";
 import classes from "./HullManage.module.css";
+import AdminHandler from "../../../lib/handler/AdminHandler";
 
-const AddHullForm = (props) => {
+const AddHullForm = () => {
   const [form] = Form.useForm();
 
   const onFinish = async (values) => {
-    console.log(values);
+    const result = await AdminHandler.addHull(values);
+    console.log(result);
+    if (result) alert(result.message);
     form.resetFields();
   };
 

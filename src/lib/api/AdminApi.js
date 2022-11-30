@@ -12,8 +12,28 @@ const AdminApi = {
       body: JSON.stringify(body),
     });
   },
+
   getEmpList: () => {
     return fetch(`${API}/emp/list`, {
+      method: "get",
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+  },
+
+  addHull: (hull) => {
+    return fetch(`${API}/hull/add`, {
+      method: "post",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(hull),
+    });
+  },
+
+  getHullList: () => {
+    return fetch(`${API}/hull/list`, {
       method: "get",
       headers: {
         "Content-type": "application/json",
