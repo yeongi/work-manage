@@ -11,7 +11,7 @@ const HullManage = () => {
           <AddHullForm />
           <hr />
           <h1>블럭 추가</h1>
-          <AddBlockForm />s
+          <AddBlockForm />
         </section>
         <section>
           <h1>선체 / 블럭 삭제</h1>
