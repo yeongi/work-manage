@@ -13,5 +13,25 @@ const EmpApi = {
       body: JSON.stringify(body),
     });
   },
+
+  addWork: (body) => {
+    return fetch(`${API}/work/list`, {
+      method: "post",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+  },
+
+  getWorkList: () => {
+    return fetch(`${API}/work/list`, {
+      method: "get",
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+  },
 };
+
 export default EmpApi;

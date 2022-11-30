@@ -20,7 +20,7 @@ module.exports = empService = {
       const conn = await pool.getConnection();
       const query = "Insert INTO work (WORK_TYPE, WORK_DES) value (?,?)";
 
-      const [result] = await conn.query(query, [WORK_TYPE, WORK_DES]);
+      const result = await conn.query(query, [WORK_TYPE, WORK_DES]);
       conn.release();
       return result;
     } catch (error) {

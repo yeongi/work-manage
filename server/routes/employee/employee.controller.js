@@ -52,6 +52,7 @@ router.post("/work/list", async (req, res) => {
   const workInfo = req.body;
   try {
     const result = await empService.addWork(workInfo);
+    console.log(result);
     if (Array.isArray(result))
       return res.status(200).json({
         status: 203,
