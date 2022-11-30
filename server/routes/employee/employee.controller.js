@@ -34,10 +34,39 @@ router.get("/hull/list", async (req, res) => {});
 router.get("/hull/:hullno/block", async (req, res) => {});
 
 //업무 리스트 조회
-router.get("/work/list", async (req, res) => {});
+router.get("/work/list", async (req, res) => {
+  try {
+    const result = await empService.getWorkList();
+    return res.status(200).json({
+      status: 200,
+      data: result,
+      message: "업무 리스트 가져오기 성공",
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 //업무 추가
-router.post("/work/list", async (req, res) => {});
+router.post("/work/list", async (req, res) => {
+  const workInfo = req.body;
+  try {
+    const result = await empService.addWork(workInfo);
+    if (Array.isArray(result))
+      return res.status(200).json({
+        status: 203,
+        message: "업무 넣기 성공",
+      });
+    if (!Array.isArray(result))
+      return res.status(200).json({
+        status: 204,
+        data: result,
+        message: "오류 발생",
+      });
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 //업무 내역 입력
 router.post("/work/record", async (req, res) => {});

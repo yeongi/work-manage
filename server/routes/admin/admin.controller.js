@@ -33,7 +33,7 @@ router.get("/emp/list", async (req, res) => {
     return res.status(200).json({
       status: 200,
       data: result,
-      message: "사원 넣기 성공",
+      message: "사원 가져오기 성공",
     });
   } catch (err) {
     console.log(err);

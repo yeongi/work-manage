@@ -13,4 +13,35 @@ module.exports = empService = {
       throw error;
     }
   },
+
+  addWork: async (body) => {
+    try {
+      const { WORK_TYPE, WORK_DES } = body;
+      const conn = await pool.getConnection();
+      const query = "Insert INTO work (WORK_TYPE, WORK_DES) value (?,?)";
+
+      const [result] = await conn.query(query, [WORK_TYPE, WORK_DES]);
+      conn.release();
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  getWorkList: async () => {
+    try {
+      const conn = await pool.getConnection();
+
+      const query = "select * from work ";
+
+      const [result] = await conn.query(query);
+
+      conn.release();
+
+      return result;
+    } catch (err) {
+      console.log(err);
+      return err.message;
+    }
+  },
 };

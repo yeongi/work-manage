@@ -46,10 +46,9 @@ module.exports = {
 
       const { HULL_NO, HULL_TYPE, SHIPYARD } = hull;
 
-      const result = await conn.query(
-        "Insert INTO hull (HULL_NO, HULL_TYPE, SHIPYARD) value (?,?,?)",
-        [HULL_NO, HULL_TYPE, SHIPYARD]
-      );
+      const query =
+        "Insert INTO hull (HULL_NO, HULL_TYPE, SHIPYARD) value (?,?,?)";
+      const result = await conn.query(query, [HULL_NO, HULL_TYPE, SHIPYARD]);
 
       conn.release();
 
@@ -83,10 +82,10 @@ module.exports = {
 
       const { BLK_NO, HULL_SQ, NORM_MH } = BLK;
 
-      const result = await conn.query(
-        "Insert INTO block (BLK_NO, HULL_SQ, NORM_MH) value (?,?,?)",
-        [BLK_NO, HULL_SQ, NORM_MH]
-      );
+      const query =
+        "Insert INTO block (BLK_NO, HULL_SQ, NORM_MH) value (?,?,?)";
+
+      const result = await conn.query(query, [BLK_NO, HULL_SQ, NORM_MH]);
 
       conn.release();
 
