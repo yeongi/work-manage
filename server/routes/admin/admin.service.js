@@ -77,15 +77,15 @@ module.exports = {
     }
   },
 
-  addHullBlock: async () => {
+  addHullBlock: async (BLK) => {
     try {
       const conn = await pool.getConnection();
 
-      const { HULL_NO, HULL_TYPE, SHIPYARD } = hull;
+      const { BLK_NO, HULL_SQ, NORM_MH } = BLK;
 
       const result = await conn.query(
-        "Insert INTO hull (HULL_NO, HULL_TYPE, SHIPYARD) value (?,?,?)",
-        [HULL_NO, HULL_TYPE, SHIPYARD]
+        "Insert INTO block (BLK_NO, HULL_SQ, NORM_MH) value (?,?,?)",
+        [BLK_NO, HULL_SQ, NORM_MH]
       );
 
       conn.release();

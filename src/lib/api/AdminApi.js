@@ -40,6 +40,16 @@ const AdminApi = {
       },
     });
   },
+
+  addBlock: (block) => {
+    return fetch(`${API}/blk/add`, {
+      method: "post",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(block),
+    });
+  },
 };
 
 export default AdminApi;

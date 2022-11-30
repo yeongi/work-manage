@@ -1,17 +1,14 @@
 import React from "react";
 import { Button, Form, Input, InputNumber, Select, Space } from "antd";
 import classes from "./HullManage.module.css";
+import AdminHandler from "../../../lib/handler/AdminHandler";
 
-const AddBlockForm = (props) => {
+const AddBlockForm = ({ hullList }) => {
   const [form] = Form.useForm();
-  // BLK_NO char(255) PK
-  // HULL_NO char(255) PK
-  // NORM_MH int
-  // RES_MH int
-  // COMPLETE int
 
   const onFinish = async (values) => {
-    console.log(values);
+    const result = await AdminHandler.addBlock(values);
+    if (result) alert(result.message);
     form.resetFields();
   };
 
@@ -20,19 +17,11 @@ const AddBlockForm = (props) => {
   };
 
   return (
-    <div className={classes["hull-input"]}>
+    <div className={classes["block-input"]}>
       <Form
         form={form}
         name="basic"
-        labelCol={{
-          span: 8,
-        }}
-        wrapperCol={{
-          span: 16,
-        }}
-        initialValues={{
-          remember: true,
-        }}
+        size="large"
         onFinish={onFinish}
         autoComplete="off"
       >
@@ -50,15 +39,25 @@ const AddBlockForm = (props) => {
         </Form.Item>
         <Form.Item
           label="선체 번호"
-          name="HULL_NO"
+          name="HULL_SQ"
           rules={[
             {
               required: true,
-              message: "선체 번호를 입력해 주세요!",
+              message: "선체 번호를 선택해 주세요!",
             },
           ]}
         >
-          <Select />
+          <Select style={{ width: 500 }}>
+            {hullList.map((hull) => {
+              return (
+                <Select.Option value={hull.HULL_SQ} key={hull.HULL_SQ}>
+                  {`HULL_NO : ${hull.HULL_NO} /
+                  HULL_TYPE : ${hull.HULL_TYPE} /
+                  SHIPYARD : ${hull.SHIPYARD}`}
+                </Select.Option>
+              );
+            })}
+          </Select>
         </Form.Item>
 
         <Form.Item
@@ -73,22 +72,23 @@ const AddBlockForm = (props) => {
         >
           <InputNumber />
         </Form.Item>
-        <Form.Item
-          wrapperCol={{
-            offset: 8,
-            span: 16,
-          }}
-        >
-          <Space>
-            <Button htmlType="button" onClick={resetHandler}>
-              Reset
-            </Button>
+        <div style={{ float: "right" }}>
+          <Form.Item>
+            <Space>
+              <Button htmlType="button" onClick={resetHandler}>
+                Reset
+              </Button>
 
-            <Button type="primary" htmlType="submit">
-              제출하기
-            </Button>
-          </Space>
-        </Form.Item>
+              <Button
+                type="primary"
+                htmlType="submit"
+                className="login-form-button"
+              >
+                제출하기
+              </Button>
+            </Space>
+          </Form.Item>
+        </div>
       </Form>
     </div>
   );

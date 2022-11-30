@@ -28,6 +28,13 @@ const AdminHandler = {
 
     return hullList.data;
   },
+
+  addBlock: async (body) => {
+    const result = await AdminApi.addBlock(body);
+    const addResult = await result.json();
+
+    return addResult;
+  },
 };
 
 export default AdminHandler;

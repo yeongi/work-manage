@@ -3,13 +3,13 @@ import { Button, Form, Input, Space } from "antd";
 import classes from "./HullManage.module.css";
 import AdminHandler from "../../../lib/handler/AdminHandler";
 
-const AddHullForm = () => {
+const AddHullForm = ({ refreshHandler }) => {
   const [form] = Form.useForm();
 
   const onFinish = async (values) => {
     const result = await AdminHandler.addHull(values);
-    console.log(result);
     if (result) alert(result.message);
+    refreshHandler();
     form.resetFields();
   };
 
@@ -22,14 +22,12 @@ const AddHullForm = () => {
       <Form
         form={form}
         name="basic"
+        size="large"
         labelCol={{
           span: 8,
         }}
         wrapperCol={{
           span: 16,
-        }}
-        initialValues={{
-          remember: true,
         }}
         onFinish={onFinish}
         autoComplete="off"
@@ -71,23 +69,19 @@ const AddHullForm = () => {
         >
           <Input />
         </Form.Item>
+        <div style={{ float: "right" }}>
+          <Form.Item>
+            <Space>
+              <Button htmlType="button" onClick={resetHandler}>
+                Reset
+              </Button>
 
-        <Form.Item
-          wrapperCol={{
-            offset: 8,
-            span: 16,
-          }}
-        >
-          <Space>
-            <Button htmlType="button" onClick={resetHandler}>
-              Reset
-            </Button>
-
-            <Button type="primary" htmlType="submit">
-              제출하기
-            </Button>
-          </Space>
-        </Form.Item>
+              <Button type="primary" htmlType="submit">
+                제출하기
+              </Button>
+            </Space>
+          </Form.Item>
+        </div>
       </Form>
     </div>
   );
