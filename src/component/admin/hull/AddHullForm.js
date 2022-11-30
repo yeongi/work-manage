@@ -42,7 +42,7 @@ const AddHullForm = ({ refreshHandler }) => {
             },
           ]}
         >
-          <Input />
+          <Input placeholder="HULL_NO" />
         </Form.Item>
 
         <Form.Item
@@ -55,7 +55,7 @@ const AddHullForm = ({ refreshHandler }) => {
             },
           ]}
         >
-          <Input />
+          <Input placeholder="HULL_TYPE" />
         </Form.Item>
         <Form.Item
           label="조선소 코드"
@@ -67,7 +67,7 @@ const AddHullForm = ({ refreshHandler }) => {
             },
           ]}
         >
-          <Input />
+          <Input placeholder="SHIPYARD" />
         </Form.Item>
         <div style={{ float: "right" }}>
           <Form.Item>

@@ -35,7 +35,7 @@ const AddBlockForm = ({ hullList }) => {
             },
           ]}
         >
-          <Input />
+          <Input placeholder="BLOCK_NO" />
         </Form.Item>
         <Form.Item
           label="선체 번호"
@@ -43,16 +43,16 @@ const AddBlockForm = ({ hullList }) => {
           rules={[
             {
               required: true,
-              message: "선체 번호를 선택해 주세요!",
+              message: "선체를 선택해 주세요!",
             },
           ]}
         >
-          <Select style={{ width: 500 }}>
+          <Select style={{ width: 500 }} placeholder="선체를 선택해 주세요.">
             {hullList.map((hull) => {
               return (
                 <Select.Option value={hull.HULL_SQ} key={hull.HULL_SQ}>
-                  {`HULL_NO : ${hull.HULL_NO} /
-                  HULL_TYPE : ${hull.HULL_TYPE} /
+                  {`HULL_NO : ${hull.HULL_NO} / 
+                  HULL_TYPE : ${hull.HULL_TYPE} / 
                   SHIPYARD : ${hull.SHIPYARD}`}
                 </Select.Option>
               );
@@ -70,7 +70,7 @@ const AddBlockForm = ({ hullList }) => {
             },
           ]}
         >
-          <InputNumber />
+          <InputNumber placeholder="M/H" />
         </Form.Item>
         <div style={{ float: "right" }}>
           <Form.Item>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Checkbox, Form, Input } from "antd";
+import { Button, Checkbox, Form, Input, Space } from "antd";
 import classes from "./EmpManage.module.css";
 import AdminHandler from "../../../lib/handler/AdminHandler";
 
@@ -41,7 +41,7 @@ const AddEmployeeForm = ({ refreshHandler }) => {
             },
           ]}
         >
-          <Input />
+          <Input placeholder="사원 번호 입력" />
         </Form.Item>
 
         <Form.Item
@@ -54,7 +54,7 @@ const AddEmployeeForm = ({ refreshHandler }) => {
             },
           ]}
         >
-          <Input />
+          <Input placeholder="사원 이름 입력" />
         </Form.Item>
 
         <Form.Item
@@ -67,29 +67,21 @@ const AddEmployeeForm = ({ refreshHandler }) => {
             },
           ]}
         >
-          <Input.Password />
-        </Form.Item>
-
-        <Form.Item
-          name="ADMIN"
-          valuePropName="checked"
-          wrapperCol={{
-            offset: 8,
-            span: 16,
-          }}
-        >
-          <Checkbox>관리자 여부</Checkbox>
+          <Input placeholder="사원 비밀번호 입력" />
         </Form.Item>
 
         <Form.Item
           wrapperCol={{
-            offset: 8,
+            offset: 4,
             span: 16,
           }}
         >
-          <Button type="primary" htmlType="submit">
-            제출하기
-          </Button>
+          <Space>
+            <Checkbox>관리자 여부</Checkbox>
+            <Button type="primary" htmlType="submit">
+              제출하기
+            </Button>
+          </Space>
         </Form.Item>
       </Form>
     </div>
