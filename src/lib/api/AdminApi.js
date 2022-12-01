@@ -50,6 +50,15 @@ const AdminApi = {
       body: JSON.stringify(block),
     });
   },
+
+  getBlkList: (hull_no) => {
+    return fetch(`${API}/blk/list/${hull_no}`, {
+      method: "get",
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+  },
 };
 
 export default AdminApi;

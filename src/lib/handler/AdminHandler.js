@@ -35,6 +35,13 @@ const AdminHandler = {
 
     return addResult;
   },
+
+  getBlkList: async (hull_no) => {
+    const result = await AdminApi.getBlkList(hull_no);
+    const blkList = await result.json();
+
+    return blkList.data;
+  },
 };
 
 export default AdminHandler;
