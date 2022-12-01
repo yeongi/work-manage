@@ -95,4 +95,21 @@ module.exports = {
       return err.message;
     }
   },
+
+  getBlkList: async (HULL_SQ) => {
+    try {
+      const conn = await pool.getConnection();
+
+      const query = "select * from block where HULL_SQ = ? ";
+
+      const [result] = await conn.query(query, [HULL_SQ]);
+
+      conn.release();
+
+      return result;
+    } catch (err) {
+      console.log(err);
+      return err.message;
+    }
+  },
 };

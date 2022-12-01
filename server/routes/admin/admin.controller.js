@@ -100,6 +100,21 @@ router.post("/blk/add", async (req, res) => {
   }
 });
 
+//블럭 리스트 조회
+router.get("/blk/list/:hullno", async (req, res) => {
+  const { hullno } = req.params;
+  try {
+    const result = await AdminService.getBlkList(hullno);
+    return res.status(200).json({
+      status: 200,
+      data: result,
+      message: "블럭 리스트 조회 성공",
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 //블럭 시수 조회
 router.get("/blk/:hullno/view", async (req, res) => {});
 
