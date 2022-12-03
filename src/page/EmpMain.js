@@ -30,13 +30,14 @@ const EmpMain = (props) => {
       <div className={classes["emp-wrapper"]}>
         <section className={classes["emp-main"]}>
           <LoginState />
+          {/* to do : 업무 추가 관리자 화면으로 넘기기
           <h1>업무 추가 하기</h1>
-          <AddWorkForm workList={workList} refreshHandler={getWorkList} />
+          <AddWorkForm workList={workList} refreshHandler={getWorkList} /> */}
           <AddWorkRecordForm workList={workList} />
         </section>
         <section className={classes["emp-calendar"]}>
           <h1> 업무 내역 확인</h1>
-          {/* <WorkCalendar /> */}
+          <WorkCalendar />
         </section>
       </div>
     </>

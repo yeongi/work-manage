@@ -1,4 +1,12 @@
-import { Button, Form, Input, InputNumber, Select, Space } from "antd";
+import {
+  Button,
+  DatePicker,
+  Form,
+  Input,
+  InputNumber,
+  Select,
+  Space,
+} from "antd";
 import { useEffect, useState } from "react";
 import AdminHandler from "../../lib/handler/AdminHandler";
 
@@ -116,7 +124,7 @@ const AddWorkRecordForm = ({ workList }) => {
               return (
                 <Select.Option value={WORK_CODE} key={WORK_CODE}>
                   {`업무 구분 : ${WORK_TYPE} / 
-                  업무 설명 : ${WORK_DES}`}
+                  세부 사항 : ${WORK_DES}`}
                 </Select.Option>
               );
             })}
@@ -149,6 +157,11 @@ const AddWorkRecordForm = ({ workList }) => {
             <InputNumber placeholder="M/H" />
             <label>야근 시수가 있다면 입력해 주세요.</label>
           </Space>
+        </Form.Item>
+
+        <Form.Item label="날짜" name="DATE_TIME">
+          <DatePicker placeholder="M/H" />
+          <label>날짜를 선택하지 않으면 당일로 전송됩니다.</label>
         </Form.Item>
 
         <div style={{ float: "left" }}>
