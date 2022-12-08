@@ -70,7 +70,27 @@ router.post("/work/list", async (req, res) => {
 });
 
 //업무 내역 입력
-router.post("/work/record", async (req, res) => {});
+router.post("/work/record", async (req, res) => {
+  const workRecord = req.body;
+  try {
+    const { insertResult, updateResult } = await empService.addWorkRecord(
+      workRecord
+    );
+    if (Array.isArray(insertResult) || Array.isArray(updateResult))
+      return res.status(200).json({
+        status: 203,
+        message: "업무 내역 넣기 성공",
+      });
+    if (!Array.isArray(insertResult))
+      return res.status(200).json({
+        status: 204,
+        data: result,
+        message: "오류 발생",
+      });
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 //본인 업무 내역 조회
 router.get("/work/record/:empno", async (req, res) => {});

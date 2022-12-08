@@ -28,6 +28,50 @@ module.exports = empService = {
     }
   },
 
+  addWorkRecord: async (body) => {
+    try {
+      const {
+        EMP_NO,
+        WORK_CODE,
+        BLK_SQ,
+        HULL_SQ,
+        INP_MH,
+        DATE_TIME,
+        OVERTIME_MH,
+      } = body;
+      console.log(body);
+
+      const inputMH = parseFloat(INP_MH) + parseFloat(OVERTIME_MH);
+      const conn = await pool.getConnection();
+      const insertQuery = `Insert INTO work_record ( 
+        EMP_NO,
+        WORK_CODE,
+        BLK_SQ,
+        HULL_SQ,
+        INP_MH,
+        WORK_DATE,
+        OVERTIME_MH) value (?,?,?,?,?,?,?)
+       `;
+
+      const updateQuery = ` UPDATE block SET RES_MH = RES_MH + ? WHERE BLK_SQ = ? ;`;
+
+      const insertResult = await conn.query(insertQuery, [
+        EMP_NO,
+        WORK_CODE,
+        BLK_SQ,
+        HULL_SQ,
+        INP_MH,
+        DATE_TIME,
+        OVERTIME_MH,
+      ]);
+      const updateResult = await conn.query(updateQuery, [inputMH, BLK_SQ]);
+      conn.release();
+      return { insertResult, updateResult };
+    } catch (error) {
+      throw error;
+    }
+  },
+
   getWorkList: async () => {
     try {
       const conn = await pool.getConnection();

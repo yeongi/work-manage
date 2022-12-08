@@ -24,6 +24,16 @@ const EmpApi = {
     });
   },
 
+  addWorkRecord: (body) => {
+    return fetch(`${API}/work/record`, {
+      method: "post",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+  },
+
   getWorkList: () => {
     return fetch(`${API}/work/list`, {
       method: "get",

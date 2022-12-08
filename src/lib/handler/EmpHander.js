@@ -15,6 +15,13 @@ const empHandler = {
     return addResult;
   },
 
+  addWorkRecord: async (body) => {
+    const result = await EmpApi.addWorkRecord(body);
+    const addResult = await result.json();
+
+    return addResult;
+  },
+
   getWorkList: async () => {
     const result = await EmpApi.getWorkList();
     const workList = await result.json();

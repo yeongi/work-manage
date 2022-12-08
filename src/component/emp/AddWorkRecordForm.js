@@ -1,16 +1,14 @@
-import {
-  Button,
-  DatePicker,
-  Form,
-  Input,
-  InputNumber,
-  Select,
-  Space,
-} from "antd";
-import { useEffect, useState } from "react";
+import { Button, DatePicker, Form, InputNumber, Select, Space } from "antd";
+import { useContext, useEffect, useState } from "react";
+import dayjs from "dayjs";
 import AdminHandler from "../../lib/handler/AdminHandler";
+import empHandler from "../../lib/handler/EmpHander";
+import { useLoginCtx } from "../../lib/store/LoginContext";
+
+const format = "YYYY-MM-DD HH:mm:ss";
 
 const AddWorkRecordForm = ({ workList }) => {
+  const loginCtx = useLoginCtx();
   const [blockList, setBlkList] = useState([]);
   const [hullList, setHullList] = useState([]);
 
@@ -35,13 +33,26 @@ const AddWorkRecordForm = ({ workList }) => {
 
   const [form] = Form.useForm();
 
-  const onFinish = async (values) => {
-    // BLK_SQ
-    // HULL_SQ
-    // INP_MH
-    // WORK_CODE
+  const onFinish = async ({
+    BLK_SQ,
+    DATE_TIME,
+    HULL_SQ,
+    INP_MH,
+    OVERTIME_MH,
+    WORK_CODE,
+  }) => {
+    const result = await empHandler.addWorkRecord({
+      BLK_SQ,
+      HULL_SQ,
+      INP_MH,
+      OVERTIME_MH:
+        OVERTIME_MH === undefined || OVERTIME_MH === "" ? 0 : OVERTIME_MH,
+      WORK_CODE,
+      DATE_TIME: DATE_TIME.format(),
+      EMP_NO: loginCtx.state.EMP_NO,
+    });
 
-    console.log(values);
+    await console.log(result);
     form.resetFields();
   };
 
@@ -141,11 +152,11 @@ const AddWorkRecordForm = ({ workList }) => {
             },
           ]}
         >
-          <InputNumber placeholder="M/H" />
+          <InputNumber placeholder="M/H" step={0.5} />
         </Form.Item>
 
         <Form.Item
-          label="야근 M/H"
+          label="야근 M/H : 야근 시수가 있다면 입력해 주세요."
           name="OVERTIME_MH"
           rules={[
             {
@@ -154,14 +165,19 @@ const AddWorkRecordForm = ({ workList }) => {
           ]}
         >
           <Space>
-            <InputNumber placeholder="M/H" />
-            <label>야근 시수가 있다면 입력해 주세요.</label>
+            <InputNumber placeholder="M/H" step={0.5} />
           </Space>
         </Form.Item>
 
-        <Form.Item label="날짜" name="DATE_TIME">
-          <DatePicker placeholder="M/H" />
-          <label>날짜를 선택하지 않으면 당일로 전송됩니다.</label>
+        <Form.Item
+          label="날짜를 선택하지 않으면 당일로 지정됩니다."
+          name="DATE_TIME"
+        >
+          <DatePicker
+            placeholder="M/H"
+            initialValues={dayjs()}
+            format={format}
+          />
         </Form.Item>
 
         <div style={{ float: "left" }}>
