@@ -1,70 +1,82 @@
-# Getting Started with Create React App
+# 기능 목록 작성
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
 
-## Available Scripts
+- 출퇴근 근태 관리를 하는 프로그램이다.
 
-In the project directory, you can run:
+배 설계 도면을 만드는 회사임
 
-### `npm start`
+프론트 엔드 : 일렉트론 → 리엑트
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+백엔드 : 노드 익스프레스 → mysql
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 공통
 
-### `npm test`
+### 로그인
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- 아이디를 입력해서 로그인을 하는 기능
+  - [x] 어드민 로그인 (ADMIN)
+  - [x] 사원 로그인 (사번)
 
-### `npm run build`
+### 사원
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- 현재 로그인된 상태를 보는 기능
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 업무
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- 업무를 추가하거나 수정하는 기능
+  - [x] 업무를 추가하는 기능
+  - [ ] 업무를 수정하는 기능
 
-### `npm run eject`
+### 업무 내역
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- 그날의 업무 내역을 입력하는 기능 ( MAIN )
+  업무 내역
+  → 사번 입력 ( 기본정보 불러오고 ) → 날짜입력 → 시수입력 (시작시간은 9시 ) → 선종,호선,블럭 조회 ( 선택) → 표준시수 실적시수 조회 확인 → 본인 실적 시수 입력 → 제출
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  - [x] 업무 내역을 입력하는 기능
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+    - [x] 기본 정보를 저장해서 불러오는 기능 ( 상태 관리 )
+    - [x] 선종을 불러 오는 기능
+      - [x] 호선을 불러오는 기능
+        - [x] 블럭을 불러오는 기능
+    - [ ] 표준 시수 실적 시수를 크게 확인 할 수 있도록
+    - [x] 본인 실적 시수를 입력할 수 있는 기능
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+  - [ ] 업무 내역을 확인하는 기능
+    - [ ] 블럭 당 업무를 확인 할 수 있게 한다.
 
-## Learn More
+- 출근한 시간도 찍을 수 있도록 한다. (추가)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 관리자
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 조선소 블럭 관리
 
-### Code Splitting
+- 조선소를 추가하는 기능 → 호선을 추가 하는 기능
+  조선소 : 선체 회사 배 회사를 뜻함 (코드 데이터로 관리)
+  호선 : 선체를 이루는 호선을 뜻함
+  - [x] 선체를 추가하는 기능
+- 블럭을 추가하는 기능 ( +표준시수 추가 )
+  블럭 : 호선을 이루는 부분 ( 설계도가 있음 )
+  - [x] 블럭을 추가하는 기능
+- 블럭을 조회 하는 기능
+  - [ ] 블럭내역을 조회 하는 기능
+- 블럭이 일이 끝났는지 확인하는 기능
+  - [ ] 블럭의 일을 끝내는 기능
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 업무조회
 
-### Analyzing the Bundle Size
+- 업무 내역을 조회 하는 기능 #WorkRecord
+  - [ ] 업무 내역을 선체 기준으로 조회 하는 기능
+  - [ ] 업무 내역을 블럭 기준으로 조회 하는 기능
+  - [ ] Think ) 블럭 기준 완료된 ( 표준시수가 다 채워진 업무 ) 블럭은 어떻게 할 것인가?
+- 업무 내역을 엑셀로 내보내는 기능
+  - [ ] Sheet.js 공부 하기
+  - [ ] 월 별로 모든 데이터 뽑아 내기 ( 선체를 기준으로 )
+  - [ ] 월 별로 모든 데이터 뽑아 내기 ( 블럭을 기준으로 )
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### 사원관리
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- 신규 사원 추가 #InputEmployee
+  - [x] 사원을 추가하는 기능
+  - [ ] 기존 사원 정보를 수정 하는 기능
