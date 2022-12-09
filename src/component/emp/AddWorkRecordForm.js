@@ -1,30 +1,20 @@
 import { Button, DatePicker, Form, InputNumber, Select, Space } from "antd";
 import { useContext, useEffect, useState } from "react";
 import dayjs from "dayjs";
-import AdminHandler from "../../lib/handler/AdminHandler";
 import empHandler from "../../lib/handler/EmpHander";
 import { useLoginCtx } from "../../lib/store/LoginContext";
+import useGetBlkList from "../../lib/state/useGetBlkList";
 
 const format = "YYYY-MM-DD HH:mm:ss";
 
 const AddWorkRecordForm = ({ workList }) => {
   const loginCtx = useLoginCtx();
-  const [blockList, setBlkList] = useState([]);
-  const [hullList, setHullList] = useState([]);
-
-  const getHullList = async () => {
-    const serverHullList = await AdminHandler.getHullList();
-    setHullList(serverHullList);
-  };
-
-  const getBlkList = async (hull_no) => {
-    //to do : complete 된 블럭은 안가져 오기
-    const blkList = await AdminHandler.getBlkList(hull_no);
-    setBlkList(blkList);
-  };
+  const { state, setter } = useGetBlkList();
+  const { hullList, blockList } = state;
+  const { getHullList, getBlkList } = setter;
 
   const onChangedHull = async (hull) => {
-    getBlkList(hull);
+    await getBlkList(hull);
   };
 
   useEffect(() => {
@@ -52,7 +42,8 @@ const AddWorkRecordForm = ({ workList }) => {
       EMP_NO: loginCtx.state.EMP_NO,
     });
 
-    await console.log(result);
+    //to do: alert로 사용자에게 알리기
+
     form.resetFields();
   };
 
