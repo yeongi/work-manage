@@ -9,9 +9,7 @@ const format = "YYYY-MM-DD HH:mm:ss";
 
 const AddWorkRecordForm = ({ workList }) => {
   const loginCtx = useLoginCtx();
-  const { state, setter } = useGetBlkList();
-  const { hullList, blockList } = state;
-  const { getHullList, getBlkList } = setter;
+  const { hullList, blockList, getHullList, getBlkList } = useGetBlkList();
 
   const onChangedHull = async (hull) => {
     await getBlkList(hull);

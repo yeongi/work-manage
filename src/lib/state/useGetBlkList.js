@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AdminHandler from "../handler/AdminHandler";
 
 const useGetBlkList = () => {
@@ -16,15 +16,16 @@ const useGetBlkList = () => {
     setBlkList(blkList);
   };
 
+  useEffect(() => {
+    getHullList();
+    getBlkList();
+  }, []);
+
   return {
-    state: {
-      hullList,
-      blockList,
-    },
-    setter: {
-      getHullList,
-      getBlkList,
-    },
+    hullList,
+    blockList,
+    getHullList,
+    getBlkList,
   };
 };
 
