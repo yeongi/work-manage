@@ -8,7 +8,6 @@ const WorkRecord = () => {
   const onChangedBlk = async (blk) => {
     //to do : 블럭에 관한 업무 기록 불러오기 구현 하기
     setBlk(blk);
-    console.log(blk);
   };
 
   return (

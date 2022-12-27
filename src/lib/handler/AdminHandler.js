@@ -42,6 +42,13 @@ const AdminHandler = {
 
     return blkList.data;
   },
+
+  getWorkRecordList: async (BLK_SQ) => {
+    const result = await AdminApi.getWorkRecordList(BLK_SQ);
+    const WorkRecord = await result.json();
+
+    return WorkRecord.data;
+  },
 };
 
 export default AdminHandler;

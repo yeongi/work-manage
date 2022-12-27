@@ -112,4 +112,21 @@ module.exports = {
       return err.message;
     }
   },
+
+  getWorkRecordOfBlk: async (blkSQ) => {
+    try {
+      const conn = await pool.getConnection();
+
+      const query = "select * from ad_work_record where BLK_SQ = ? ";
+
+      const [result] = await conn.query(query, [blkSQ]);
+
+      conn.release();
+
+      return result;
+    } catch (err) {
+      console.log(err);
+      return err.message;
+    }
+  },
 };

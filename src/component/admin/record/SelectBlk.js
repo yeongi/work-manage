@@ -15,7 +15,6 @@ const SelectBlk = ({ onChangedBlk }) => {
     getHullList();
   }, []);
 
-  console.log(hullList, blockList);
   return (
     <div>
       <Form>

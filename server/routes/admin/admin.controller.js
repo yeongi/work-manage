@@ -121,4 +121,19 @@ router.get("/blk/:hullno/view", async (req, res) => {});
 //블럭 수정
 router.post("/blk/:blkno/edit", async (req, res) => {});
 
+//업무 내역 조회 (블럭기준)
+router.get("/work/view/:blkno", async (req, res) => {
+  const { blkno } = req.params;
+  try {
+    const result = await AdminService.getWorkRecordOfBlk(blkno);
+    return res.status(200).json({
+      status: 200,
+      data: result,
+      message: "업무 내역 리스트 ( 블럭 기준 ) 조회 성공",
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 module.exports = router;

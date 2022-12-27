@@ -59,6 +59,15 @@ const AdminApi = {
       },
     });
   },
+
+  getWorkRecordList: (BLK_SQ) => {
+    return fetch(`${API}/work/view/${BLK_SQ}`, {
+      method: "get",
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+  },
 };
 
 export default AdminApi;
