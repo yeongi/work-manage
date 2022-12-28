@@ -93,7 +93,19 @@ router.post("/work/record", async (req, res) => {
 });
 
 //본인 업무 내역 조회
-router.get("/work/record/:empno", async (req, res) => {});
+router.get("/work/record/:empno", async (req, res) => {
+  const { empno } = req.params;
+  try {
+    const result = await empService.getWorkRecordOfEmp(empno);
+    return res.status(200).json({
+      status: 200,
+      data: result,
+      message: "업무 내역 리스트 ( 블럭 기준 ) 조회 성공",
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 //업무 내역 입력
 router.post("/work/record/edit/:workno", async (req, res) => {});

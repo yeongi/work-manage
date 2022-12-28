@@ -28,6 +28,13 @@ const empHandler = {
 
     return workList.data;
   },
+
+  getWorkRecordList: async (EMP_NO) => {
+    const result = await EmpApi.getWorkRecordList(EMP_NO);
+    const WorkRecord = await result.json();
+
+    return WorkRecord.data;
+  },
 };
 
 export default empHandler;

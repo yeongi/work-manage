@@ -88,4 +88,21 @@ module.exports = empService = {
       return err.message;
     }
   },
+
+  getWorkRecordOfEmp: async (EMP_NO) => {
+    try {
+      const conn = await pool.getConnection();
+
+      const query = "select * from ad_work_record where EMP_NO = ? ";
+
+      const [result] = await conn.query(query, [EMP_NO]);
+
+      conn.release();
+
+      return result;
+    } catch (err) {
+      console.log(err);
+      return err.message;
+    }
+  },
 };

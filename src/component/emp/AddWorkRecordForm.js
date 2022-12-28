@@ -7,7 +7,7 @@ import useGetBlkList from "../../lib/state/useGetBlkList";
 
 const format = "YYYY-MM-DD HH:mm:ss";
 
-const AddWorkRecordForm = ({ workList }) => {
+const AddWorkRecordForm = ({ workList, refreshHandler }) => {
   const loginCtx = useLoginCtx();
   const { hullList, blockList, getHullList, getBlkList } = useGetBlkList();
 
@@ -43,6 +43,7 @@ const AddWorkRecordForm = ({ workList }) => {
     //to do: alert로 사용자에게 알리기
 
     form.resetFields();
+    refreshHandler();
   };
 
   const resetHandler = () => {
