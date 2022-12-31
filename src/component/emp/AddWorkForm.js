@@ -70,7 +70,7 @@ const AddWorkForm = ({ workList, refreshHandler }) => {
                   .length
               }
             >
-              업무 추가
+              추가하기
             </Button>
           )}
         </Form.Item>

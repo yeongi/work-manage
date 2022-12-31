@@ -79,7 +79,7 @@ const AddEmployeeForm = ({ refreshHandler }) => {
           <Space>
             <Checkbox>관리자 여부</Checkbox>
             <Button type="primary" htmlType="submit">
-              제출하기
+              등록하기
             </Button>
           </Space>
         </Form.Item>

@@ -7,6 +7,8 @@ const useGetBlkList = () => {
 
   const getHullList = async () => {
     const serverHullList = await AdminHandler.getHullList();
+    serverHullList.reverse();
+    serverHullList.pop();
     setHullList(serverHullList);
   };
 

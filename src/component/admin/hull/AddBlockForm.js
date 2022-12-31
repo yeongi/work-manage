@@ -84,7 +84,7 @@ const AddBlockForm = ({ hullList }) => {
                 htmlType="submit"
                 className="login-form-button"
               >
-                제출하기
+                등록하기
               </Button>
             </Space>
           </Form.Item>

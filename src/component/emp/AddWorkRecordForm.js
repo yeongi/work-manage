@@ -11,6 +11,13 @@ const AddWorkRecordForm = ({ workList, refreshHandler }) => {
   const loginCtx = useLoginCtx();
   const { hullList, blockList, getHullList, getBlkList } = useGetBlkList();
 
+  const disabledDate = (current) => {
+    // Can not select days
+    return !(
+      dayjs().subtract(2, "day") < current && current < dayjs().add(2, "day")
+    );
+  };
+
   const onChangedHull = async (hull) => {
     await getBlkList(hull);
   };
@@ -40,7 +47,7 @@ const AddWorkRecordForm = ({ workList, refreshHandler }) => {
       EMP_NO: loginCtx.state.EMP_NO,
     });
 
-    //to do: alert로 사용자에게 알리기
+    alert("업무기록 제출을 완료하였습니다.");
 
     form.resetFields();
     refreshHandler();
@@ -61,13 +68,17 @@ const AddWorkRecordForm = ({ workList, refreshHandler }) => {
         onFinish={onFinish}
         autoComplete="off"
       >
+        <p>
+          선체와 블럭이 없는 업무기록의 경우에는 <b>" 업무 외 선체 "</b>를
+          선택해주세요.
+        </p>
         <Form.Item
           label="HULL"
           name="HULL_SQ"
           rules={[
             {
               required: true,
-              message: "선체를 골라주세요!",
+              message: "선체를 선택해주세요!",
             },
           ]}
         >
@@ -75,16 +86,25 @@ const AddWorkRecordForm = ({ workList, refreshHandler }) => {
             style={{ width: 500 }}
             placeholder="선체를 선택해 주세요."
             onChange={onChangedHull}
-          >
-            {hullList.map(({ HULL_NO, HULL_SQ, HULL_TYPE, SHIPYARD }) => {
-              return (
-                <Select.Option value={HULL_SQ} key={HULL_SQ}>
-                  {`
-                  선체 번호 : ${HULL_NO} /선체 종류 : ${HULL_TYPE} / 조선소 : ${SHIPYARD}`}
-                </Select.Option>
-              );
-            })}
-          </Select>
+            options={[
+              {
+                label: "기타 업무",
+                options: [{ label: "업무 외 선체", value: 1 }],
+              },
+              {
+                label: "선체",
+                options: hullList.map(
+                  ({ HULL_NO, HULL_SQ, HULL_TYPE, SHIPYARD }) => {
+                    return {
+                      label: `
+                      선체 번호 : ${HULL_NO} /선체 종류 : ${HULL_TYPE} / 조선소 : ${SHIPYARD}`,
+                      value: HULL_SQ,
+                    };
+                  }
+                ),
+              },
+            ]}
+          ></Select>
         </Form.Item>
         <Form.Item
           label="BLOCK"
@@ -92,7 +112,7 @@ const AddWorkRecordForm = ({ workList, refreshHandler }) => {
           rules={[
             {
               required: true,
-              message: "블럭을 골라주세요!",
+              message: "블럭을 선택하세요!",
             },
           ]}
         >
@@ -142,7 +162,7 @@ const AddWorkRecordForm = ({ workList, refreshHandler }) => {
             },
           ]}
         >
-          <InputNumber placeholder="M/H" step={0.5} />
+          <InputNumber placeholder="M/H" step={0.5} min={0} max={24} />
         </Form.Item>
 
         <Form.Item
@@ -155,17 +175,24 @@ const AddWorkRecordForm = ({ workList, refreshHandler }) => {
           ]}
         >
           <Space>
-            <InputNumber placeholder="M/H" step={0.5} />
+            <InputNumber placeholder="M/H" step={0.5} min={0} />
           </Space>
         </Form.Item>
 
         <Form.Item
-          label="날짜를 선택하지 않으면 당일로 지정됩니다."
+          label="날짜를 선택해주세요"
           name="DATE_TIME"
+          rules={[
+            {
+              required: true,
+              message: "날짜를 선택해주세요",
+            },
+          ]}
         >
           <DatePicker
             placeholder="M/H"
             initialValues={dayjs()}
+            disabledDate={disabledDate}
             format={format}
           />
         </Form.Item>
@@ -182,7 +209,7 @@ const AddWorkRecordForm = ({ workList, refreshHandler }) => {
                 htmlType="submit"
                 className="login-form-button"
               >
-                제출하기
+                등록하기
               </Button>
             </Space>
           </Form.Item>

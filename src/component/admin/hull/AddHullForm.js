@@ -77,7 +77,7 @@ const AddHullForm = ({ refreshHandler }) => {
               </Button>
 
               <Button type="primary" htmlType="submit">
-                제출하기
+                등록하기
               </Button>
             </Space>
           </Form.Item>
