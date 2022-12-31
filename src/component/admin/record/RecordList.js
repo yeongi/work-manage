@@ -1,5 +1,23 @@
 import { useEffect, useState } from "react";
 import AdminHandler from "../../../lib/handler/AdminHandler";
+import classes from "./RecordList.module.css";
+import { Divider, List, Typography } from "antd";
+import HeaderItem from "./HeaderItem";
+import ListItem from "./ListItem";
+const headers = [
+  "업무 내용",
+  "업무 종류",
+  "블럭 번호",
+  "사원 이름",
+  "사원 번호",
+  "조선소",
+  "선체 종류",
+  "선체 번호",
+  "표준 시수",
+  "투입 시수",
+  "야근 시수",
+  "업무 날짜",
+];
 
 const RecordList = ({ block }) => {
   const [workRecordList, setList] = useState([{}]);
@@ -14,10 +32,15 @@ const RecordList = ({ block }) => {
   }, [block]);
 
   return (
-    <div>
-      <h1>업무 기록 리스트</h1>
-      {workRecordList.map(
-        ({
+    <div className={classes.wrapper}>
+      <Divider orientation="left">업무 기록 리스트</Divider>
+      <List
+        size="large"
+        header={<HeaderItem items={headers} />}
+        footer={<div>제작자 ＠github : yeongi</div>}
+        bordered
+        dataSource={workRecordList}
+        renderItem={({
           RECORD_NO,
           BLK_NO,
           BLK_SQ,
@@ -37,16 +60,27 @@ const RecordList = ({ block }) => {
           WORK_TYPE,
         }) => {
           return (
-            <p key={RECORD_NO}>
-              NO: {RECORD_NO} 업무 내용: {WORK_TYPE} 업무 종류: {WORK_DES}
-              블럭 번호: {BLK_NO} 사원 이름: {EMP_NAME} 사원 번호: {EMP_NO}
-              조선소: {SHIPYARD} 선체 종류: {HULL_TYPE} 선체 번호: {HULL_NO}
-              표준 시수: {NORM_MH} 투입 시수: {INP_MH} 야근 시수:{OVERTIME_MH}
-              업무 날짜 : {WORK_DATE}
-            </p>
+            <List.Item>
+              <ListItem
+                items={[
+                  WORK_TYPE,
+                  WORK_DES,
+                  BLK_NO,
+                  EMP_NAME,
+                  EMP_NO,
+                  SHIPYARD,
+                  HULL_TYPE,
+                  HULL_NO,
+                  NORM_MH,
+                  INP_MH,
+                  OVERTIME_MH,
+                  WORK_DATE,
+                ]}
+              />
+            </List.Item>
           );
-        }
-      )}
+        }}
+      />
     </div>
   );
 };
