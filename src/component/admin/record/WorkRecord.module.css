@@ -1,0 +1,8 @@
+.selet-wrapper {
+  margin: 0 auto;
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  border: 1px solid black;
+  justify-content: space-around;
+}
