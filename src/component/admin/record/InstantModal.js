@@ -5,7 +5,6 @@ const InstantModal = ({ title, children, YearMonth }) => {
 
   useEffect(() => {
     //"YYYY-MM"
-    console.log(YearMonth);
     const regex = RegExp(/^\d{4}-(0[1-9]|1[012])$/);
     if (regex.test(YearMonth)) setOpen(true);
   }, [YearMonth]);
