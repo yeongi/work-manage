@@ -1,7 +1,8 @@
 .item {
   height: 20px;
   font-weight: bold;
-  width: 100px;
+  width: 8%;
+  min-width: 40px;
   margin: 5px;
   background-color: rgb(241, 241, 241);
   border-radius: 10px;
@@ -12,4 +13,5 @@
 .wrapper {
   display: flex;
   position: sticky;
+  min-width: 1153px;
 }

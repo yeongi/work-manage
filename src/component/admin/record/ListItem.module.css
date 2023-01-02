@@ -1,6 +1,6 @@
 .item {
   height: 15px;
-  width: 90px;
+  width: 8%;
   margin: 5px;
   border-radius: 10px;
   padding: 10px;
@@ -9,5 +9,6 @@
 
 .wrapper {
   display: flex;
-  width: inherit;
+  width: 100%;
+  min-width: 1153px;
 }

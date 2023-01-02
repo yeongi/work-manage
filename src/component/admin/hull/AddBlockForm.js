@@ -48,15 +48,16 @@ const AddBlockForm = ({ hullList }) => {
           ]}
         >
           <Select style={{ width: 500 }} placeholder="선체를 선택해 주세요.">
-            {hullList.map((hull) => {
-              return (
-                <Select.Option value={hull.HULL_SQ} key={hull.HULL_SQ}>
-                  {`HULL_NO : ${hull.HULL_NO} / 
+            {hullList.length > 0 &&
+              hullList.map((hull) => {
+                return (
+                  <Select.Option value={hull.HULL_SQ} key={hull.HULL_SQ}>
+                    {`HULL_NO : ${hull.HULL_NO} / 
                   HULL_TYPE : ${hull.HULL_TYPE} / 
                   SHIPYARD : ${hull.SHIPYARD}`}
-                </Select.Option>
-              );
-            })}
+                  </Select.Option>
+                );
+              })}
           </Select>
         </Form.Item>
 

@@ -9,7 +9,9 @@ const HullManage = () => {
 
   const getList = async () => {
     const list = await AdminHandler.getHullList();
-    setHullList(list);
+    const reverseList = [...list].reverse();
+    reverseList.pop();
+    setHullList(reverseList);
     return;
   };
 
