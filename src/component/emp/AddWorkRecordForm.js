@@ -7,7 +7,7 @@ import useGetBlkList from "../../lib/state/useGetBlkList";
 
 const format = "YYYY-MM-DD HH:mm:ss";
 
-const AddWorkRecordForm = ({ workList, refreshHandler }) => {
+const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
   const loginCtx = useLoginCtx();
   const { hullList, blockList, getHullList, getBlkList } = useGetBlkList();
 
@@ -46,6 +46,9 @@ const AddWorkRecordForm = ({ workList, refreshHandler }) => {
       DATE_TIME: DATE_TIME.format(),
       EMP_NO: loginCtx.state.EMP_NO,
     });
+
+    //이걸 이용해서 redux로 전역으로 관리 하자.
+    addWorkRecordInfo(result.RECORD_ID);
 
     alert("업무기록 제출을 완료하였습니다.");
 

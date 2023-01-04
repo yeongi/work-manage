@@ -51,6 +51,15 @@ const EmpApi = {
       },
     });
   },
+
+  getWorkRecord: (NO) => {
+    return fetch(`${API}/work/record/no/${NO}`, {
+      method: "get",
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+  },
 };
 
 export default EmpApi;

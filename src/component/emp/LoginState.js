@@ -1,10 +1,12 @@
 import { useLoginCtx } from "../../lib/store/LoginContext";
 import dayJs from "dayjs";
+import { dayJsYMD } from "../../lib/dayJs";
 
-const LoginState = () => {
+const LoginState = ({ myList }) => {
   const loginCtx = useLoginCtx();
-  const dayjs = dayJs();
-  const today = [dayjs.year(), dayjs.month() + 1, dayjs.date()].join("-");
+  const today = dayJsYMD(dayJs());
+  console.log(myList);
+
   return (
     <div>
       <div>
@@ -15,7 +17,7 @@ const LoginState = () => {
         <p>날짜 : {today}</p>
       </div>
       <div>
-        <h3>오늘 한 일</h3>
+        <h1>금일 업무 내역</h1>
       </div>
     </div>
   );

@@ -1,7 +1,12 @@
-const dayJsYM = (day) => {
+export const dayJsYM = (day) => {
   const month = day.month() + 1 > 9 ? day.month() + 1 : "0" + (day.month() + 1);
   const year = day.year();
   return [year, month].join("-");
 };
 
-export default dayJsYM;
+export const dayJsYMD = (day) => {
+  const month = day.month() + 1 > 9 ? day.month() + 1 : "0" + (day.month() + 1);
+  const year = day.year();
+  const date = day.date() > 9 ? day.date() : "0" + day.date();
+  return [year, month, date].join("-");
+};

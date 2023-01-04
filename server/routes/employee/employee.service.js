@@ -39,7 +39,6 @@ module.exports = empService = {
         DATE_TIME,
         OVERTIME_MH,
       } = body;
-      console.log(body);
 
       const inputMH = parseFloat(INP_MH) + parseFloat(OVERTIME_MH);
       const conn = await pool.getConnection();
@@ -96,6 +95,23 @@ module.exports = empService = {
       const query = "select * from ad_work_record where EMP_NO = ? ";
 
       const [result] = await conn.query(query, [EMP_NO]);
+
+      conn.release();
+
+      return result;
+    } catch (err) {
+      console.log(err);
+      return err.message;
+    }
+  },
+
+  getWorkRecordOfNo: async (NO) => {
+    try {
+      const conn = await pool.getConnection();
+
+      const query = "select * from ad_work_record where RECORD_NO = ? ";
+
+      const [result] = await conn.query(query, [NO]);
 
       conn.release();
 

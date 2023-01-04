@@ -3,7 +3,7 @@ import { DatePicker, Space } from "antd";
 import dayjs from "dayjs";
 import InstantModal from "./InstantModal";
 import MonthRecord from "./MonthRecord";
-import dayJsYM from "../../../lib/dayJs";
+import { dayJsYM } from "../../../lib/dayJs";
 
 const SelectMonth = (props) => {
   const [ym, setYM] = useState("");

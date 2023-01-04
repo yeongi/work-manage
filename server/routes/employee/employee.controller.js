@@ -76,10 +76,12 @@ router.post("/work/record", async (req, res) => {
     const { insertResult, updateResult } = await empService.addWorkRecord(
       workRecord
     );
-    if (Array.isArray(insertResult) || Array.isArray(updateResult))
+
+    if (Array.isArray(insertResult) && Array.isArray(updateResult))
       return res.status(200).json({
         status: 203,
         message: "업무 내역 넣기 성공",
+        RECORD_ID: insertResult[0].insertId,
       });
     if (!Array.isArray(insertResult))
       return res.status(200).json({
@@ -97,6 +99,21 @@ router.get("/work/record/:empno", async (req, res) => {
   const { empno } = req.params;
   try {
     const result = await empService.getWorkRecordOfEmp(empno);
+    return res.status(200).json({
+      status: 200,
+      data: result,
+      message: "업무 내역 리스트 ( 블럭 기준 ) 조회 성공",
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+//본인 업무 내역 조회
+router.get("/work/record/no/:no", async (req, res) => {
+  const { no } = req.params;
+  try {
+    const result = await empService.getWorkRecordOfNo(no);
     return res.status(200).json({
       status: 200,
       data: result,
