@@ -13,12 +13,13 @@
 .emp-main {
   width: 45%;
   padding: 20px;
-  min-width: 590px;
+  min-width: 753px;
   background-color: white;
 }
 
 .emp-calendar {
   width: 45%;
+  min-width: 753px;
   background-color: white;
   padding: 20px;
 }

@@ -1,23 +1,35 @@
 import { Button, Checkbox, Form, Input } from "antd";
+import { useEffect, useRef } from "react";
 import empHandler from "../lib/handler/EmpHander";
+import useMountFocus from "../lib/state/useMountFocus";
 import { useLoginCtx } from "../lib/store/LoginContext";
 import classes from "./page.module.css";
 
 const Login = () => {
   const loginCtx = useLoginCtx();
 
-  const onFinish = async (values) => {
-    const result = await empHandler.signIn(values);
+  const inputRef = useRef();
 
-    if (result.status === 200) {
-      alert(`로그인 결과 : ${result.message}`);
-      const { EMP_NAME, EMP_NO, ADMIN } = result.data;
-      loginCtx.onLogin({ IS_LOGIN: true, EMP_NO, EMP_NAME, IS_ADMIN: ADMIN });
-    }
+  const focusing = () => inputRef.current.focus({ cursor: "start" });
+
+  const onFinish = async (values) => {
+    try {
+      const result = await empHandler.signIn(values);
+      if (result.status === 200) {
+        alert(`로그인 결과 : ${result.message}`);
+        const { EMP_NAME, EMP_NO, ADMIN } = result.data;
+        loginCtx.onLogin({ IS_LOGIN: true, EMP_NO, EMP_NAME, IS_ADMIN: ADMIN });
+      }
+    } catch (error) {}
   };
 
+  useEffect(() => {
+    focusing();
+  }, []);
+
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+    alert("에러", errorInfo);
+    focusing();
   };
 
   return (
@@ -51,7 +63,7 @@ const Login = () => {
               },
             ]}
           >
-            <Input />
+            <Input ref={inputRef} />
           </Form.Item>
 
           <Form.Item

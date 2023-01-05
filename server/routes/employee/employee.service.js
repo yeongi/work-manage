@@ -92,7 +92,8 @@ module.exports = empService = {
     try {
       const conn = await pool.getConnection();
 
-      const query = "select * from ad_work_record where EMP_NO = ? ";
+      const query =
+        "select * from ad_work_record  where EMP_NO = ? order by WORK_DATE;";
 
       const [result] = await conn.query(query, [EMP_NO]);
 

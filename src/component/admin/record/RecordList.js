@@ -4,6 +4,8 @@ import classes from "./RecordList.module.css";
 import { Divider, List, Typography } from "antd";
 import HeaderItem from "./HeaderItem";
 import ListItem from "./ListItem";
+import dayjs from "dayjs";
+import { dayJsYMD } from "../../../lib/dayJs";
 const headers = [
   "업무 내용",
   "업무 종류",
@@ -74,7 +76,7 @@ const RecordList = ({ block }) => {
                   NORM_MH,
                   INP_MH,
                   OVERTIME_MH,
-                  WORK_DATE,
+                  dayJsYMD(dayjs(WORK_DATE)),
                 ]}
               />
             </List.Item>
