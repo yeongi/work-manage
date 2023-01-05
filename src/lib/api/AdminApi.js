@@ -68,6 +68,15 @@ const AdminApi = {
       },
     });
   },
+
+  getWorkMonthRecordList: (ym) => {
+    return fetch(`${API}/work/month/view/${ym}`, {
+      method: "get",
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+  },
 };
 
 export default AdminApi;

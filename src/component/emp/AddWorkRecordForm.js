@@ -39,9 +39,11 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
     const result = await empHandler.addWorkRecord({
       BLK_SQ,
       HULL_SQ,
-      INP_MH,
+      INP_MH: INP_MH.toFixed(1),
       OVERTIME_MH:
-        OVERTIME_MH === undefined || OVERTIME_MH === "" ? 0 : OVERTIME_MH,
+        OVERTIME_MH === undefined || OVERTIME_MH === ""
+          ? 0
+          : OVERTIME_MH.toFixed(1),
       WORK_CODE,
       DATE_TIME: DATE_TIME.format(),
       EMP_NO: loginCtx.state.EMP_NO,

@@ -17,7 +17,7 @@ const SelectMonth = (props) => {
     <>
       <DatePicker picker="month" onChange={onModalOpenHandler} />
       <InstantModal title={"월 별 업무 기록 내역"} YearMonth={ym}>
-        <MonthRecord />
+        <MonthRecord ym={ym} />
       </InstantModal>
     </>
   );

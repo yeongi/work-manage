@@ -49,6 +49,13 @@ const AdminHandler = {
 
     return WorkRecord.data;
   },
+
+  getWorkMonthRecordList: async (ym) => {
+    const result = await AdminApi.getWorkMonthRecordList(ym);
+    const WorkRecord = await result.json();
+
+    return WorkRecord.data;
+  },
 };
 
 export default AdminHandler;

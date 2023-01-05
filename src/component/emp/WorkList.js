@@ -18,7 +18,6 @@ const headers = [
 ];
 
 const WorkList = ({ list }) => {
-  console.log(list);
   return (
     <div className={classes.wrapper}>
       <section className={classes["hedear-wrapper"]}>
