@@ -181,8 +181,6 @@ module.exports = {
 
       conn.release();
 
-      console.log(RESULT);
-
       return RESULT;
     } catch (err) {
       console.log(err);

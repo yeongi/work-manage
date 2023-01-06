@@ -1,0 +1,19 @@
+.record-wrap {
+  display: flex;
+  padding: 2px;
+}
+
+.record-wrap p {
+  font-size: 14px;
+  padding: 2px;
+}
+
+.work-wrap {
+  display: flex;
+  justify-content: space-around;
+}
+
+.work-wrap div {
+  border: 1px solid black;
+  display: flex;
+}
