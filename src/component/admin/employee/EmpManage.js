@@ -3,6 +3,7 @@ import AddEmployeeForm from "./AddEmployeeForm";
 import EmployeeList from "./EmployeeList";
 import AdminHandler from "../../../lib/handler/AdminHandler";
 import classes from "./EmpManage.module.css";
+import MyExcelBtn from "../sheet/example";
 
 const EmpManage = () => {
   const [empList, setEmpList] = useState({});
@@ -29,9 +30,7 @@ const EmpManage = () => {
           <h1>사원 조회</h1>
           <EmployeeList empList={empList} />
         </section>
-        <section className={classes["emp-info"]}>
-          <h1>사원 정보</h1>
-        </section>
+        <MyExcelBtn />
       </div>
     </div>
   );

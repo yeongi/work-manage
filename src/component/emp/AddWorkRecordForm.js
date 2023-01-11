@@ -74,7 +74,7 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
         autoComplete="off"
       >
         <p>
-          선체와 블럭이 없는 업무기록의 경우에는 <b>" 업무 외 선체 "</b>를
+          선체와 블럭이 없는 업무기록의 경우에는 <b>"기타 업무"</b>를
           선택해주세요.
         </p>
         <Form.Item
@@ -94,7 +94,7 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
             options={[
               {
                 label: "기타 업무",
-                options: [{ label: "업무 외 선체", value: 1 }],
+                options: [{ label: "기타 업무", value: 1 }],
               },
               {
                 label: "선체",
@@ -167,7 +167,7 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
             },
           ]}
         >
-          <InputNumber placeholder="M/H" step={0.5} min={0} max={24} />
+          <InputNumber placeholder="M/H" step={0.5} min={0.5} max={24} />
         </Form.Item>
 
         <Form.Item

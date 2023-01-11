@@ -58,7 +58,7 @@ const MonthRecord = ({ ym }) => {
                             <p>업무 종류 : {WORK_TYPE}</p>
                             <p>업무 내용 : {WORK_DES}</p>
                             <p>업무 투입 시수 : {SUM_INP_MH}</p>
-                            <p>업무 야근 시수 : {SUM_OVERTIME_MH}</p>
+                            <p>업무 야근 시수 : {SUM_OVER_MH}</p>
                           </div>
                         );
                       }

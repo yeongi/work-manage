@@ -4,16 +4,15 @@ import EmpWorkRecord from "../component/emp/EmpWorkRecord";
 import LoginState from "../component/emp/LoginState";
 import SelectMonthEmp from "../component/emp/SelectMonthEmp";
 import empHandler from "../lib/handler/EmpHander";
+import useEmpRecordList from "../lib/state/useEmpRecordList";
 import useToDidWork from "../lib/state/useToDidWork";
 import { useLoginCtx } from "../lib/store/LoginContext";
 import classes from "./Employee.module.css";
 
-const EmpMain = (props) => {
-  //Work List 불러 오기
-  //선체 -> 블럭 불러오기
+const EmpMain = () => {
   const { state } = useLoginCtx();
   const [workList, setWorkList] = useState([]);
-  const [workRecordList, setRecordList] = useState([]);
+  const [workRecordList, getMyWorkRecordList] = useEmpRecordList(state.EMP_NO);
   const [ym, setYm] = useState("");
   const [filteredRecordList, setFilteredList] = useState([]);
 
@@ -29,11 +28,6 @@ const EmpMain = (props) => {
     setWorkList(result);
   };
 
-  const getMyWorkRecordList = async () => {
-    const result = await empHandler.getWorkRecordList(state.EMP_NO);
-    setRecordList(result);
-  };
-
   const filteredMonthMyRecordList = (yearmonth) => {
     const filteredList = workRecordList.filter((record) => {
       return record.WORK_DATE.includes(yearmonth);
@@ -43,7 +37,6 @@ const EmpMain = (props) => {
 
   useEffect(() => {
     getWorkList();
-    getMyWorkRecordList();
   }, []);
 
   return (
@@ -62,9 +55,6 @@ const EmpMain = (props) => {
         </section>
         <section className={classes["emp-calendar"]}>
           <h1> 업무 내역 확인</h1>
-          {/* to do: 월과 그 사원이 한 업무 기록에 대한 리스트 
-            사원 업무 기록 리스트를 recordList에 넣어야 함
-          */}
           <SelectMonthEmp onSelectYmHandler={onSelectYmHandler} />
           <EmpWorkRecord recordList={filteredRecordList} />
         </section>

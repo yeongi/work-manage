@@ -34,10 +34,15 @@
 .emp-list {
   text-align: center;
   border: 1px solid black;
-  width: 26%;
+  width: 50%;
   padding: 20px;
-  height: 700px;
+  height: 600px;
+  overflow-y: scroll;
   border-radius: 50px;
+}
+
+.emp-list::-webkit-scrollbar {
+  display: none;
 }
 
 .emp-info {
