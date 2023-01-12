@@ -6,3 +6,9 @@
   border: 1px solid black;
   justify-content: space-around;
 }
+
+.selet-wrapper section {
+  width: 30%;
+  padding: 10px;
+  text-align: center;
+}

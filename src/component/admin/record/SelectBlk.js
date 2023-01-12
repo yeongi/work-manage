@@ -3,15 +3,14 @@ import { useEffect } from "react";
 import AdminHandler from "../../../lib/handler/AdminHandler";
 import useGetBlkList from "../../../lib/state/useGetBlkList";
 
-const SelectBlk = ({ onChangedBlk }) => {
+const SelectBlk = ({ onChangedBlk, selectHull }) => {
   //선체, 블럭, 업무 기록 선택
 
   const { hullList, blockList, getHullList, getBlkList } = useGetBlkList();
 
   const onChangedHull = async (hull) => {
+    selectHull(hull);
     await getBlkList(hull);
-    const hull_work_list = await AdminHandler.getWorkHullRecordList(hull);
-    console.log(hull_work_list);
   };
 
   useEffect(() => {
