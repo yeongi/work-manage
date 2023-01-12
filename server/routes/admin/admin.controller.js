@@ -136,6 +136,21 @@ router.get("/work/view/:blkno", async (req, res) => {
   }
 });
 
+//업무 블럭 별 조화 (선체 기준)
+router.get("/work/hull/view/:hullsq", async (req, res) => {
+  const { hullsq } = req.params;
+  try {
+    const result = await AdminService.getBlockListOfHull(hullsq);
+    return res.status(200).json({
+      status: 200,
+      data: result,
+      message: "업무 내역 리스트 ( 선체 기준 ) 조회 성공",
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 //업무 월별 조회 (월 기준)
 router.get("/work/month/view/:ym", async (req, res) => {
   const { ym } = req.params;

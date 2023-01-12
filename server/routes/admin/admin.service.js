@@ -187,4 +187,46 @@ module.exports = {
       return err.message;
     }
   },
+
+  getBlockListOfHull: async (HULL_SQ) => {
+    const BlockListOfHull = `    
+    SELECT BLK_SQ, BLK_NO,HULL_SQ,HULL_NO,HULL_TYPE,SHIPYARD
+    ,sum(INP_MH) AS SUM_INP_MH
+    ,sum(OVERTIME_MH)AS SUM_OVER_MH
+    ,RES_MH ,NORM_MH 
+    FROM ad_work_record where hull_sq = ?
+    GROUP BY BLK_SQ 
+    order by BLK_SQ DESC;`;
+
+    const BlockWorkSum = `
+    -- 블럭 업무에 대한 총합을 가져옴 --
+    SELECT WORK_CODE ,WORK_TYPE, WORK_DES, SUM(INP_MH) as SUM_INP_MH
+    , SUM(OVERTIME_MH) as SUM_OVER_MH 
+    FROM (
+    SELECT * FROM ad_work_record
+    where blk_sq = ?
+    ORDER BY WORK_DATE) AS MH_RECORD
+    GROUP BY WORK_CODE;`;
+
+    try {
+      const conn = await pool.getConnection();
+
+      const [BLK_RES] = await conn.query(BlockListOfHull, [HULL_SQ]);
+
+      const RESULT = await Promise.all(
+        BLK_RES.map(async (RES) => {
+          const [WORK_LIST] = await conn.query(BlockWorkSum, [RES.BLK_SQ]);
+
+          return { WORK_LIST, ...RES };
+        })
+      );
+
+      conn.release();
+
+      return RESULT;
+    } catch (err) {
+      console.log(err);
+      return err.message;
+    }
+  },
 };

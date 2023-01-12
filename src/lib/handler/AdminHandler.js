@@ -56,6 +56,13 @@ const AdminHandler = {
 
     return WorkRecord.data;
   },
+
+  getWorkHullRecordList: async (hull_sq) => {
+    const result = await AdminApi.getWorkHullRecordList(hull_sq);
+    const WorkRecord = await result.json();
+
+    return WorkRecord.data;
+  },
 };
 
 export default AdminHandler;

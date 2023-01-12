@@ -77,6 +77,15 @@ const AdminApi = {
       },
     });
   },
+
+  getWorkHullRecordList: (hull_sq) => {
+    return fetch(`${API}/work/hull/view/${hull_sq}`, {
+      method: "get",
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+  },
 };
 
 export default AdminApi;

@@ -1,5 +1,6 @@
 import { Form, Select } from "antd";
 import { useEffect } from "react";
+import AdminHandler from "../../../lib/handler/AdminHandler";
 import useGetBlkList from "../../../lib/state/useGetBlkList";
 
 const SelectBlk = ({ onChangedBlk }) => {
@@ -9,6 +10,8 @@ const SelectBlk = ({ onChangedBlk }) => {
 
   const onChangedHull = async (hull) => {
     await getBlkList(hull);
+    const hull_work_list = await AdminHandler.getWorkHullRecordList(hull);
+    console.log(hull_work_list);
   };
 
   useEffect(() => {
