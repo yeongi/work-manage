@@ -56,7 +56,10 @@ const EmpMain = () => {
         <section className={classes["emp-calendar"]}>
           <h1> 업무 내역 확인</h1>
           <SelectMonthEmp onSelectYmHandler={onSelectYmHandler} />
-          <EmpWorkRecord recordList={filteredRecordList} />
+          <EmpWorkRecord
+            EMP_NAME={state.EMP_NAME}
+            recordList={filteredRecordList}
+          />
         </section>
       </div>
     </>
