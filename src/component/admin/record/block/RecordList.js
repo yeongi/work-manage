@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import AdminHandler from "../../../lib/handler/AdminHandler";
+import AdminHandler from "../../../../lib/handler/AdminHandler";
 import classes from "./RecordList.module.css";
 import { Divider, List, Typography } from "antd";
 import HeaderItem from "./HeaderItem";
 import ListItem from "./ListItem";
 import dayjs from "dayjs";
-import { dayJsYMD } from "../../../lib/dayJs";
+import { dayJsYMD } from "../../../../lib/dayJs";
 const headers = [
   "업무 내용",
   "업무 종류",
@@ -35,7 +35,7 @@ const RecordList = ({ block }) => {
 
   return (
     <div className={classes.wrapper}>
-      <Divider orientation="left">업무 기록 리스트</Divider>
+      <Divider orientation="left">블럭별 업무 기록 리스트</Divider>
       <List
         size="large"
         header={<HeaderItem items={headers} />}
