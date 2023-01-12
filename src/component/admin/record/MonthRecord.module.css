@@ -1,19 +1,113 @@
-.record-wrap {
+.wrapper {
+  padding: 30px;
+  min-width: 800px;
+  width: auto;
+}
+.all-wrapper {
+  width: 100%;
   display: flex;
-  padding: 2px;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 10px;
 }
 
-.record-wrap p {
-  font-size: 14px;
-  padding: 2px;
+.header-wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
 }
 
-.work-wrap {
+.header-wrapper p {
+  width: 100%;
+  height: 21px;
+  text-align: center;
+  padding: 4px;
+  margin: 2px;
+  background-color: rgb(234, 234, 234);
+  font-weight: bold;
+  border-radius: 3px;
+}
+
+.list-wrapper {
+  display: flex;
+  justify-content: space-around;
+  width: auto;
+}
+
+.list-wrapper p {
+  width: 100%;
+  height: 22px;
+  text-align: center;
+  padding: 4px;
+  margin: 2px;
+  font-weight: bold;
+}
+
+.work-header {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  font-size: 13px;
+  height: 20px;
+  padding: 4px;
+}
+
+.work-header p {
+  width: 30%;
+  height: 20px;
+  text-align: center;
+  padding: 4px;
+  margin: 2px;
+  background-color: rgb(234, 234, 234);
+  font-weight: bold;
+  border-radius: 3px;
+}
+
+.wlist-wrapper {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.wlist-wrapper p {
+  height: 30px;
+  width: 100%;
+  text-align: center;
+  padding: 4px;
+  margin: 2px;
+  font-weight: bold;
+  border-radius: 20px;
+}
+
+.date-header {
+  display: flex;
+  gap: 2px;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.date-header p {
+  width: 100%;
+  height: 20px;
+  text-align: center;
+  padding: 3px;
+  margin: 1px;
+  background-color: rgb(234, 234, 234);
+  font-weight: bold;
+  font-size: 12px;
+  border-radius: 3px;
+}
+
+.date-wrapper {
   display: flex;
   justify-content: space-around;
 }
 
-.work-wrap div {
-  border: 1px solid black;
-  display: flex;
+.date-wrapper p {
+  width: 100%;
+  height: 20px;
+  text-align: center;
+  padding: 6px;
+  margin: 2px;
+  font-size: 13px;
+  border-radius: 20px;
 }

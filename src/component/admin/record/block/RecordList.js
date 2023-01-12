@@ -6,6 +6,7 @@ import HeaderItem from "./HeaderItem";
 import ListItem from "./ListItem";
 import dayjs from "dayjs";
 import { dayJsYMD } from "../../../../lib/dayJs";
+import NoFilterdtoExcel from "../../sheet/NoFilterdtoExcel";
 const headers = [
   "업무 내용",
   "업무 종류",
@@ -23,10 +24,20 @@ const headers = [
 
 const RecordList = ({ block }) => {
   const [workRecordList, setList] = useState([{}]);
+  const [fileName, setFileName] = useState("");
 
   const getWorkRecordList = async (block) => {
     const list = await AdminHandler.getWorkRecordList(block);
     setList(list);
+    //to do : 파일 이름 설정 하기
+    if (list.length > 0) {
+      const { BLK_NO, HULL_NO, HULL_TYPE, SHIPYARD } = list[0];
+      setFileName(
+        `${SHIPYARD}-${HULL_TYPE}-${HULL_NO}-${BLK_NO}-${dayJsYMD(
+          dayjs(new Date())
+        )}`
+      );
+    }
   };
 
   useEffect(() => {
@@ -35,10 +46,15 @@ const RecordList = ({ block }) => {
 
   return (
     <div className={classes.wrapper}>
-      <Divider orientation="left">블럭별 업무 기록 리스트</Divider>
+      <Divider orientation="left"> 블럭별 업무 기록 리스트</Divider>
       <List
         size="large"
-        header={<HeaderItem items={headers} />}
+        header={
+          <div>
+            <NoFilterdtoExcel list={workRecordList} fileName={fileName} />
+            <HeaderItem items={headers} />
+          </div>
+        }
         footer={<div>제작자 ＠github : yeongi</div>}
         bordered
         dataSource={workRecordList}
