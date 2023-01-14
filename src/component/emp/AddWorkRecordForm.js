@@ -78,6 +78,23 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
           선택해주세요.
         </p>
         <Form.Item
+          label="날짜를 선택해주세요"
+          name="DATE_TIME"
+          rules={[
+            {
+              required: true,
+              message: "날짜를 선택해주세요",
+            },
+          ]}
+        >
+          <DatePicker
+            placeholder="M/H"
+            initialValues={dayjs()}
+            disabledDate={disabledDate}
+            format={format}
+          />
+        </Form.Item>
+        <Form.Item
           label="HULL"
           name="HULL_SQ"
           rules={[
@@ -182,24 +199,6 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
           <Space>
             <InputNumber placeholder="M/H" step={0.5} min={0} />
           </Space>
-        </Form.Item>
-
-        <Form.Item
-          label="날짜를 선택해주세요"
-          name="DATE_TIME"
-          rules={[
-            {
-              required: true,
-              message: "날짜를 선택해주세요",
-            },
-          ]}
-        >
-          <DatePicker
-            placeholder="M/H"
-            initialValues={dayjs()}
-            disabledDate={disabledDate}
-            format={format}
-          />
         </Form.Item>
 
         <div style={{ float: "left" }}>

@@ -8,7 +8,7 @@ const MyExcelBtn = () => {
 
   useEffect(() => {
     const getEmpList = async () => {
-      const list = await AdminHandler.getWorkMonthRecordList("2023-01");
+      const list = await AdminHandler.getEmployeeList();
       setEmpList(list);
       return;
     };
@@ -24,7 +24,7 @@ const MyExcelBtn = () => {
     XLSX.writeFile(workbook, "Employees.xlsx", { compression: true });
   };
 
-  return <Button onClick={getEmpExcelHandler}>가져오기</Button>;
+  return <Button onClick={getEmpExcelHandler}>사원 목록 가져오기</Button>;
 };
 
 export default MyExcelBtn;

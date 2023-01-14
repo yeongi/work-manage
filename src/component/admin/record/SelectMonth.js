@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { DatePicker, Space } from "antd";
 import dayjs from "dayjs";
-import InstantModal from "./InstantModal";
-import MonthRecord from "./MonthRecord";
+import InstantModal from "./month/InstantModal";
+import MonthRecord from "./month/MonthRecord";
 import { dayJsYM } from "../../../lib/dayJs";
 
 const SelectMonth = (props) => {

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import AdminHandler from "../../../lib/handler/AdminHandler";
+import AdminHandler from "../../../../lib/handler/AdminHandler";
 import classes from "./MonthRecord.module.css";
 import { List, Divider } from "antd";
 import dayjs from "dayjs";
-import { dayJsMD } from "../../../lib/dayJs";
+import { dayJsMD } from "../../../../lib/dayJs";
 
 const MonthRecord = ({ ym }) => {
   const [lists, setList] = useState([]);
