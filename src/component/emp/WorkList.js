@@ -4,13 +4,14 @@ import { v4 } from "uuid";
 import classes from "./WorkList.module.css";
 
 const headers = [
+  "날짜",
   "선체 번호",
   "선체 종류",
   "조선소",
   "블럭 번호",
   "투입 시수",
   "야근 시수",
-  "날짜",
+
   "업무 종류",
   "업무 내용",
   "사원 이름",
@@ -46,6 +47,9 @@ const WorkList = ({ list }) => {
           }) => {
             return (
               <div key={v4()} className={classes["list-wrapper"]}>
+                <p className={classes["list-item"]}>
+                  {dayJsYMD(dayjs(WORK_DATE))}
+                </p>
                 <p className={classes["list-item"]}>{HULL_NO}</p>
                 <p className={classes["list-item"]}>{HULL_TYPE}</p>
                 <p className={classes["list-item"]}>{SHIPYARD}</p>
@@ -55,9 +59,6 @@ const WorkList = ({ list }) => {
                 </p>
                 <p className={classes["list-item"]}>
                   <b className={classes["list-item"]}>{OVERTIME_MH}</b>
-                </p>
-                <p className={classes["list-item"]}>
-                  {dayJsYMD(dayjs(WORK_DATE))}
                 </p>
                 <p className={classes["list-item"]}>{WORK_DES}</p>
                 <p className={classes["list-item"]}>{WORK_TYPE}</p>
