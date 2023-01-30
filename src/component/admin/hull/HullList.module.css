@@ -1,0 +1,27 @@
+.header {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.header p {
+  height: 15px;
+  width: 8%;
+  margin: 5px;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+.wrapper p {
+  height: 15px;
+  width: 8%;
+  margin: 5px;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+}

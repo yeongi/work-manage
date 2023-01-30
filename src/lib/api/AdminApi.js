@@ -86,6 +86,15 @@ const AdminApi = {
       },
     });
   },
+
+  updateHullComplete: (hull_sq) => {
+    return fetch(`${API}/hull/complete/${hull_sq}`, {
+      method: "put",
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+  },
 };
 
 export default AdminApi;

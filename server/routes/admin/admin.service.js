@@ -229,4 +229,29 @@ module.exports = {
       return err.message;
     }
   },
+
+  updateCompleteHull: async (hull_sq) => {
+    try {
+      const conn = await pool.getConnection();
+
+      const [[{ complete }]] = await conn.query(
+        "SELECT complete FROM hull WHERE hull_sq=?",
+        [hull_sq]
+      );
+
+      const query =
+        complete === 1
+          ? "UPDATE hull SET complete = 0 WHERE hull_sq = ?"
+          : "UPDATE hull SET complete = 1 WHERE hull_sq = ?";
+
+      const [result] = await conn.query(query, [hull_sq]);
+
+      conn.release();
+
+      return result;
+    } catch (err) {
+      console.log(err);
+      return err.message;
+    }
+  },
 };

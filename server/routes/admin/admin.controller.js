@@ -166,4 +166,19 @@ router.get("/work/month/view/:ym", async (req, res) => {
   }
 });
 
+//블럭 완료 업데이트
+router.put("/hull/complete/:hullsq", async (req, res) => {
+  const { hullsq } = req.params;
+  try {
+    const result = await AdminService.updateCompleteHull(hullsq);
+    return res.status(200).json({
+      status: 200,
+      data: result,
+      message: "선체 완료 업데이트",
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 module.exports = router;
