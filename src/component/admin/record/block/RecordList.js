@@ -7,20 +7,8 @@ import ListItem from "./ListItem";
 import dayjs from "dayjs";
 import { dayJsYMD } from "../../../../lib/dayJs";
 import NoFilterdtoExcel from "../../sheet/NoFilterdtoExcel";
-const headers = [
-  "업무 내용",
-  "업무 종류",
-  "블럭 번호",
-  "사원 이름",
-  "사원 번호",
-  "조선소",
-  "선체 종류",
-  "선체 번호",
-  "표준 시수",
-  "투입 시수",
-  "야근 시수",
-  "업무 날짜",
-];
+import { BLK_LIST } from "../../../../lib/const/List";
+const headers = BLK_LIST.HEADER;
 
 const RecordList = ({ block }) => {
   const [workRecordList, setList] = useState([{}]);
@@ -81,14 +69,14 @@ const RecordList = ({ block }) => {
             <List.Item>
               <ListItem
                 items={[
+                  SHIPYARD,
+                  BLK_NO,
+                  HULL_NO,
+                  HULL_TYPE,
                   WORK_TYPE,
                   WORK_DES,
-                  BLK_NO,
                   EMP_NAME,
                   EMP_NO,
-                  SHIPYARD,
-                  HULL_TYPE,
-                  HULL_NO,
                   NORM_MH,
                   INP_MH,
                   OVERTIME_MH,

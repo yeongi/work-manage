@@ -1,18 +1,8 @@
 import classes from "./HeaderItem.module.css";
-import { v4 } from "uuid";
+import mappingHeader from "../../../../lib/MappingHeader";
 
 const HeaderItem = ({ items }) => {
-  return (
-    <div className={classes.wrapper}>
-      {items.map((item) => {
-        return (
-          <div key={v4()} className={classes.item}>
-            {item}
-          </div>
-        );
-      })}
-    </div>
-  );
+  return <div className={classes.wrapper}>{items.map(mappingHeader)}</div>;
 };
 
 export default HeaderItem;

@@ -1,4 +1,10 @@
-.item {
+.wrapper {
+  display: flex;
+  position: sticky;
+  min-width: 1153px;
+}
+
+.wrapper p {
   height: 20px;
   font-weight: bold;
   width: 8%;
@@ -8,10 +14,4 @@
   border-radius: 10px;
   padding: 10px;
   text-align: center;
-}
-
-.wrapper {
-  display: flex;
-  position: sticky;
-  min-width: 1153px;
 }
