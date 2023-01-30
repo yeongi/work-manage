@@ -2,19 +2,8 @@ import { useEffect, useState } from "react";
 import AdminHandler from "../../../../lib/handler/AdminHandler";
 import { Divider, List } from "antd";
 import classes from "./HullRecordList.module.css";
-import dayjs from "dayjs";
-import { dayJsYMD } from "../../../../lib/dayJs";
-
-const headers = [
-  "조선소",
-  "블럭 번호",
-  "선체 번호",
-  "선체 종류",
-  "표준 시수",
-  "총합 투입 시수",
-  "총합 야근 시수",
-  "투입 시수",
-];
+import { HULL_LIST } from "../../../../lib/const/List";
+import mappingHeader from "../../../../lib/MappingHeader";
 
 const HullRecordList = ({ hull }) => {
   const [recordList, setList] = useState([{}]);
@@ -22,7 +11,6 @@ const HullRecordList = ({ hull }) => {
   const getHullWorkRecordList = async (hull) => {
     const hull_work_list = await AdminHandler.getWorkHullRecordList(hull);
     setList(hull_work_list);
-    console.log(recordList);
   };
 
   useEffect(() => {
@@ -53,7 +41,7 @@ const HullRecordList = ({ hull }) => {
           <List.Item>
             <div className={classes["item-wrapper"]}>
               <div className={classes["header-wrapper"]}>
-                {headers.map((header) => {
+                {HULL_LIST.HEADER.map((header) => {
                   return <p>{header}</p>;
                 })}
               </div>
@@ -70,10 +58,7 @@ const HullRecordList = ({ hull }) => {
               <List
                 header={
                   <div className={classes["work-header"]}>
-                    <p>업무 종류</p>
-                    <p>업무 내용</p>
-                    <p>업무 투입시수</p>
-                    <p>업무 야근시수</p>
+                    {HULL_LIST.WORK_HEADER.map(mappingHeader)}
                   </div>
                 }
                 bordered
