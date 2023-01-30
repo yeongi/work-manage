@@ -10,6 +10,7 @@ const format = "YYYY-MM-DD HH:mm:ss";
 const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
   const loginCtx = useLoginCtx();
   const { hullList, blockList, getHullList, getBlkList } = useGetBlkList();
+  const [hull_no, setHullNo] = useState(0);
 
   const disabledDate = (current) => {
     // Can not select days
@@ -19,6 +20,7 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
   };
 
   const onChangedHull = async (hull) => {
+    setHullNo(hull);
     await getBlkList(hull);
   };
 
@@ -139,17 +141,23 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
           ]}
         >
           <Select style={{ width: 500 }} placeholder="블럭을 선택해 주세요.">
-            {blockList.map(
-              ({ BLK_NO, BLK_SQ, COMPLETE, HULL_SQ, NORM_MH, RES_MH }) => {
-                return (
-                  <Select.Option value={BLK_SQ} key={BLK_SQ}>
-                    {`블럭 번호 : ${BLK_NO} / 
+            {hull_no === 1 && (
+              <Select.Option value={1} key={1}>
+                기타 업무
+              </Select.Option>
+            )}
+            {hull_no !== 1 &&
+              blockList.map(
+                ({ BLK_NO, BLK_SQ, COMPLETE, HULL_SQ, NORM_MH, RES_MH }) => {
+                  return (
+                    <Select.Option value={BLK_SQ} key={BLK_SQ}>
+                      {`블럭 번호 : ${BLK_NO} / 
                   실적 시수 : ${RES_MH} / 
                   계획 시수 : ${NORM_MH}`}
-                  </Select.Option>
-                );
-              }
-            )}
+                    </Select.Option>
+                  );
+                }
+              )}
           </Select>
         </Form.Item>
         <Form.Item
