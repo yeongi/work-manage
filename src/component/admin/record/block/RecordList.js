@@ -7,8 +7,8 @@ import ListItem from "./ListItem";
 import dayjs from "dayjs";
 import { dayJsYMD } from "../../../../lib/dayJs";
 import NoFilterdtoExcel from "../../sheet/NoFilterdtoExcel";
-import { BLK_LIST } from "../../../../lib/const/List";
-const headers = BLK_LIST.HEADER;
+import { HEADER } from "../../../../lib/const/List";
+const headers = HEADER.BLK_LIST;
 
 const RecordList = ({ block }) => {
   const [workRecordList, setList] = useState([{}]);

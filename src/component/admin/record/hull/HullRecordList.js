@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import AdminHandler from "../../../../lib/handler/AdminHandler";
 import { Divider, List } from "antd";
 import classes from "./HullRecordList.module.css";
-import { HULL_LIST } from "../../../../lib/const/List";
+import { HEADER } from "../../../../lib/const/List";
 import mappingHeader from "../../../../lib/MappingHeader";
 
 const HullRecordList = ({ hull }) => {
@@ -41,9 +41,7 @@ const HullRecordList = ({ hull }) => {
           <List.Item>
             <div className={classes["item-wrapper"]}>
               <div className={classes["header-wrapper"]}>
-                {HULL_LIST.HEADER.map((header) => {
-                  return <p>{header}</p>;
-                })}
+                {HEADER.HULL_LIST.map(mappingHeader)}
               </div>
               <div className={classes["list-wrapper"]}>
                 <p>{SHIPYARD}</p>
@@ -58,7 +56,7 @@ const HullRecordList = ({ hull }) => {
               <List
                 header={
                   <div className={classes["work-header"]}>
-                    {HULL_LIST.WORK_HEADER.map(mappingHeader)}
+                    {HEADER.WORK.map(mappingHeader)}
                   </div>
                 }
                 bordered

@@ -4,6 +4,10 @@ import classes from "./MonthRecord.module.css";
 import { List, Divider } from "antd";
 import dayjs from "dayjs";
 import { dayJsMD } from "../../../../lib/dayJs";
+import { HEADER } from "../../../../lib/const/List";
+import mappingHeader from "../../../../lib/MappingHeader";
+
+const { HULL_LIST, WORK, BLK_LIST } = HEADER;
 
 const MonthRecord = ({ ym }) => {
   const [lists, setList] = useState([]);
@@ -13,6 +17,7 @@ const MonthRecord = ({ ym }) => {
       const result = await AdminHandler.getWorkMonthRecordList(ym);
       setList(result);
     };
+    console.log(lists);
     getMonthWorkRecord();
   }, [ym]);
   return (
@@ -40,32 +45,22 @@ const MonthRecord = ({ ym }) => {
           <List.Item>
             <div className={classes["all-wrapper"]}>
               <div className={classes["header-wrapper"]}>
-                <p>선체 번호 </p>
-                <p>선체 종류</p>
-                <p>블럭 번호 </p>
-                <p>조선소</p>
-                <p>총합 투입 시수</p>
-                <p>총합 야근 시수</p>
-                <p>투입 시수</p>
-                <p>표준 시수</p>
+                {HULL_LIST.map(mappingHeader)}
               </div>
               <div className={classes["list-wrapper"]}>
+                <p>{SHIPYARD}</p>
+                <p>{BLK_NO}</p>
                 <p>{HULL_NO}</p>
                 <p>{HULL_TYPE}</p>
-                <p>{BLK_NO}</p>
-                <p>{SHIPYARD}</p>
+                <p>{NORM_MH}</p>
                 <p>{SUM_INP_MH}</p>
                 <p>{SUM_OVER_MH}</p>
                 <p>{RES_MH}</p>
-                <p>{NORM_MH}</p>
               </div>
               <List
                 header={
                   <div className={classes["work-header"]}>
-                    <p>업무 종류</p>
-                    <p>업무 내용</p>
-                    <p>업무 투입시수</p>
-                    <p>업무 야근시수</p>
+                    {WORK.map(mappingHeader)}
                   </div>
                 }
                 bordered
@@ -91,17 +86,7 @@ const MonthRecord = ({ ym }) => {
               <List
                 header={
                   <div className={classes["date-header"]}>
-                    <p>업무종류</p>
-                    <p>업무내용</p>
-                    <p>사원이름</p>
-                    <p>사원번호</p>
-                    <p>블럭번호</p>
-                    <p>선체번호</p>
-                    <p>선체종류</p>
-                    <p>조선소</p>
-                    <p>투입시수</p>
-                    <p>야근시수</p>
-                    <p>날짜</p>
+                    {BLK_LIST.map(mappingHeader)}
                   </div>
                 }
                 bordered
@@ -128,14 +113,15 @@ const MonthRecord = ({ ym }) => {
                 }) => (
                   <List.Item>
                     <div className={classes["date-wrapper"]}>
+                      <p>{SHIPYARD}</p>
+                      <p>{BLK_NO}</p>
+                      <p>{HULL_NO}</p>
+                      <p>{HULL_TYPE}</p>
                       <p>{WORK_TYPE}</p>
                       <p>{WORK_DES}</p>
                       <p>{EMP_NAME}</p>
                       <p>{EMP_NO}</p>
-                      <p>{BLK_NO}</p>
-                      <p>{HULL_NO}</p>
-                      <p>{HULL_TYPE}</p>
-                      <p>{SHIPYARD}</p>
+                      <p>{NORM_MH}</p>
                       <p>{INP_MH}</p>
                       <p>{OVERTIME_MH}</p>
                       <p>{dayJsMD(dayjs(WORK_DATE))}</p>
