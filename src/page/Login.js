@@ -1,9 +1,10 @@
 import { Button, Checkbox, Form, Input } from "antd";
 import { useEffect, useRef } from "react";
 import empHandler from "../lib/handler/EmpHander";
-import useMountFocus from "../lib/state/useMountFocus";
 import { useLoginCtx } from "../lib/store/LoginContext";
-import classes from "./page.module.css";
+import classes from "./Login.module.css";
+import { Avatar } from "antd";
+import imgUrl from "../img/junsu.jpg";
 
 const Login = () => {
   const loginCtx = useLoginCtx();
@@ -34,9 +35,19 @@ const Login = () => {
 
   return (
     <div className={classes["login-wrapper"]}>
-      <h1>Work-Manage with electron</h1>
-      <h3>로그인 페이지 입니다.</h3>
-      <p> 사원 분들은 관리자님에게 아이디 생성을 요청해야 합니다.</p>
+      <section className={classes["header-section"]}>
+        <div>
+          <h1>회사 이름</h1>
+
+          <Avatar src={<img src={imgUrl} alt="avatar" />} />
+          <h3>로그인 페이지 입니다.</h3>
+          <p> 사원 분들은 관리자님에게 아이디 생성을 요청해야 합니다.</p>
+        </div>
+      </section>
+      <section className={classes["footer-section"]}>
+        <p>제작자 github : yeongi</p>
+        <hr />
+      </section>
       <div className={classes["login-form"]}>
         <Form
           name="basic"
@@ -77,17 +88,6 @@ const Login = () => {
             ]}
           >
             <Input.Password />
-          </Form.Item>
-
-          <Form.Item
-            name="remember"
-            valuePropName="checked"
-            wrapperCol={{
-              offset: 8,
-              span: 16,
-            }}
-          >
-            <Checkbox>Remember me</Checkbox>
           </Form.Item>
 
           <Form.Item

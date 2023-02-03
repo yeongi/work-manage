@@ -1,0 +1,40 @@
+.login-wrapper {
+  text-align: center;
+  width: 85%;
+  padding: 20px;
+  padding-top: 50px;
+  border: 1px dotted #90abbd;
+  border-radius: 20px;
+  margin: 0 auto;
+  height: 900px;
+}
+
+.login-form {
+  margin: 0 auto;
+  height: 160px;
+  position: relative;
+  bottom: 570px;
+  background-color: #fafafa;
+  z-index: 20;
+  width: 500px;
+  padding: 30px;
+  padding-left: 20px;
+  border: dotted 1px rgb(215, 215, 215);
+  border-radius: 20px;
+}
+
+.header-section {
+  width: 100%;
+  height: 400px;
+  color: #e3f0fb;
+  background-color: #12415d;
+  padding-top: 40px;
+}
+
+.footer-section {
+  padding-top: 100px;
+  width: 100%;
+  height: 300px;
+  margin-top: 10px;
+  background-color: #e3f0fb;
+}

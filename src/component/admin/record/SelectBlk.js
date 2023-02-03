@@ -5,7 +5,6 @@ import useGetBlkList from "../../../lib/state/useGetBlkList";
 
 const SelectBlk = ({ onChangedBlk, selectHull }) => {
   //선체, 블럭, 업무 기록 선택
-
   const { hullList, blockList, getHullList, getBlkList } = useGetBlkList();
 
   const onChangedHull = async (hull) => {
@@ -22,7 +21,7 @@ const SelectBlk = ({ onChangedBlk, selectHull }) => {
       <Form>
         <Form.Item>
           <Select
-            style={{ width: 500 }}
+            style={{ width: 400 }}
             placeholder="선체를 선택해 주세요."
             onChange={onChangedHull}
           >
@@ -39,7 +38,7 @@ const SelectBlk = ({ onChangedBlk, selectHull }) => {
         </Form.Item>
         <Form.Item>
           <Select
-            style={{ width: 500 }}
+            style={{ width: 400 }}
             placeholder="블럭을 선택해 주세요."
             onChange={onChangedBlk}
           >

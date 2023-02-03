@@ -14,16 +14,13 @@ const HullList = ({ hullList, refreshHandler }) => {
 
   return (
     <>
-      <Divider orientation="left">
-        <h1>선체 리스트</h1>
-      </Divider>
+      <h1>선체 리스트</h1>
       <List
         size="large"
         header={
           <div className={classes.header}>{header.map(mappingHeader)}</div>
         }
         footer={<div>제작자 ＠github : yeongi</div>}
-        bordered
         dataSource={hullList}
         renderItem={({ HULL_NO, HULL_SQ, HULL_TYPE, SHIPYARD, complete }) => {
           return (
