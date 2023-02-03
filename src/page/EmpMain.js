@@ -43,23 +43,30 @@ const EmpMain = () => {
     <>
       <div className={classes["emp-wrapper"]}>
         <section className={classes["emp-main"]}>
-          <LoginState myList={myList} />
+          <article className={classes.state}>
+            <LoginState myList={myList} />
+          </article>
+
           {/* to do : 업무 추가 관리자 화면으로 넘기기
           <h1>업무 추가 하기</h1>
           <AddWorkForm workList={workList} refreshHandler={getWorkList} /> */}
-          <AddWorkRecordForm
-            workList={workList}
-            refreshHandler={getMyWorkRecordList}
-            addWorkRecordInfo={addList}
-          />
-        </section>
-        <section className={classes["emp-calendar"]}>
-          <h1> 업무 내역 확인</h1>
-          <SelectMonthEmp onSelectYmHandler={onSelectYmHandler} />
-          <EmpWorkRecord
-            EMP_NAME={state.EMP_NAME}
-            recordList={filteredRecordList}
-          />
+          <article className={classes.form}>
+            <h1>업무 내역 추가 하기</h1>
+            <AddWorkRecordForm
+              workList={workList}
+              refreshHandler={getMyWorkRecordList}
+              addWorkRecordInfo={addList}
+            />
+            <hr />
+          </article>
+          <article className={classes["work-list"]}>
+            <h1> 업무 내역 확인</h1>
+            <SelectMonthEmp onSelectYmHandler={onSelectYmHandler} />
+            <EmpWorkRecord
+              EMP_NAME={state.EMP_NAME}
+              recordList={filteredRecordList}
+            />
+          </article>
         </section>
       </div>
     </>

@@ -3,7 +3,7 @@ import Admin from "./Admin";
 import EmpMain from "./EmpMain";
 import { useLoginCtx } from "../lib/store/LoginContext";
 import classes from "./page.module.css";
-import Footer from "./Footer";
+import CreatorFooter from "./CreatorFooter";
 
 const Main = () => {
   const loginCtx = useLoginCtx();
@@ -23,8 +23,8 @@ const Main = () => {
       </section>
       <section className={classes["body-section"]}>
         {loginCtx.state.IS_ADMIN ? <Admin /> : <EmpMain />}
+        <CreatorFooter />
       </section>
-      <Footer />
     </div>
   );
 };

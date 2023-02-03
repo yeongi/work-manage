@@ -66,8 +66,6 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
 
   return (
     <div>
-      <h1>업무 내역</h1>
-
       <Form
         form={form}
         name="basic"
@@ -209,7 +207,7 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
           </Space>
         </Form.Item>
 
-        <div style={{ float: "left" }}>
+        <div>
           <Form.Item>
             <Space>
               <Button htmlType="button" onClick={resetHandler}>
