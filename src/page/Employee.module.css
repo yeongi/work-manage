@@ -1,9 +1,11 @@
 .emp-wrapper {
   height: auto;
-  padding: 20px;
+  padding-top: 30px;
+  padding-bottom: 30px;
   flex-wrap: wrap;
   margin: 0 auto;
-  background-color: #fffffb;
+  margin-bottom: 10px;
+  width: 100%;
 }
 
 .emp-main {
@@ -15,9 +17,9 @@
   background-color: #fffffb;
   border: 1px dotted #415664;
   margin: 0 auto;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
   padding: 20px;
-  width: 80%;
+  width: 85%;
   border-radius: 30px;
 }
 

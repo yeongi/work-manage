@@ -8,6 +8,7 @@ import useEmpRecordList from "../lib/state/useEmpRecordList";
 import useToDidWork from "../lib/state/useToDidWork";
 import { useLoginCtx } from "../lib/store/LoginContext";
 import classes from "./Employee.module.css";
+import noteBookUrl from "../img/note_book.jpg";
 
 const EmpMain = () => {
   const { state } = useLoginCtx();
@@ -41,7 +42,10 @@ const EmpMain = () => {
 
   return (
     <>
-      <div className={classes["emp-wrapper"]}>
+      <div
+        style={{ backgroundImage: `url(${noteBookUrl})` }}
+        className={classes["emp-wrapper"]}
+      >
         <section className={classes["emp-main"]}>
           <article className={classes.state}>
             <LoginState myList={myList} />

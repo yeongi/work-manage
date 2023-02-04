@@ -15,7 +15,7 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
   const disabledDate = (current) => {
     // Can not select days
     return !(
-      dayjs().subtract(2, "day") < current && current < dayjs().add(2, "day")
+      dayjs().subtract(3, "day") < current && current < dayjs().add(2, "day")
     );
   };
 
