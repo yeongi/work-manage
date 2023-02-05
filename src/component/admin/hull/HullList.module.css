@@ -1,6 +1,7 @@
 .header {
   display: flex;
   width: 100%;
+  background-color: white;
   justify-content: center;
 }
 
@@ -16,6 +17,7 @@
   display: flex;
   width: 100%;
   justify-content: center;
+  background-color: white;
 }
 .wrapper p {
   height: 15px;

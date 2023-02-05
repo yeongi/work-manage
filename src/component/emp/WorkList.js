@@ -17,7 +17,7 @@ const WorkList = ({ myList }) => {
         header={
           <div className={classes.header}>{header.map(mappingHeader)}</div>
         }
-        footer={<div>제작자 github : yeongi</div>}
+        footer={<hr />}
         dataSource={myList}
         renderItem={({
           HULL_NO,

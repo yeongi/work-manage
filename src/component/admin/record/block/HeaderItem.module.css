@@ -1,6 +1,7 @@
 .wrapper {
   display: flex;
   position: sticky;
+  background-color: white;
   min-width: 1153px;
 }
 

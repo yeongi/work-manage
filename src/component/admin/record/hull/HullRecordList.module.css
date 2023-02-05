@@ -5,6 +5,7 @@
 
 .header-wrapper {
   display: flex;
+  background-color: white;
   justify-content: space-around;
 }
 
@@ -20,6 +21,7 @@
 }
 
 .item-wrapper {
+  background-color: white;
   width: 100%;
 }
 
