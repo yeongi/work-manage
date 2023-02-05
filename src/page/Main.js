@@ -12,7 +12,6 @@ const Main = () => {
     <div className={classes.wrapper}>
       <section className={classes.main}>
         <div className={classes["header-section"]}>
-          <div className={classes.logo}>로고 넣을듯</div>
           <div className={classes.header}>
             <h1> WORK - MANAGE </h1>
           </div>

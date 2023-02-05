@@ -1,0 +1,62 @@
+.emp-wrapper {
+  height: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-bottom: 10px;
+  margin: 0 auto;
+  padding: 10px;
+  width: 100%;
+}
+
+.emp-main {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.emp-main h3 {
+  font-size: 20px;
+  text-align: center;
+}
+
+.emp-main article {
+  background-color: #406d87;
+  border: 8px double #b3c9d3;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 30px;
+  height: auto;
+}
+
+.state {
+  width: 60%;
+  min-width: 931px;
+}
+
+.form {
+  width: 35%;
+  min-width: 551px;
+}
+
+.work-list {
+  margin: 0 auto;
+  min-width: 753px;
+  height: auto;
+}
+
+.list-des {
+  display: flex;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 30px;
+  height: auto;
+  justify-content: space-around;
+  background-color: #ffffff;
+}
+
+.work-header {
+  color: #ffffff;
+}

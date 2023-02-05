@@ -7,7 +7,7 @@ import empHandler from "../lib/handler/EmpHander";
 import useEmpRecordList from "../lib/state/useEmpRecordList";
 import useToDidWork from "../lib/state/useToDidWork";
 import { useLoginCtx } from "../lib/store/LoginContext";
-import classes from "./Employee.module.css";
+import classes from "./EmpMain.module.css";
 import noteBookUrl from "../img/note_book.jpg";
 
 const EmpMain = () => {
@@ -16,13 +16,12 @@ const EmpMain = () => {
   const [workRecordList, getMyWorkRecordList] = useEmpRecordList(
     loginCtx.state.EMP_NO
   );
-  const [ym, setYm] = useState("");
+
   const [filteredRecordList, setFilteredList] = useState([]);
 
   const [myList, addList] = useToDidWork();
 
   const onSelectYmHandler = (ym) => {
-    setYm(ym);
     filteredMonthMyRecordList(ym);
   };
 
@@ -49,29 +48,26 @@ const EmpMain = () => {
         className={classes["emp-wrapper"]}
       >
         <section className={classes["emp-main"]}>
-          <article className={classes.state}>
-            <LoginState myList={myList} />
-          </article>
-
-          {/* to do : 업무 추가 관리자 화면으로 넘기기
-          <h1>업무 추가 하기</h1>
-          <AddWorkForm workList={workList} refreshHandler={getWorkList} /> */}
           <article className={classes.form}>
-            <h1>업무 내역 추가 하기</h1>
             <AddWorkRecordForm
               workList={workList}
               refreshHandler={getMyWorkRecordList}
               addWorkRecordInfo={addList}
             />
-            <hr />
+          </article>
+          <article className={classes.state}>
+            <LoginState myList={myList} />
           </article>
           <article className={classes["work-list"]}>
-            <h1> 업무 내역 확인</h1>
-            <SelectMonthEmp onSelectYmHandler={onSelectYmHandler} />
-            <EmpWorkRecord
-              EMP_NAME={loginCtx.state.EMP_NAME}
-              recordList={filteredRecordList}
-            />
+            <h3 className={classes["work-header"]}>월별 업무 내역 확인</h3>
+            <div className={classes["list-des"]}>
+              <div>
+                <p>연,월을 선택하면 본인의 업무 내역을 확인할 수 있습니다.</p>
+                <h1> {loginCtx.state.EMP_NAME}님 업무 기록 내역</h1>
+              </div>
+              <SelectMonthEmp onSelectYmHandler={onSelectYmHandler} />
+            </div>
+            <EmpWorkRecord recordList={filteredRecordList} />
           </article>
         </section>
       </div>

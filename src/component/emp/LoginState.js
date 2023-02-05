@@ -2,7 +2,7 @@ import { useLoginCtx } from "../../lib/store/LoginContext";
 import dayJs from "dayjs";
 import { dayJsYMD } from "../../lib/dayJs";
 import WorkList from "./WorkList";
-import classes from "./EmpMain.module.css";
+import classes from "./LoginState.module.css";
 import { useEffect } from "react";
 
 const LoginState = ({ myList }) => {

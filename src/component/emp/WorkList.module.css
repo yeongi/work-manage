@@ -1,42 +1,48 @@
 .wrapper {
   background-color: white;
-  width: 95%;
-  padding: 20px;
+  width: 99%;
   border-radius: 20px;
-  border: 2px dotted blue;
+  border: 2px dotted #b3c9d3;
   overflow: hidden;
   min-width: 865px;
 }
 
 .header {
+  width: 98%;
   display: flex;
-  width: 100%;
+  background-color: #7c9bb0;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 20px;
   justify-content: space-around;
   gap: 4px;
 }
 
 .header p {
-  height: 30px;
-  font-size: 13px;
-  width: 8%;
-  padding: 5px 3px 1px 3px;
-  background-color: beige;
+  height: 20px;
+  font-size: 12px;
+  width: 9%;
+  padding: 3px;
+  border-radius: 5px;
   font-weight: bold;
+  color: white;
   text-align: center;
 }
 
 .list-wrapper {
   display: flex;
   width: 100%;
-  gap: 4px;
+  padding-left: 10px;
+  padding-right: 10px;
   justify-content: space-around;
+  gap: 5px;
 }
 
 .list-wrapper p {
-  height: 14px;
-  width: 7%;
-  padding: 0 3px 1px 1rem;
-  font-size: 15px;
+  width: 9%;
+  height: 10px;
+  padding: 3px;
+  font-size: 13px;
 }
 
 .list-height {

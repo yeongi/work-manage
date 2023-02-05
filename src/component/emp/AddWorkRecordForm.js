@@ -1,9 +1,10 @@
 import { Button, DatePicker, Form, InputNumber, Select, Space } from "antd";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import empHandler from "../../lib/handler/EmpHander";
 import { useLoginCtx } from "../../lib/store/LoginContext";
 import useGetBlkList from "../../lib/state/useGetBlkList";
+import classes from "./LoginState.module.css";
 
 const format = "YYYY-MM-DD HH:mm:ss";
 
@@ -65,7 +66,8 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
   };
 
   return (
-    <div>
+    <div className={classes["form-wrapper"]}>
+      <h3>업무 내역 추가 하기</h3>
       <Form
         form={form}
         name="basic"
@@ -73,10 +75,6 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
         onFinish={onFinish}
         autoComplete="off"
       >
-        <p>
-          선체와 블럭이 없는 업무기록의 경우에는 <b>"기타 업무"</b>를
-          선택해주세요.
-        </p>
         <Form.Item
           label="날짜를 선택해주세요"
           name="DATE_TIME"
@@ -94,6 +92,9 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
             format={format}
           />
         </Form.Item>
+        <p className={classes.description}>
+          날짜는 금일 기준 <b>2일</b>까지 선택가능 합니다.
+        </p>
         <Form.Item
           label="HULL"
           name="HULL_SQ"
@@ -105,7 +106,7 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
           ]}
         >
           <Select
-            style={{ width: 500 }}
+            style={{ width: 450 }}
             placeholder="선체를 선택해 주세요."
             onChange={onChangedHull}
             options={[
@@ -128,6 +129,10 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
             ]}
           ></Select>
         </Form.Item>
+        <p className={classes.description}>
+          선체와 블럭이 필요없는 업무기록의 경우에는 <b>"기타 업무"</b>를
+          선택해주세요.
+        </p>
         <Form.Item
           label="BLOCK"
           name="BLK_SQ"
@@ -138,7 +143,7 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
             },
           ]}
         >
-          <Select style={{ width: 500 }} placeholder="블럭을 선택해 주세요.">
+          <Select style={{ width: 450 }} placeholder="블럭을 선택해 주세요.">
             {hull_no === 1 && (
               <Select.Option value={1} key={1}>
                 기타 업무
@@ -168,7 +173,7 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
             },
           ]}
         >
-          <Select style={{ width: 500 }} placeholder="업무를 선택해 주세요.">
+          <Select style={{ width: 450 }} placeholder="업무를 선택해 주세요.">
             {workList.map(({ WORK_CODE, WORK_TYPE, WORK_DES }) => {
               return (
                 <Select.Option value={WORK_CODE} key={WORK_CODE}>
@@ -179,6 +184,9 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
             })}
           </Select>
         </Form.Item>
+        <p className={classes.description}>
+          업무를 추가적으로 입력하시려면 관리자님께 문의해주세요!
+        </p>
 
         <Form.Item
           label="투입 M/H"
@@ -192,7 +200,9 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
         >
           <InputNumber placeholder="M/H" step={0.5} min={0.5} max={24} />
         </Form.Item>
-
+        <p className={classes.description}>
+          투입시수는 0.5 M/H 단위로 입력가능하며 필수로 입력해야 합니다.
+        </p>
         <Form.Item
           label="야근 M/H : 야근 시수가 있다면 입력해 주세요."
           name="OVERTIME_MH"
