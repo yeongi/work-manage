@@ -6,7 +6,7 @@ import { useLoginCtx } from "../store/LoginContext";
 
 const useToDidWork = () => {
   const [myList, setList] = useState([]);
-  const { state } = useLoginCtx();
+  const loginCtx = useLoginCtx();
   const today = dayJsYMD(dayJs());
 
   useEffect(() => {
@@ -19,7 +19,8 @@ const useToDidWork = () => {
         setList(list);
       }
     };
-    fetchMyWork(state.EMP_NO);
+
+    fetchMyWork(loginCtx.state.EMP_NO);
   }, []);
 
   const addMyWork = ([list]) => {

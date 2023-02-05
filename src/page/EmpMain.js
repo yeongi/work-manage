@@ -11,9 +11,11 @@ import classes from "./Employee.module.css";
 import noteBookUrl from "../img/note_book.jpg";
 
 const EmpMain = () => {
-  const { state } = useLoginCtx();
+  const loginCtx = useLoginCtx();
   const [workList, setWorkList] = useState([]);
-  const [workRecordList, getMyWorkRecordList] = useEmpRecordList(state.EMP_NO);
+  const [workRecordList, getMyWorkRecordList] = useEmpRecordList(
+    loginCtx.state.EMP_NO
+  );
   const [ym, setYm] = useState("");
   const [filteredRecordList, setFilteredList] = useState([]);
 
@@ -67,7 +69,7 @@ const EmpMain = () => {
             <h1> 업무 내역 확인</h1>
             <SelectMonthEmp onSelectYmHandler={onSelectYmHandler} />
             <EmpWorkRecord
-              EMP_NAME={state.EMP_NAME}
+              EMP_NAME={loginCtx.state.EMP_NAME}
               recordList={filteredRecordList}
             />
           </article>

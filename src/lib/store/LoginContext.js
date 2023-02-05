@@ -4,13 +4,15 @@ const initState = {
   IS_LOGIN: false,
   EMP_NO: null,
   EMP_NAME: "",
+  MH: 0,
   IS_ADMIN: false,
 };
 
 const LoginCtx = createContext({
   onLogin: () => {},
   onLogout: () => {},
-  ...initState,
+  setMH: () => {},
+  state: initState,
 });
 
 export const useLoginCtx = () => {
@@ -25,7 +27,27 @@ export const LoginProvider = ({ children }) => {
   };
 
   const onLogoutHandler = () => {
-    setLogin(initState);
+    if (loginState.IS_ADMIN) {
+      alert("로그아웃 됐습니다.");
+      setLogin(initState);
+      return;
+    }
+    if (loginState.MH < 8) {
+      alert("금일 투입 시수를 다 채우지 않았습니다. 로그아웃 됩니다.");
+      setLogin(initState);
+      return;
+    }
+    if (loginState.MH >= 8) {
+      alert("로그아웃 됐습니다.");
+      setLogin(initState);
+      return;
+    }
+  };
+
+  const setTodayMHHandler = (MH) => {
+    setLogin((prev) => {
+      return { ...prev, MH: MH };
+    });
   };
 
   return (
@@ -33,6 +55,7 @@ export const LoginProvider = ({ children }) => {
       value={{
         onLogin: onLoginHandler,
         onLogout: onLogoutHandler,
+        setMH: setTodayMHHandler,
         state: loginState,
       }}
     >
