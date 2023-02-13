@@ -42,7 +42,7 @@ const WorkRecord = () => {
 
   return (
     <div>
-      <div className={classes["selet-wrapper"]}>
+      <div className={classes["select-wrapper"]}>
         <section>
           <h1>블럭 및 선체 선택</h1>
           <SelectBlk onChangedBlk={onChangedBlk} selectHull={ohChangedHull} />
@@ -63,7 +63,7 @@ const WorkRecord = () => {
           <SelectMonth />
         </section>
       </div>
-      {workList}
+      <div className={classes["list-wrapper"]}>{workList}</div>
     </div>
   );
 };

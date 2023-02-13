@@ -1,9 +1,9 @@
 .manage-wrapper {
   text-align: center;
-  padding: 2rem;
-  background-color: rgb(247, 247, 247);
+  background-color: rgb(255, 255, 255);
   margin: auto;
-  width: 80%;
+  width: 100%;
+  padding: 10px;
   height: auto;
   min-width: 700px;
 }
@@ -48,6 +48,7 @@
 
 .list-wrapper {
   width: 90%;
-  border: 1px solid black;
+  border: 3px solid rgb(232, 232, 232);
   padding: 30px;
+  border-radius: 20px;
 }

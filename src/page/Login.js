@@ -37,10 +37,10 @@ const Login = () => {
     <div className={classes["login-wrapper"]}>
       <section className={classes["header-section"]}>
         <div>
-          <h1>회사 이름</h1>
+          <h1>하나 E&T</h1>
 
           <Avatar src={<img src={imgUrl} alt="avatar" />} />
-          <h3>로그인 페이지 입니다.</h3>
+          <h3>Login</h3>
           <p> 사원 분들은 관리자님에게 아이디 생성을 요청해야 합니다.</p>
         </div>
       </section>
