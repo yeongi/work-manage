@@ -13,6 +13,7 @@
   height: auto;
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .emp-main h3 {
@@ -24,20 +25,20 @@
   background-color: #406d87;
   border: 8px double #b3c9d3;
   margin: 0 auto;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   padding: 10px;
   border-radius: 30px;
   height: auto;
 }
 
 .state {
-  width: 50%;
-  min-width: 931px;
+  width: 30%;
+  min-width: 500px;
 }
 
 .form {
-  width: 33%;
-  min-width: 551px;
+  width: 38%;
+  min-width: 590px;
 }
 
 .work-list {

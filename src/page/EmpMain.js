@@ -8,7 +8,8 @@ import useEmpRecordList from "../lib/state/useEmpRecordList";
 import useToDidWork from "../lib/state/useToDidWork";
 import { useLoginCtx } from "../lib/store/LoginContext";
 import classes from "./EmpMain.module.css";
-import noteBookUrl from "../img/note_book.jpg";
+import shipURL from "../img/ship.jpg";
+import TodayWorkList from "../component/emp/TodayWorkList";
 
 const EmpMain = () => {
   const loginCtx = useLoginCtx();
@@ -44,7 +45,7 @@ const EmpMain = () => {
   return (
     <>
       <div
-        style={{ backgroundImage: `url(${noteBookUrl})` }}
+        style={{ backgroundImage: `url(${shipURL})` }}
         className={classes["emp-wrapper"]}
       >
         <section className={classes["emp-main"]}>
@@ -56,9 +57,11 @@ const EmpMain = () => {
             />
           </article>
           <article className={classes.state}>
-            <LoginState myList={myList} />
+            <LoginState />
           </article>
           <article className={classes["work-list"]}>
+            <h3 className={classes["work-header"]}>오늘 업무 내역 확인</h3>
+            <TodayWorkList myList={myList} />
             <h3 className={classes["work-header"]}>월별 업무 내역 확인</h3>
             <div className={classes["list-des"]}>
               <div>

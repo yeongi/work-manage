@@ -6,3 +6,7 @@
   height: 100%;
   background-color: #456f7b;
 }
+
+.App::-webkit-scrollbar {
+  display: none;
+}
