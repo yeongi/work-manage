@@ -70,9 +70,9 @@ const RecordList = ({ block }) => {
               <ListItem
                 items={[
                   SHIPYARD,
-                  BLK_NO,
                   HULL_NO,
                   HULL_TYPE,
+                  BLK_NO,
                   WORK_TYPE,
                   WORK_DES,
                   EMP_NAME,

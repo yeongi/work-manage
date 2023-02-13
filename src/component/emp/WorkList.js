@@ -37,10 +37,9 @@ const WorkList = ({ myList }) => {
             <List.Item>
               <div className={classes["list-wrapper"]}>
                 <p>{SHIPYARD}</p>
-                <p>{BLK_NO}</p>
                 <p>{HULL_NO}</p>
                 <p>{HULL_TYPE}</p>
-
+                <p>{BLK_NO}</p>
                 <p>{WORK_DES}</p>
                 <p>{WORK_TYPE}</p>
                 <p>{EMP_NAME}</p>

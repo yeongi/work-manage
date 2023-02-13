@@ -45,9 +45,9 @@ const HullRecordList = ({ hull }) => {
               </div>
               <div className={classes["list-wrapper"]}>
                 <p>{SHIPYARD}</p>
-                <p>{BLK_NO}</p>
                 <p>{HULL_NO}</p>
                 <p>{HULL_TYPE}</p>
+                <p>{BLK_NO}</p>
                 <p>{NORM_MH}</p>
                 <p>{SUM_INP_MH}</p>
                 <p>{SUM_OVER_MH}</p>

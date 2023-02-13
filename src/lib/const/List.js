@@ -2,9 +2,9 @@ const LIST = {
   HEADER: {
     HULL_LIST: [
       "SHIP_YARD",
-      "BLK_NO",
       "HULL_NO",
       "HULL_TYPE",
+      "BLK_NO",
       "표준 시수",
       "총합 투입 시수",
       "총합 야근 시수",
@@ -15,9 +15,9 @@ const LIST = {
 
     BLK_LIST: [
       "SHIP_YARD",
-      "BLK_NO",
       "HULL_NO",
       "HULL_TYPE",
+      "BLK_NO",
       "업무 내용",
       "업무 종류",
       "사원 이름",

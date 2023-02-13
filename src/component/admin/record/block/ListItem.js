@@ -2,7 +2,6 @@ import classes from "./ListItem.module.css";
 import { v4 } from "uuid";
 
 const ListItem = ({ items }) => {
-  console.log(items);
   return (
     <div className={classes.wrapper}>
       {items.map((item) => {
