@@ -11,17 +11,28 @@ const format = "YYYY-MM-DD HH:mm:ss";
 const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
   const loginCtx = useLoginCtx();
   const { hullList, blockList, getHullList, getBlkList } = useGetBlkList();
-  const [hull_no, setHullNo] = useState(0);
 
-  const disabledDate = (current) => {
-    // Can not select days
-    return !(
-      dayjs().subtract(3, "day") < current && current < dayjs().add(2, "day")
-    );
+  const [hull_no, setHullNo] = useState(0);
+  const [filteredWorkList, setWorkList] = useState(workList);
+
+  const workListFitered = (hullsq) => {
+    if (hullsq === 1) {
+      const filteredList = workList.filter((work) => {
+        return !(work.WORK_TYPE === "본작업" || work.WORK_TYPE === "개정작업");
+      });
+      setWorkList(filteredList);
+    }
+    if (hullsq !== 1) {
+      const filteredList = workList.filter((work) => {
+        return work.WORK_TYPE === "본작업" || work.WORK_TYPE === "개정작업";
+      });
+      setWorkList(filteredList);
+    }
   };
 
   const onChangedHull = async (hull) => {
     setHullNo(hull);
+    workListFitered(hull);
     await getBlkList(hull);
   };
 
@@ -30,6 +41,13 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
   }, []);
 
   const [form] = Form.useForm();
+
+  const disabledDate = (current) => {
+    // Can not select days
+    return !(
+      dayjs().subtract(3, "day") < current && current < dayjs().add(2, "day")
+    );
+  };
 
   const onFinish = async ({
     BLK_SQ,
@@ -86,7 +104,7 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
           ]}
         >
           <DatePicker
-            placeholder="M/H"
+            placeholder="날짜를 선택해주세요"
             initialValues={dayjs()}
             disabledDate={disabledDate}
             format={format}
@@ -174,7 +192,7 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
           ]}
         >
           <Select style={{ width: 450 }} placeholder="업무를 선택해 주세요.">
-            {workList.map(({ WORK_CODE, WORK_TYPE, WORK_DES }) => {
+            {filteredWorkList.map(({ WORK_CODE, WORK_TYPE, WORK_DES }) => {
               return (
                 <Select.Option value={WORK_CODE} key={WORK_CODE}>
                   {`업무 구분 : ${WORK_TYPE} / 
