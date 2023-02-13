@@ -9,7 +9,7 @@ const useGetBlkList = () => {
     const serverHullList = await AdminHandler.getHullList();
     serverHullList.reverse();
     serverHullList.pop();
-    setHullList(serverHullList);
+    setHullList(serverHullList.filter((list) => list.complete === 0));
   };
 
   const getBlkList = async (hull_no) => {

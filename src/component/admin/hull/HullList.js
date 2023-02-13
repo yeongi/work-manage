@@ -30,7 +30,7 @@ const HullList = ({ hullList, refreshHandler }) => {
                 <p>{HULL_NO}</p>
                 <p>{HULL_TYPE}</p>
                 {/* to do: 업데이트 구분 따라 렌더링 바꾸기 */}
-                <p>{complete}</p>
+                <p>{complete === 0 ? "미완료" : "작업 완료"}</p>
                 <Button
                   onClick={() => {
                     completeHandler(HULL_SQ);
