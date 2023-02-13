@@ -1,21 +1,11 @@
 import { useLoginCtx } from "../../lib/store/LoginContext";
 import dayJs from "dayjs";
 import { dayJsYMD } from "../../lib/dayJs";
-import WorkList from "./WorkList";
 import classes from "./LoginState.module.css";
-import { useEffect } from "react";
 
-const LoginState = ({ myList }) => {
+const LoginState = () => {
   const loginCtx = useLoginCtx();
   const today = dayJsYMD(dayJs());
-
-  useEffect(() => {
-    const todayInput = myList.reduce((acc, cur) => {
-      return acc + cur.INP_MH;
-    }, 0);
-
-    loginCtx.setMH(todayInput);
-  }, [myList]);
 
   return (
     <div className={classes.wrapper}>
@@ -33,8 +23,11 @@ const LoginState = ({ myList }) => {
           <h3>금일 업무 내역</h3>
           <div className={classes["state-box"]}>
             <p>
-              {/* 아이콘 추가 하기 */}! 금일 업무 내역의 <b>"투입 시수"</b>가{" "}
-              <b>8시간</b> 이상 입력되어야 합니다.
+              {/* 아이콘 추가 하기 */}! 금일 업무 내역의 <b>"투입 시수"</b>가
+              이상 입력되어야 합니다.
+            </p>
+            <p>
+              ! 투입 시수가 <b>"8시간"</b>이하면 로그아웃이 되지않습니다!
             </p>
             <p>
               <b>금일 총 투입 시수 (M/H)</b> :
@@ -43,11 +36,6 @@ const LoginState = ({ myList }) => {
           </div>
         </section>
       </div>
-      {myList.length === 0 ? (
-        <h3>"금일 업무내역이 존재 하지 않습니다."</h3>
-      ) : (
-        <WorkList myList={myList} />
-      )}
     </div>
   );
 };
