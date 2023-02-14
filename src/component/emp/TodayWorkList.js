@@ -3,16 +3,13 @@ import dayJs from "dayjs";
 import { dayJsYMD } from "../../lib/dayJs";
 import WorkList from "./WorkList";
 import { useEffect } from "react";
+import sumMhMyList from "../../lib/sumMhList";
 
 const TodayWorkList = ({ myList }) => {
   const loginCtx = useLoginCtx();
 
   useEffect(() => {
-    const todayInput = myList.reduce((acc, cur) => {
-      return acc + cur.INP_MH;
-    }, 0);
-
-    loginCtx.setMH(todayInput);
+    loginCtx.setMH(sumMhMyList(myList));
   }, [myList]);
 
   return (
