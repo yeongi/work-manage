@@ -140,7 +140,7 @@ module.exports = {
     FROM ad_work_record 
     where DATE_FORMAT(WORK_DATE,'%Y-%m') = ?
     GROUP BY BLK_SQ 
-    order by BLK_SQ DESC;`;
+    order by HULL_NO;`;
 
     const WORK_SUM_QUERY = `
     -- 그 달의 업무에 대한 총합을 가져옴 --
@@ -208,6 +208,10 @@ module.exports = {
     ORDER BY WORK_DATE) AS MH_RECORD
     GROUP BY WORK_CODE;`;
 
+    const WORKLIST_QUERY = `
+    -- 블럭 업무 기록 리스트를 가져옴 --
+    SELECT * FROM ad_work_record where blk_sq = ? ORDER BY WORK_DATE;`;
+
     try {
       const conn = await pool.getConnection();
 
@@ -217,7 +221,11 @@ module.exports = {
         BLK_RES.map(async (RES) => {
           const [WORK_LIST] = await conn.query(BlockWorkSum, [RES.BLK_SQ]);
 
-          return { WORK_LIST, ...RES };
+          console.log(BLK_RES);
+
+          const [DATE_LIST] = await conn.query(WORKLIST_QUERY, [RES.BLK_SQ]);
+
+          return { DATE_LIST, WORK_LIST, ...RES };
         })
       );
 
