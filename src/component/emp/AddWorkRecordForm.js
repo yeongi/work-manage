@@ -14,6 +14,7 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
 
   const [hull_no, setHullNo] = useState(0);
   const [filteredWorkList, setWorkList] = useState(workList);
+  const [componentDisabled, setDisabled] = useState(true);
 
   const workListFitered = (hullsq) => {
     if (hullsq === 1) {
@@ -38,12 +39,12 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
 
   useEffect(() => {
     getHullList();
+    setDisabled(false);
   }, []);
 
   const [form] = Form.useForm();
 
   const disabledDate = (current) => {
-    // Can not select days
     return !(
       dayjs().subtract(3, "day") < current && current < dayjs().add(2, "day")
     );
@@ -57,14 +58,16 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
     OVERTIME_MH,
     WORK_CODE,
   }) => {
+    setDisabled(true);
+    console.log(OVERTIME_MH);
     const result = await empHandler.addWorkRecord({
       BLK_SQ,
       HULL_SQ,
-      INP_MH: INP_MH.toFixed(1),
+      INP_MH: Math.floor(INP_MH * 10) / 10,
       OVERTIME_MH:
         OVERTIME_MH === undefined || OVERTIME_MH === ""
           ? 0
-          : OVERTIME_MH.toFixed(1),
+          : Math.floor(OVERTIME_MH * 10) / 10,
       WORK_CODE,
       DATE_TIME: DATE_TIME.format(),
       EMP_NO: loginCtx.state.EMP_NO,
@@ -77,6 +80,7 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
 
     form.resetFields();
     refreshHandler();
+    setDisabled(false);
   };
 
   const resetHandler = () => {
@@ -90,6 +94,7 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
         form={form}
         name="basic"
         size="large"
+        disabled={componentDisabled}
         onFinish={onFinish}
         autoComplete="off"
       >
@@ -216,7 +221,7 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
             },
           ]}
         >
-          <InputNumber placeholder="M/H" step={0.5} min={0.5} max={24} />
+          <InputNumber placeholder="M/H" step={0.5} min={0} max={24} />
         </Form.Item>
         <p className={classes.description}>
           투입시수는 0.5 M/H 단위로 입력가능하며 필수로 입력해야 합니다.
@@ -224,15 +229,14 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
         <Form.Item
           label="야근 M/H : 야근 시수가 있다면 입력해 주세요."
           name="OVERTIME_MH"
+          initialValue={0}
           rules={[
             {
               required: false,
             },
           ]}
         >
-          <Space>
-            <InputNumber placeholder="M/H" step={0.5} min={0} />
-          </Space>
+          <InputNumber placeholder="M/H" step={0.5} min={0} />
         </Form.Item>
 
         <div>

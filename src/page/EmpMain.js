@@ -60,7 +60,7 @@ const EmpMain = () => {
             <LoginState />
           </article>
           <article className={classes["work-list"]}>
-            <h3 className={classes["work-header"]}>오늘 업무 내역 확인</h3>
+            <h3 className={classes["work-header"]}>금일 업무 내역 확인</h3>
             <TodayWorkList myList={myList} />
             <h3 className={classes["work-header"]}>월별 업무 내역 확인</h3>
             <div className={classes["list-des"]}>
