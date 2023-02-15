@@ -22,7 +22,7 @@ const HullRecordList = ({ hull }) => {
   return (
     <div className={classes.wrapper}>
       <Divider orientation="left">
-        선체별 업무 기록 리스트{" "}
+        <p>선체별 업무 기록 리스트</p>
         <HullListExport
           list={recordList}
           fileName={[

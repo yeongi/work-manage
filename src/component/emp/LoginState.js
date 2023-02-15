@@ -24,6 +24,7 @@ const LoginState = () => {
           <div className={classes["state-box"]}>
             <p>
               {/* 아이콘 추가 하기 */}! 금일 업무 내역의 <b>"투입 시수"</b>가
+              <b>"8시간"</b>
               이상 입력되어야 합니다.
             </p>
             <p>
