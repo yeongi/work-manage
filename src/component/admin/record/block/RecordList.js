@@ -57,7 +57,6 @@ const RecordList = ({ block }) => {
           HULL_TYPE,
           INP_MH,
           NORM_MH,
-          OVERTIME_MH,
           RES_MH,
           SHIPYARD,
           WORK_CODE,
@@ -79,7 +78,6 @@ const RecordList = ({ block }) => {
                   EMP_NO,
                   NORM_MH,
                   INP_MH,
-                  OVERTIME_MH,
                   dayJsYMD(dayjs(WORK_DATE)),
                 ]}
               />

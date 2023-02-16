@@ -30,7 +30,6 @@ const WorkList = ({ myList }) => {
             SHIPYARD,
             BLK_NO,
             INP_MH,
-            OVERTIME_MH,
             WORK_DATE,
             WORK_DES,
             WORK_TYPE,
@@ -52,9 +51,6 @@ const WorkList = ({ myList }) => {
                   <p>{NORM_MH}</p>
                   <p>
                     <b className={classes.MH}>{INP_MH}</b>
-                  </p>
-                  <p>
-                    <b className={classes.MH}>{OVERTIME_MH}</b>
                   </p>
                   <p>{dayJsYMD(dayjs(WORK_DATE))}</p>
                 </div>

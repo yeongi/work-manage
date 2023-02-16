@@ -47,7 +47,6 @@ const HullRecordList = ({ hull }) => {
           RES_MH,
           SHIPYARD,
           SUM_INP_MH,
-          SUM_OVER_MH,
           WORK_LIST,
         }) => (
           <>
@@ -63,7 +62,6 @@ const HullRecordList = ({ hull }) => {
                   <p>{BLK_NO}</p>
                   <p>{NORM_MH}</p>
                   <p>{SUM_INP_MH}</p>
-                  <p>{SUM_OVER_MH}</p>
                   <p>{RES_MH}</p>
                 </div>
                 <List
@@ -87,7 +85,6 @@ const HullRecordList = ({ hull }) => {
                         <p>{WORK_TYPE}</p>
                         <p>{WORK_DES}</p>
                         <p>{SUM_INP_MH}</p>
-                        <p>{SUM_OVER_MH}</p>
                       </div>
                     </List.Item>
                   )}

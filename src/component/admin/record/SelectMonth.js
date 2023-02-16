@@ -5,7 +5,7 @@ import InstantModal from "./month/InstantModal";
 import MonthRecord from "./month/MonthRecord";
 import { dayJsYM } from "../../../lib/dayJs";
 
-const SelectMonth = (props) => {
+const SelectMonth = () => {
   const [ym, setYM] = useState("");
 
   const onModalOpenHandler = (value) => {

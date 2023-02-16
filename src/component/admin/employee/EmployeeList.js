@@ -10,6 +10,7 @@ const EmployeeList = ({ empList }) => {
 
   useEffect(() => {
     if (EMP_NO) getMyWorkRecordList();
+    console.log(empList);
   }, [EMP_NO]);
   return (
     <>
@@ -23,7 +24,16 @@ const EmployeeList = ({ empList }) => {
           renderItem={(emp) => (
             <List.Item>
               <List.Item.Meta
-                title={<b>{emp.EMP_NAME}</b>}
+                title={
+                  <>
+                    <p>
+                      사원명 :<b>{emp.EMP_NAME}</b>{" "}
+                    </p>
+                    <p>
+                      사번 :<b>{emp.EMP_NO}</b>{" "}
+                    </p>
+                  </>
+                }
                 description={`${emp.EMP_NAME}님의 업무내역을 조회하시려면 버튼을 클릭하세요. `}
               />
               <Button

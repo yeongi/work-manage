@@ -18,7 +18,6 @@ const MonthRecord = ({ ym }) => {
       const result = await AdminHandler.getWorkMonthRecordList(ym);
       setList(result);
     };
-    console.log(lists);
     getMonthWorkRecord();
   }, [ym]);
   return (
@@ -43,7 +42,6 @@ const MonthRecord = ({ ym }) => {
           RES_MH,
           SHIPYARD,
           SUM_INP_MH,
-          SUM_OVER_MH,
           WORK_LIST,
         }) => (
           <List.Item>
@@ -58,7 +56,6 @@ const MonthRecord = ({ ym }) => {
                 <p>{HULL_TYPE}</p>
                 <p>{NORM_MH}</p>
                 <p>{SUM_INP_MH}</p>
-                <p>{SUM_OVER_MH}</p>
                 <p>{RES_MH}</p>
               </div>
               <List
@@ -70,19 +67,12 @@ const MonthRecord = ({ ym }) => {
                 bordered
                 itemLayout="vertical"
                 dataSource={WORK_LIST}
-                renderItem={({
-                  SUM_INP_MH,
-                  SUM_OVER_MH,
-                  WORK_CODE,
-                  WORK_DES,
-                  WORK_TYPE,
-                }) => (
+                renderItem={({ SUM_INP_MH, WORK_DES, WORK_TYPE }) => (
                   <List.Item>
                     <div className={classes["wlist-wrapper"]}>
                       <p>{WORK_TYPE}</p>
                       <p>{WORK_DES}</p>
                       <p>{SUM_INP_MH}</p>
-                      <p>{SUM_OVER_MH}</p>
                     </div>
                   </List.Item>
                 )}
@@ -106,7 +96,6 @@ const MonthRecord = ({ ym }) => {
                   HULL_TYPE,
                   INP_MH,
                   NORM_MH,
-                  OVERTIME_MH,
                   RECORD_NO,
                   RES_MH,
                   SHIPYARD,
@@ -127,7 +116,6 @@ const MonthRecord = ({ ym }) => {
                       <p>{EMP_NO}</p>
                       <p>{NORM_MH}</p>
                       <p>{INP_MH}</p>
-                      <p>{OVERTIME_MH}</p>
                       <p>{dayJsMD(dayjs(WORK_DATE))}</p>
                     </div>
                   </List.Item>

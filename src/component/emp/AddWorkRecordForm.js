@@ -37,6 +37,10 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
     await getBlkList(hull);
   };
 
+  const onClearHull = (e) => {
+    console.log(e);
+  };
+
   useEffect(() => {
     getHullList();
     setDisabled(false);
@@ -55,19 +59,14 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
     DATE_TIME,
     HULL_SQ,
     INP_MH,
-    OVERTIME_MH,
     WORK_CODE,
   }) => {
     setDisabled(true);
-    console.log(OVERTIME_MH);
+
     const result = await empHandler.addWorkRecord({
       BLK_SQ,
       HULL_SQ,
       INP_MH: Math.floor(INP_MH * 10) / 10,
-      OVERTIME_MH:
-        OVERTIME_MH === undefined || OVERTIME_MH === ""
-          ? 0
-          : Math.floor(OVERTIME_MH * 10) / 10,
       WORK_CODE,
       DATE_TIME: DATE_TIME.format(),
       EMP_NO: loginCtx.state.EMP_NO,
@@ -159,6 +158,7 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
         <Form.Item
           label="BLOCK"
           name="BLK_SQ"
+          onClear={onClearHull}
           rules={[
             {
               required: true,
@@ -189,6 +189,7 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
         <Form.Item
           label="WORK"
           name="WORK_CODE"
+          onClear={onClearHull}
           rules={[
             {
               required: true,
@@ -213,6 +214,7 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
 
         <Form.Item
           label="투입 M/H"
+          onClear={onClearHull}
           name="INP_MH"
           rules={[
             {
@@ -226,19 +228,6 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
         <p className={classes.description}>
           투입시수는 0.5 M/H 단위로 입력가능하며 필수로 입력해야 합니다.
         </p>
-        <Form.Item
-          label="야근 M/H : 야근 시수가 있다면 입력해 주세요."
-          name="OVERTIME_MH"
-          initialValue={0}
-          rules={[
-            {
-              required: false,
-            },
-          ]}
-        >
-          <InputNumber placeholder="M/H" step={0.5} min={0} />
-        </Form.Item>
-
         <div>
           <Form.Item>
             <Space>
