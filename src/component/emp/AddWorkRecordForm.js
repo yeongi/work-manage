@@ -11,7 +11,6 @@ const format = "YYYY-MM-DD HH:mm:ss";
 const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
   const loginCtx = useLoginCtx();
   const { hullList, blockList, getHullList, getBlkList } = useGetBlkList();
-
   const [hull_no, setHullNo] = useState(0);
   const [filteredWorkList, setWorkList] = useState(workList);
   const [componentDisabled, setDisabled] = useState(true);
@@ -31,22 +30,21 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
     }
   };
 
-  const onChangedHull = async (hull) => {
-    setHullNo(hull);
-    workListFitered(hull);
-    await getBlkList(hull);
-  };
-
-  const onClearHull = (e) => {
-    console.log(e);
-  };
-
   useEffect(() => {
     getHullList();
     setDisabled(false);
   }, []);
 
   const [form] = Form.useForm();
+
+  const onChangedHull = async (hull) => {
+    setHullNo(hull);
+    workListFitered(hull);
+    await getBlkList(hull);
+    form.setFieldValue("BLK_SQ", undefined);
+    form.setFieldValue("WORK_CODE", undefined);
+    form.setFieldValue("INP_MH", undefined);
+  };
 
   const disabledDate = (current) => {
     return !(
@@ -158,7 +156,6 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
         <Form.Item
           label="BLOCK"
           name="BLK_SQ"
-          onClear={onClearHull}
           rules={[
             {
               required: true,
@@ -189,7 +186,6 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
         <Form.Item
           label="WORK"
           name="WORK_CODE"
-          onClear={onClearHull}
           rules={[
             {
               required: true,
@@ -214,7 +210,6 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
 
         <Form.Item
           label="투입 M/H"
-          onClear={onClearHull}
           name="INP_MH"
           rules={[
             {

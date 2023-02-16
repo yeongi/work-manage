@@ -10,7 +10,6 @@ const EmployeeList = ({ empList }) => {
 
   useEffect(() => {
     if (EMP_NO) getMyWorkRecordList();
-    console.log(empList);
   }, [EMP_NO]);
   return (
     <>

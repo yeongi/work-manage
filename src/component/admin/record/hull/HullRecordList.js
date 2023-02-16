@@ -12,7 +12,6 @@ const HullRecordList = ({ hull }) => {
   const getHullWorkRecordList = async (hull) => {
     const hull_work_list = await AdminHandler.getWorkHullRecordList(hull);
     setList(hull_work_list);
-    console.log(recordList);
   };
 
   useEffect(() => {
