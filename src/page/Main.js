@@ -13,7 +13,7 @@ const Main = () => {
       <section className={classes.main}>
         <div className={classes["header-section"]}>
           <div className={classes.header}>
-            <h1> 하나 E&T </h1>
+            <h1> 하나 이엔티 </h1>
           </div>
           <Button className={classes.button} onClick={loginCtx.onLogout}>
             로그아웃 하기

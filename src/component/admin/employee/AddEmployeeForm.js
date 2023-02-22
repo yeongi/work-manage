@@ -7,6 +7,7 @@ const AddEmployeeForm = ({ refreshHandler }) => {
   const [form] = Form.useForm();
 
   const onFinish = async (values) => {
+    console.log(values);
     const result = await AdminHandler.addEmployee(values);
     if (result.status === 203) alert(`${result.message}`);
     if (result.status === 204) alert(`${result.message} : ${result.data}`);
@@ -71,6 +72,7 @@ const AddEmployeeForm = ({ refreshHandler }) => {
         </Form.Item>
 
         <Form.Item
+          name="ADMIN"
           wrapperCol={{
             offset: 4,
             span: 16,

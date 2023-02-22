@@ -4,7 +4,7 @@ import empHandler from "../lib/handler/EmpHander";
 import { useLoginCtx } from "../lib/store/LoginContext";
 import classes from "./Login.module.css";
 import { Avatar } from "antd";
-import imgUrl from "../img/junsu.jpg";
+import imgUrl from "../img/logo.png";
 
 const Login = () => {
   const loginCtx = useLoginCtx();
@@ -38,8 +38,6 @@ const Login = () => {
       <section className={classes["header-section"]}>
         <div>
           <h1>하나 E&T</h1>
-
-          <Avatar src={<img src={imgUrl} alt="avatar" />} />
           <h3>Login</h3>
           <p> 사원 분들은 관리자님에게 아이디 생성을 요청해야 합니다.</p>
         </div>

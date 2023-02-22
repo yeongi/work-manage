@@ -5,14 +5,12 @@ module.exports = {
     try {
       const conn = await pool.getConnection();
 
-      const { EMP_NO, EMP_NAME, EMP_PW, ADMIN } = body;
+      const { EMP_NO, EMP_NAME, EMP_PW } = body;
 
-      const result = await conn.query("Insert INTO employee value (?,?,?,?)", [
-        EMP_NO,
-        EMP_NAME,
-        EMP_PW,
-        ADMIN,
-      ]);
+      const result = await conn.query(
+        "INSERT INTO employee (`EMP_NO`, `EMP_NAME`, `EMP_PW`) VALUES (?, ?, ?);",
+        [EMP_NO, EMP_NAME, EMP_PW]
+      );
 
       conn.release();
 
