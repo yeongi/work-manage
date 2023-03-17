@@ -49,6 +49,9 @@ const EmpMain = () => {
         className={classes["emp-wrapper"]}
       >
         <section className={classes["emp-main"]}>
+          <article className={classes.state}>
+            <LoginState />
+          </article>
           <article className={classes.form}>
             <AddWorkRecordForm
               workList={workList}
@@ -56,9 +59,7 @@ const EmpMain = () => {
               addWorkRecordInfo={addList}
             />
           </article>
-          <article className={classes.state}>
-            <LoginState />
-          </article>
+
           <article className={classes["work-list"]}>
             <h3 className={classes["work-header"]}>금일 업무 내역 확인</h3>
             <TodayWorkList myList={myList} />
