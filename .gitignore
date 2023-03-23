@@ -25,3 +25,4 @@ yarn-debug.log*
 yarn-error.log*
 src/lib/createApi.js
 server/config/dbConfig.js
+src/lib/createApi.js
