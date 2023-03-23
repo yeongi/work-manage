@@ -27,8 +27,8 @@ export const LoginProvider = ({ children }) => {
   };
 
   const onLogoutHandler = () => {
+    //loginState 로직 메인으로 옮기기
     if (loginState.IS_ADMIN) {
-      alert("로그아웃 됐습니다.");
       setLogin(initState);
       return;
     }

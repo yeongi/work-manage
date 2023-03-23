@@ -1,31 +1,27 @@
 import { Button, Form, Input } from "antd";
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import empHandler from "../lib/handler/EmpHander";
 import { useLoginCtx } from "../lib/store/LoginContext";
 import classes from "./Login.module.css";
-import AlertModal from "../component/AlertModal";
+import useModalState from "../lib/state/useMyModal";
 
 const Login = () => {
   const loginCtx = useLoginCtx();
   const inputRef = useRef();
-  const [modal, setOpen] = useState({ open: false, message: "" });
+  const { MyModal, openModalFunc } = useModalState("로그인 결과");
 
   const onFinish = async (values) => {
     try {
       const result = await empHandler.signIn(values);
       if (result.status === 200) {
-        setOpen({
-          open: true,
-          message: "로그인 성공",
-          handler: () => {
-            const { EMP_NAME, EMP_NO, ADMIN } = result.data;
-            loginCtx.onLogin({
-              IS_LOGIN: true,
-              EMP_NO,
-              EMP_NAME,
-              IS_ADMIN: ADMIN,
-            });
-          },
+        openModalFunc("로그인 성공", () => {
+          const { EMP_NAME, EMP_NO, ADMIN } = result.data;
+          loginCtx.onLogin({
+            IS_LOGIN: true,
+            EMP_NO,
+            EMP_NAME,
+            IS_ADMIN: ADMIN,
+          });
         });
       } else {
       }
@@ -38,13 +34,7 @@ const Login = () => {
 
   return (
     <div className={classes["login-wrapper"]}>
-      {
-        <AlertModal
-          title="로그인 결과"
-          state={modal}
-          setIsModalOpen={setOpen}
-        />
-      }
+      {<MyModal />}
       <section className={classes["header-section"]}>
         <div>
           <h1>하나 E&T</h1>
