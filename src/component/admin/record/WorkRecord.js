@@ -28,12 +28,13 @@ const WorkRecord = () => {
       break;
   }
 
-  const onChangedBlk = async (blk) => {
+  const onChangedBlk = (blk) => {
     setBlk(blk);
   };
 
-  const ohChangedHull = async (hull) => {
+  const ohChangedHull = (hull) => {
     setHull(hull);
+    setBlk("");
   };
 
   const onClickListBtn = (value) => {

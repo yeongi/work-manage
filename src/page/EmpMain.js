@@ -28,6 +28,7 @@ const EmpMain = () => {
 
   const getWorkList = async () => {
     const result = await empHandler.getWorkList();
+    console.log(result);
     setWorkList(result);
   };
 

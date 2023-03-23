@@ -24,13 +24,17 @@
 .emp-main article {
   background-color: #406d87;
   width: 50%;
-  min-width: 550px;
+  min-width: 500px;
   border: 8px double #b3c9d3;
   margin: 0 auto;
   margin-bottom: 10px;
   padding: 10px;
   border-radius: 30px;
   height: auto;
+}
+
+.emp-main .work-list {
+  min-width: 870px;
 }
 
 .list-des {
