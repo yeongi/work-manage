@@ -2,21 +2,28 @@ import React from "react";
 import { Button, Checkbox, Form, Input, Space } from "antd";
 import classes from "./EmpManage.module.css";
 import AdminHandler from "../../../lib/handler/AdminHandler";
+import useModalState from "../../../lib/state/useMyModal";
 
 const AddEmployeeForm = ({ refreshHandler }) => {
   const [form] = Form.useForm();
 
+  const { MyModal, openModalFunc } = useModalState("사원 추가");
+
   const onFinish = async (values) => {
-    console.log(values);
     const result = await AdminHandler.addEmployee(values);
-    if (result.status === 203) alert(`${result.message}`);
-    if (result.status === 204) alert(`${result.message} : ${result.data}`);
+    if (result.status === 203) {
+      openModalFunc(`${result.message}`);
+    }
+    if (result.status === 204) {
+      openModalFunc(`${result.message} : ${result.data}`);
+    }
     form.resetFields();
     refreshHandler();
   };
 
   return (
     <div className={classes["emp-input"]}>
+      <MyModal />
       <Form
         form={form}
         name="basic"

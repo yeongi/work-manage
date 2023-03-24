@@ -5,6 +5,7 @@ import empHandler from "../../lib/handler/EmpHander";
 import { useLoginCtx } from "../../lib/store/LoginContext";
 import useGetBlkList from "../../lib/state/useGetBlkList";
 import classes from "./LoginState.module.css";
+import useModalState from "../../lib/state/useMyModal";
 
 const format = "YYYY-MM-DD HH:mm:ss";
 
@@ -29,6 +30,8 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
       setWorkList(filteredList);
     }
   };
+
+  const { MyModal, openModalFunc } = useModalState("업무기록제출");
 
   useEffect(() => {
     getHullList();
@@ -73,11 +76,11 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
     //이걸 이용해서 redux로 전역으로 관리 하자.
     addWorkRecordInfo(result.RECORD_ID);
 
-    alert("업무기록 제출을 완료하였습니다.");
-
-    form.resetFields();
-    refreshHandler();
-    setDisabled(false);
+    openModalFunc("업무기록 제출을 완료하였습니다.", () => {
+      form.resetFields();
+      refreshHandler();
+      setDisabled(false);
+    });
   };
 
   const resetHandler = () => {
@@ -87,6 +90,7 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
   return (
     <div className={classes["form-wrapper"]}>
       <h3>업무 내역 추가 하기</h3>
+      <MyModal />
       <Form
         form={form}
         name="basic"

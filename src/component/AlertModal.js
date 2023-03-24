@@ -13,7 +13,13 @@ const AlertModal = ({ title, state, setIsModalOpen }) => {
   return (
     <>
       {state.open && (
-        <Modal title={title} open={state.open} onOk={handleOk} type="success">
+        <Modal
+          title={title}
+          open={state.open}
+          closable={true}
+          onOk={handleOk}
+          type="success"
+        >
           <p>{state.message}</p>
         </Modal>
       )}

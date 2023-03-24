@@ -1,10 +1,17 @@
 import { useState } from "react";
 import AlertModal from "../../component/AlertModal";
 
-const useModalState = (title) => {
-  const [modal, setOpen] = useState({ open: false, message: "" });
+const initialState = { open: false, message: "", handler: () => {} };
 
-  const openModal = (message, handler) =>
+const useModalState = (title) => {
+  const [modal, setOpen] = useState(initialState);
+
+  const openModal = (
+    message,
+    handler = () => {
+      setOpen(initialState);
+    }
+  ) =>
     setOpen({
       open: true,
       message: message,
