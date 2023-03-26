@@ -76,7 +76,37 @@ router.get("/hull/list", async (req, res) => {
 });
 
 //선체  조회
-router.get("/hull/:hullno/view", async (req, res) => {});
+router.get("/hull/:hullno", async (req, res) => {});
+
+//선체  수정하기
+router.put("/hull/:hullno", async (req, res) => {
+  try {
+    const { body } = req;
+    const result = await AdminService.updateHullInfo();
+    return res.status(200).json({
+      status: 200,
+      data: result,
+      message: "선체 정보 업데이트 성공",
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+//선체  삭제하기
+router.delete("/hull/:hullno", async (req, res) => {
+  try {
+    const { params } = req;
+    const result = await AdminService.deleteHullInfo(params);
+    return res.status(200).json({
+      status: 200,
+      data: result,
+      message: "선체 삭제 성공",
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 //todo : 서비스 구현 하기
 //블럭 추가

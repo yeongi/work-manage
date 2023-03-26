@@ -260,4 +260,7 @@ module.exports = {
       return err.message;
     }
   },
+
+  updateHullInfo: async (hull) => {},
+  deleteHullInfo: async (hull_sq) => {},
 };
