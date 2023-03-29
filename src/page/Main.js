@@ -16,7 +16,7 @@ const Main = () => {
       <section className={classes.main}>
         <div className={classes["header-section"]}>
           <div className={classes.header}>
-            <h1> 하나 이엔티 </h1>
+            <h1> 하나 이엔티 시수관리 </h1>
           </div>
           <Button
             className={classes.button}

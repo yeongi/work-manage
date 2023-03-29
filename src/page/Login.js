@@ -37,7 +37,7 @@ const Login = () => {
       {<MyModal />}
       <section className={classes["header-section"]}>
         <div>
-          <h1>하나 E&T</h1>
+          <h1>하나 E&T 시수관리</h1>
           <h3>Login</h3>
           <p> 사원 분들은 관리자님에게 아이디 생성을 요청해야 합니다.</p>
         </div>
