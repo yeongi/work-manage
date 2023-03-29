@@ -261,6 +261,48 @@ module.exports = {
     }
   },
 
-  updateHullInfo: async (hull) => {},
-  deleteHullInfo: async (hull_sq) => {},
+  updateHullInfo: async (hull) => {
+    try {
+      const conn = await pool.getConnection();
+
+      const { HULL_SQ, HULL_NO, HULL_TYPE, SHIPYARD } = hull;
+
+      const updateQuery = `UPDATE hull SET 
+      HULL_NO = ${HULL_NO}, 
+      HULL_TYPE = ${HULL_TYPE}, 
+      SHIPYARD = ${SHIPYARD}
+      WHERE hull_sq = ${HULL_SQ}`;
+
+      const [result] = await conn.query(updateQuery);
+
+      conn.release();
+
+      return result;
+    } catch (err) {
+      console.log(err);
+      return err.message;
+    }
+  },
+
+  updateBlkInfo: async (blk) => {
+    try {
+      const conn = await pool.getConnection();
+
+      const { BLK_SQ, BLK_NO, NORM_MH } = blk;
+
+      const updateQuery = `UPDATE block SET 
+      BLK_NO = ${BLK_NO}, 
+      NORM_MH = ${NORM_MH},
+      WHERE BLK_SQ = ${BLK_SQ}`;
+
+      const [result] = await conn.query(updateQuery);
+
+      conn.release();
+
+      return result;
+    } catch (err) {
+      console.log(err);
+      return err.message;
+    }
+  },
 };

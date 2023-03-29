@@ -82,26 +82,11 @@ router.get("/hull/:hullno", async (req, res) => {});
 router.put("/hull/:hullno", async (req, res) => {
   try {
     const { body } = req;
-    const result = await AdminService.updateHullInfo();
+    const result = await AdminService.updateHullInfo(body);
     return res.status(200).json({
       status: 200,
       data: result,
       message: "선체 정보 업데이트 성공",
-    });
-  } catch (err) {
-    console.log(err);
-  }
-});
-
-//선체  삭제하기
-router.delete("/hull/:hullno", async (req, res) => {
-  try {
-    const { params } = req;
-    const result = await AdminService.deleteHullInfo(params);
-    return res.status(200).json({
-      status: 200,
-      data: result,
-      message: "선체 삭제 성공",
     });
   } catch (err) {
     console.log(err);
@@ -149,7 +134,19 @@ router.get("/blk/list/:hullno", async (req, res) => {
 router.get("/blk/:hullno/view", async (req, res) => {});
 
 //블럭 수정
-router.post("/blk/:blkno/edit", async (req, res) => {});
+router.post("/blk/edit", async (req, res) => {
+  try {
+    const { body } = req;
+    const result = await AdminService.updateBlkInfo(body);
+    return res.status(200).json({
+      status: 200,
+      data: result,
+      message: "블럭 정보 수정 업데이트 성공",
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 //업무 내역 조회 (블럭기준)
 router.get("/work/view/:blkno", async (req, res) => {
