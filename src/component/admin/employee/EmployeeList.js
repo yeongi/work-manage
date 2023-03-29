@@ -31,6 +31,9 @@ const EmployeeList = ({ empList }) => {
                     <p>
                       사번 :<b>{emp.EMP_NO}</b>{" "}
                     </p>
+                    <p>
+                      비밀번호 :<b>{emp.EMP_PW}</b>{" "}
+                    </p>
                   </>
                 }
                 description={`${emp.EMP_NAME}님의 업무내역을 조회하시려면 버튼을 클릭하세요. `}

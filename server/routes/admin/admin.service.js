@@ -25,7 +25,7 @@ module.exports = {
     try {
       const conn = await pool.getConnection();
 
-      const query = "select EMP_NO, EMP_NAME from employee ";
+      const query = "select EMP_NO, EMP_NAME,EMP_PW from employee ";
 
       const [result] = await conn.query(query);
 
