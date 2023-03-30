@@ -93,7 +93,6 @@ router.put("/hull/:hullno", async (req, res) => {
   }
 });
 
-//todo : 서비스 구현 하기
 //블럭 추가
 router.post("/blk/add", async (req, res) => {
   const block = req.body;
