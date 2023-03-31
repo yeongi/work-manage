@@ -1,0 +1,12 @@
+.info-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  text-align: center;
+}
+
+.info-wrapper div {
+  border: 3px rgb(140, 138, 138) dotted;
+  border-radius: 20px;
+  width: 140px;
+}
