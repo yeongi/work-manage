@@ -27,20 +27,7 @@ export const LoginProvider = ({ children }) => {
   };
 
   const onLogoutHandler = () => {
-    //loginState 로직 메인으로 옮기기
-    if (loginState.IS_ADMIN) {
-      setLogin(initState);
-      return;
-    }
-    if (loginState.MH < 8) {
-      alert("금일 투입 시수를 다 채우지 않았습니다.");
-      return;
-    }
-    if (loginState.MH >= 8) {
-      alert("로그아웃 됐습니다.");
-      setLogin(initState);
-      return;
-    }
+    setLogin(initState);
   };
 
   const setTodayMHHandler = (MH) => {
