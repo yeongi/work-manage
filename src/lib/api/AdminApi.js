@@ -96,9 +96,10 @@ const AdminApi = {
     });
   },
 
-  updateHullComplete: (hull_sq) => {
-    return fetch(`${API}/hull/info/complete/${hull_sq}`, {
+  updateHullComplete: (body) => {
+    return fetch(`${API}/hull/info/${body.HULL_SQ}`, {
       method: "put",
+      body: JSON.stringify(body),
       headers: {
         "Content-type": "application/json",
       },

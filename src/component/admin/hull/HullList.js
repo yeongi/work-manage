@@ -12,7 +12,7 @@ const HullList = ({ hullList, refreshHandler }) => {
   return (
     <>
       <h1>선체 리스트</h1>
-      <HullModal hullInfo={selectedHull} />
+      <HullModal hullInfo={selectedHull} refreshHandler={refreshHandler} />
       <List
         size="large"
         header={

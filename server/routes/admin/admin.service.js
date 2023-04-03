@@ -290,9 +290,9 @@ module.exports = {
       const { HULL_SQ, HULL_NO, HULL_TYPE, SHIPYARD } = hull;
 
       const updateQuery = `UPDATE hull SET 
-      HULL_NO = ${HULL_NO}, 
-      HULL_TYPE = ${HULL_TYPE}, 
-      SHIPYARD = ${SHIPYARD}
+      HULL_NO = "${HULL_NO}", 
+      HULL_TYPE = "${HULL_TYPE}",
+      SHIPYARD = "${SHIPYARD}"
       WHERE hull_sq = ${HULL_SQ}`;
 
       const [result] = await conn.query(updateQuery);

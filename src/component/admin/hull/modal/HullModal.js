@@ -4,15 +4,24 @@ import useModalState from "../../../../lib/state/useMyModal";
 import { Button, Form, Input, Modal, Checkbox } from "antd";
 import classes from "./HullModal.module.css";
 
-const HullModal = ({ hullInfo }) => {
+const HullModal = ({ hullInfo, refreshHandler }) => {
   const [open, setOpen] = useState(false);
   const { MyModal, openModalFunc } = useModalState("업데이트 완료");
   const [hull, setHull] = useState({});
 
   const [form] = Form.useForm();
 
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     console.log("Finish:", values);
+
+    const result = await AdminHandler.updateHullComplte({
+      ...values,
+      HULL_SQ: hullInfo.HULL_SQ,
+      complete: values.complete === true ? 0 : 1,
+    });
+
+    openModalFunc(result.message);
+    setHull(values);
   };
 
   useEffect(async () => {
@@ -31,13 +40,10 @@ const HullModal = ({ hullInfo }) => {
     if (hullInfo === undefined) setOpen(false);
   }, [hullInfo]);
 
-  // const completeHandler = async (hullsq) => {
-  //   const result = await AdminHandler.updateHullComplte(hullsq);
-  //   openModalFunc(result.message);
-  //   setHull(result.data);
-  //   console.log("페치된 데이터", result.data);
-  //   console.log("hull 상태", hull);
-  // };
+  const closeHandler = async () => {
+    await refreshHandler();
+    setOpen(false);
+  };
 
   if (hull !== undefined) {
     return (
@@ -46,10 +52,8 @@ const HullModal = ({ hullInfo }) => {
           title="선체 정보 조회 및 수정"
           centered
           open={open}
-          onOk={() => setOpen(false)}
-          onCancel={() => {
-            setOpen(false);
-          }}
+          onOk={closeHandler}
+          onCancel={closeHandler}
           width={900}
         >
           {
@@ -74,7 +78,11 @@ const HullModal = ({ hullInfo }) => {
                 <div>
                   <p>작업 완료 여부</p>
                   <hr />
-                  <h3>{hull.complete === 0 ? "작업 진행 중" : "작업 완료"}</h3>
+                  <h3>
+                    {hull.complete === 0 || hull.complete === false
+                      ? "작업 진행 중"
+                      : "작업 완료"}
+                  </h3>
                 </div>
               </article>
             </section>
