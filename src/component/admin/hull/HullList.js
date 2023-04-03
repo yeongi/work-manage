@@ -9,15 +9,10 @@ const header = ["SHIP_YARD", "HULL_NO", "HULL_TYPE", "자세히 보기"];
 const HullList = ({ hullList, refreshHandler }) => {
   const [selectedHull, setHullselect] = useState();
 
-  const resetHullState = async (sq) => {
-    await refreshHandler();
-    await setHullselect(hullList.find(({ HULL_SQ }) => HULL_SQ === sq));
-  };
-
   return (
     <>
       <h1>선체 리스트</h1>
-      <HullModal hullInfo={selectedHull} resetHullState={resetHullState} />
+      <HullModal hullInfo={selectedHull} />
       <List
         size="large"
         header={

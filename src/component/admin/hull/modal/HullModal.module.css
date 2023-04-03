@@ -10,3 +10,8 @@
   border-radius: 20px;
   width: 140px;
 }
+
+.form-wrapper {
+  padding: 10px;
+  margin: 10px;
+}
