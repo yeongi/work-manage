@@ -68,6 +68,11 @@ const AdminHandler = {
     const result = await AdminApi.updateHullComplete(hull_sq);
     return await result.json();
   },
+
+  getHullInfo: async (hull_sq) => {
+    const result = await AdminApi.getHullInfo(hull_sq);
+    return await result.json();
+  },
 };
 
 export default AdminHandler;

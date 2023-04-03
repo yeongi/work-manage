@@ -94,6 +94,23 @@ module.exports = {
     }
   },
 
+  getHullInfo: async (HULL_SQ) => {
+    try {
+      const conn = await pool.getConnection();
+
+      const query = "select * from hull where HULL_SQ = ? ";
+
+      const [result] = await conn.query(query, [HULL_SQ]);
+
+      conn.release();
+
+      return result;
+    } catch (err) {
+      console.log(err);
+      return err.message;
+    }
+  },
+
   getBlkList: async (HULL_SQ) => {
     try {
       const conn = await pool.getConnection();
@@ -245,13 +262,18 @@ module.exports = {
         [hull_sq]
       );
 
-      const query =
+      const updateQuery =
         complete === 1
           ? "UPDATE hull SET complete = 0 WHERE hull_sq = ?"
           : "UPDATE hull SET complete = 1 WHERE hull_sq = ?";
 
-      const [result] = await conn.query(query, [hull_sq]);
+      const [updateResult] = await conn.query(updateQuery, [hull_sq]);
 
+      const getQuery = "select * from hull where HULL_SQ = ? ";
+
+      const [result] = await conn.query(getQuery, [hull_sq]);
+
+      console.log(updateResult, result);
       conn.release();
 
       return result;

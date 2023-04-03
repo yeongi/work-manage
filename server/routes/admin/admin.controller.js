@@ -76,10 +76,22 @@ router.get("/hull/list", async (req, res) => {
 });
 
 //선체  조회
-router.get("/hull/:hullno", async (req, res) => {});
+router.get("/hull/info/:hullno", async (req, res) => {
+  try {
+    const { hullno } = req.params;
+    const result = await AdminService.getHullInfo(hullno);
+    return res.status(200).json({
+      status: 200,
+      data: result,
+      message: "선체 조회 성공",
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 //선체  수정하기
-router.put("/hull/:hullno", async (req, res) => {
+router.put("/hull/info/:hullno", async (req, res) => {
   try {
     const { body } = req;
     const result = await AdminService.updateHullInfo(body);
@@ -193,13 +205,13 @@ router.get("/work/month/view/:ym", async (req, res) => {
 });
 
 //블럭 완료 업데이트
-router.put("/hull/complete/:hullsq", async (req, res) => {
+router.put("/hull/info/complete/:hullsq", async (req, res) => {
   const { hullsq } = req.params;
   try {
     const result = await AdminService.updateCompleteHull(hullsq);
     return res.status(200).json({
       status: 200,
-      data: result,
+      data: result[0],
       message: "선체 완료 업데이트",
     });
   } catch (err) {

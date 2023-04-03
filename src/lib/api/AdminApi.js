@@ -87,8 +87,17 @@ const AdminApi = {
     });
   },
 
+  getHullInfo: (hullsq) => {
+    return fetch(`${API}/hull/info/${hullsq}`, {
+      method: "get",
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+  },
+
   updateHullComplete: (hull_sq) => {
-    return fetch(`${API}/hull/complete/${hull_sq}`, {
+    return fetch(`${API}/hull/info/complete/${hull_sq}`, {
       method: "put",
       headers: {
         "Content-type": "application/json",
