@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import AdminHandler from "../../../../lib/handler/AdminHandler";
+import BlkList from "./BlkList";
 import useModalState from "../../../../lib/state/useMyModal";
 import { Button, Form, Input, Modal, Checkbox } from "antd";
 import classes from "./HullModal.module.css";
@@ -14,14 +15,21 @@ const HullModal = ({ hullInfo, refreshHandler }) => {
   const onFinish = async (values) => {
     console.log("Finish:", values);
 
-    const result = await AdminHandler.updateHullComplte({
-      ...values,
-      HULL_SQ: hullInfo.HULL_SQ,
-      complete: values.complete === true ? 0 : 1,
-    });
+    try {
+      const result = await AdminHandler.updateHullComplte({
+        ...values,
+        HULL_SQ: hullInfo.HULL_SQ,
+        complete: values.complete === true ? 0 : 1,
+      });
 
-    openModalFunc(result.message);
-    setHull(values);
+      if (result.status === 200) {
+        console.log(result);
+        openModalFunc(result.message);
+        setHull(values);
+      }
+    } catch (error) {
+      openModalFunc(error);
+    }
   };
 
   useEffect(async () => {
@@ -66,15 +74,16 @@ const HullModal = ({ hullInfo, refreshHandler }) => {
                   <h3>{hull.SHIPYARD}</h3>
                 </div>
                 <div>
-                  <p>선체 종류</p>
-                  <hr />
-                  <h3>{hull.HULL_TYPE}</h3>
-                </div>
-                <div>
                   <p>선체 번호</p>
                   <hr />
                   <h3>{hull.HULL_NO}</h3>
                 </div>
+                <div>
+                  <p>선체 종류</p>
+                  <hr />
+                  <h3>{hull.HULL_TYPE}</h3>
+                </div>
+
                 <div>
                   <p>작업 완료 여부</p>
                   <hr />
@@ -106,17 +115,6 @@ const HullModal = ({ hullInfo, refreshHandler }) => {
               </Form.Item>
 
               <Form.Item
-                name="HULL_TYPE"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-                <Input placeholder="HULL_TYPE" />
-              </Form.Item>
-
-              <Form.Item
                 name="HULL_NO"
                 rules={[
                   {
@@ -126,7 +124,16 @@ const HullModal = ({ hullInfo, refreshHandler }) => {
               >
                 <Input placeholder="HULL_NO" />
               </Form.Item>
-
+              <Form.Item
+                name="HULL_TYPE"
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
+              >
+                <Input placeholder="HULL_TYPE" />
+              </Form.Item>
               <Form.Item name="complete" valuePropName="checked">
                 <Checkbox>complete</Checkbox>
               </Form.Item>
@@ -137,6 +144,13 @@ const HullModal = ({ hullInfo, refreshHandler }) => {
                 </Button>
               </Form.Item>
             </Form>
+          </section>
+          <section>
+            {hullInfo !== undefined ? (
+              <BlkList HULL_SQ={hullInfo.HULL_SQ} />
+            ) : (
+              <h1>블럭리스트</h1>
+            )}
           </section>
 
           <MyModal />

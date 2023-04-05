@@ -17,7 +17,6 @@ const RecordList = ({ block }) => {
   const getWorkRecordList = async (block) => {
     const list = await AdminHandler.getWorkRecordList(block);
     setList(list);
-    //to do : 파일 이름 설정 하기
     if (list.length > 0) {
       const { BLK_NO, HULL_NO, HULL_TYPE, SHIPYARD } = list[0];
       setFileName(
