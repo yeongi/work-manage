@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import AdminHandler from "../../../../lib/handler/AdminHandler";
+import BlkForm from "./BlkForm";
 
 const BlkList = ({ HULL_SQ }) => {
   const [blkList, setBlkList] = useState([]);
@@ -7,10 +8,10 @@ const BlkList = ({ HULL_SQ }) => {
   const listFetch = async () => {
     const result = await AdminHandler.getBlkList(HULL_SQ);
 
-    setBlkList(result);
+    if (result !== undefined) setBlkList(result);
   };
 
-  useEffect(() => {
+  useEffect(async () => {
     listFetch();
   }, [HULL_SQ]);
 
@@ -18,17 +19,12 @@ const BlkList = ({ HULL_SQ }) => {
     <>
       <h1>블럭리스트</h1>
       <hr />
-      {blkList.map(({ BLK_NO, BLK_SQ, HULL_SQ, NORM_MH, RES_MH }) => {
-        return (
-          <ol>
-            <li>{BLK_NO}</li>
-            <li>{BLK_SQ}</li>
-            <li>{HULL_SQ}</li>
-            <li>{NORM_MH}</li>
-            <li>{RES_MH}</li>
-          </ol>
-        );
-      })}
+      <div>
+        {blkList.length > 0 &&
+          blkList.map((blkinfo) => {
+            return <BlkForm key={blkinfo.BLK_SQ} blkInfo={blkinfo} />;
+          })}
+      </div>
     </>
   );
 };

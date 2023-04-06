@@ -13,8 +13,6 @@ const HullModal = ({ hullInfo, refreshHandler }) => {
   const [form] = Form.useForm();
 
   const onFinish = async (values) => {
-    console.log("Finish:", values);
-
     try {
       const result = await AdminHandler.updateHullComplte({
         ...values,
@@ -62,7 +60,7 @@ const HullModal = ({ hullInfo, refreshHandler }) => {
           open={open}
           onOk={closeHandler}
           onCancel={closeHandler}
-          width={900}
+          width={1000}
         >
           {
             <section>
@@ -140,7 +138,7 @@ const HullModal = ({ hullInfo, refreshHandler }) => {
 
               <Form.Item>
                 <Button type="primary" htmlType="submit">
-                  {"업데이트"}
+                  {"선체 정보 업데이트"}
                 </Button>
               </Form.Item>
             </Form>
