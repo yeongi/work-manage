@@ -1,20 +1,31 @@
 import { Form, Button, Input } from "antd";
-import { useEffect } from "react";
+import AdminHandler from "../../../../lib/handler/AdminHandler";
+import useModalState from "../../../../lib/state/useMyModal";
 
 // { BLK_NO, BLK_SQ, HULL_SQ, NORM_MH, RES_MH }
 
-const BlkForm = ({ blkInfo }) => {
+const BlkForm = ({ blkInfo, refreshHandler }) => {
   const [form] = Form.useForm();
 
-  useEffect(() => {
-    form.setFieldsValue({
-      BLK_NO: blkInfo.BLK_NO,
-      NORM_MH: blkInfo.NORM_MH,
-    });
-  }, [blkInfo]);
+  const { MyModal, openModalFunc } = useModalState();
+
+  form.setFieldsValue({
+    BLK_NO: blkInfo.BLK_NO,
+    NORM_MH: blkInfo.NORM_MH,
+  });
 
   const onFinish = async (values) => {
-    console.log("Finish:", values);
+    const body = {
+      ...values,
+      BLK_SQ: blkInfo.BLK_SQ,
+    };
+
+    const result = await AdminHandler.updateBlkInfo(body);
+
+    if (result.status === 200) {
+      openModalFunc(result.message);
+      await refreshHandler();
+    }
   };
 
   return (
@@ -54,6 +65,8 @@ const BlkForm = ({ blkInfo }) => {
           </Button>
         </Form.Item>
       </Form>
+
+      <MyModal />
     </>
   );
 };

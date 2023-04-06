@@ -145,7 +145,7 @@ router.get("/blk/list/:hullno", async (req, res) => {
 router.get("/blk/:hullno/view", async (req, res) => {});
 
 //블럭 수정
-router.post("/blk/edit", async (req, res) => {
+router.put("/blk/info/edit", async (req, res) => {
   try {
     const { body } = req;
     const result = await AdminService.updateBlkInfo(body);

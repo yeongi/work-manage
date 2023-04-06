@@ -22,7 +22,13 @@ const BlkList = ({ HULL_SQ }) => {
       <div>
         {blkList.length > 0 &&
           blkList.map((blkinfo) => {
-            return <BlkForm key={blkinfo.BLK_SQ} blkInfo={blkinfo} />;
+            return (
+              <BlkForm
+                key={blkinfo.BLK_SQ}
+                blkInfo={blkinfo}
+                refreshHandler={listFetch}
+              />
+            );
           })}
       </div>
     </>

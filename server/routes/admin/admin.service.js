@@ -313,8 +313,8 @@ module.exports = {
       const { BLK_SQ, BLK_NO, NORM_MH } = blk;
 
       const updateQuery = `UPDATE block SET 
-      BLK_NO = ${BLK_NO}, 
-      NORM_MH = ${NORM_MH},
+      BLK_NO = "${BLK_NO}", 
+      NORM_MH = ${NORM_MH}
       WHERE BLK_SQ = ${BLK_SQ}`;
 
       const [result] = await conn.query(updateQuery);
