@@ -9,6 +9,7 @@ const SelectBlk = ({ onChangedBlk, selectHull }) => {
 
   const onChangedHull = async (hull) => {
     selectHull(hull);
+    await getHullList();
     await getBlkList(hull);
   };
 

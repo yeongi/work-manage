@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import AdminHandler from "../../../../lib/handler/AdminHandler";
-import { Button, Divider, List } from "antd";
+import { Divider, List } from "antd";
 import classes from "./HullRecordList.module.css";
 import { HEADER } from "../../../../lib/const/List";
 import mappingHeader from "../../../../lib/MappingHeader";
@@ -12,6 +12,7 @@ const HullRecordList = ({ hull }) => {
   const getHullWorkRecordList = async (hull) => {
     const hull_work_list = await AdminHandler.getWorkHullRecordList(hull);
     setList(hull_work_list);
+    console.log(hull_work_list);
   };
 
   useEffect(() => {
@@ -20,7 +21,8 @@ const HullRecordList = ({ hull }) => {
 
   return (
     <>
-      {recordList.lenght > 0 && (
+      {recordList.length === 0 && <h1>업무기록이 존재하지 않습니다.</h1>}
+      {recordList.length > 0 && (
         <div className={classes.wrapper}>
           <Divider orientation="left">
             <p>선체별 업무 기록 리스트</p>

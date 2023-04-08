@@ -287,12 +287,13 @@ module.exports = {
     try {
       const conn = await pool.getConnection();
 
-      const { HULL_SQ, HULL_NO, HULL_TYPE, SHIPYARD } = hull;
+      const { HULL_SQ, HULL_NO, HULL_TYPE, SHIPYARD, complete } = hull;
 
       const updateQuery = `UPDATE hull SET 
       HULL_NO = "${HULL_NO}", 
       HULL_TYPE = "${HULL_TYPE}",
-      SHIPYARD = "${SHIPYARD}"
+      SHIPYARD = "${SHIPYARD}",
+      complete = ${complete}
       WHERE hull_sq = ${HULL_SQ}`;
 
       const [result] = await conn.query(updateQuery);

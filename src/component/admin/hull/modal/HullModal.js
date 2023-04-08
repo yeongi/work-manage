@@ -17,8 +17,9 @@ const HullModal = ({ hullInfo, refreshHandler }) => {
       const result = await AdminHandler.updateHullComplte({
         ...values,
         HULL_SQ: hullInfo.HULL_SQ,
-        complete: values.complete === true ? 0 : 1,
+        complete: values.complete === true ? 1 : 0,
       });
+      console.log(values);
 
       if (result.status === 200) {
         console.log(result);
