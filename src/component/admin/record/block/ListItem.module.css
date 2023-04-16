@@ -10,6 +10,6 @@
 .wrapper {
   display: flex;
   width: 100%;
-  min-width: 1153px;
+  min-width: 700px;
   background-color: white;
 }

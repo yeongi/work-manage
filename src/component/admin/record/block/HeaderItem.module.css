@@ -2,14 +2,14 @@
   display: flex;
   position: sticky;
   background-color: white;
-  min-width: 1153px;
+  min-width: 700px;
 }
 
 .wrapper p {
   height: 20px;
   font-weight: bold;
   width: 8%;
-  min-width: 40px;
+  min-width: 20px;
   margin: 5px;
   background-color: rgb(241, 241, 241);
   border-radius: 10px;

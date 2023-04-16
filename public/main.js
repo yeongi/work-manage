@@ -10,6 +10,8 @@ function createWindow() {
   const win = new BrowserWindow({
     width: 1600,
     height: 900,
+    autoHideMenuBar: true,
+    icon: path.join(__dirname, "assets/icons/docunment.ico"),
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true,
