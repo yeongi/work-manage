@@ -21,10 +21,8 @@ const listToOneJson = (lists) => {
   lists.forEach((list) => {
     const {
       BLK_NO,
-      BLK_SQ,
       DATE_LIST,
       HULL_NO,
-      HULL_SQ,
       HULL_TYPE,
       NORM_MH,
       RES_MH,

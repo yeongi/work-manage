@@ -1,17 +1,6 @@
-import { useLoginCtx } from "../../lib/store/LoginContext";
-import dayJs from "dayjs";
-import { dayJsYMD } from "../../lib/dayJs";
 import WorkList from "./WorkList";
-import { useEffect } from "react";
-import sumMhMyList from "../../lib/sumMhList";
 
 const TodayWorkList = ({ myList }) => {
-  const loginCtx = useLoginCtx();
-
-  useEffect(() => {
-    loginCtx.setMH(sumMhMyList(myList));
-  }, [myList]);
-
   return (
     <>
       {myList.length === 0 ? (

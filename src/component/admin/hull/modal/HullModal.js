@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import AdminHandler from "../../../../lib/handler/AdminHandler";
 import BlkList from "./BlkList";
 import useModalState from "../../../../lib/state/useMyModal";
@@ -13,39 +13,43 @@ const HullModal = ({ hullInfo, refreshHandler }) => {
   const [form] = Form.useForm();
 
   const onFinish = async (values) => {
-    try {
-      const result = await AdminHandler.updateHullComplte({
-        ...values,
-        HULL_SQ: hullInfo.HULL_SQ,
-        complete: values.complete === true ? 1 : 0,
-      });
-      console.log(values);
+    const result = await AdminHandler.updateHullComplte({
+      ...values,
+      HULL_SQ: hullInfo.HULL_SQ,
+      complete: values.complete === true ? 1 : 0,
+    });
+    console.log(values);
 
-      if (result.status === 200) {
-        console.log(result);
-        openModalFunc(result.message);
-        setHull(values);
-      }
-    } catch (error) {
-      openModalFunc(error);
+    if (result.status === 200) {
+      console.log(result);
+      openModalFunc(result.message);
+      setHull(values);
     }
   };
 
-  useEffect(async () => {
-    //hull 정보가 맞으면
-    if (hullInfo !== undefined) {
-      setHull(hullInfo);
-      await form.setFieldsValue({
-        HULL_NO: hullInfo.HULL_NO,
-        HULL_TYPE: hullInfo.HULL_TYPE,
-        SHIPYARD: hullInfo.SHIPYARD,
-        complete: hullInfo.complete,
-      });
+  const onCheckHullInfo = useCallback(
+    async (hi) => {
+      //hull 정보가 맞으면
+      if (hi !== undefined) {
+        setHull(hi);
 
-      setOpen(true);
-    }
-    if (hullInfo === undefined) setOpen(false);
-  }, [hullInfo]);
+        await form.setFieldsValue({
+          HULL_NO: hi.HULL_NO,
+          HULL_TYPE: hi.HULL_TYPE,
+          SHIPYARD: hi.SHIPYARD,
+          complete: hi.complete,
+        });
+
+        setOpen(true);
+      }
+      if (hi === undefined) setOpen(false);
+    },
+    [form]
+  );
+
+  useEffect(() => {
+    onCheckHullInfo(hullInfo);
+  }, [onCheckHullInfo, hullInfo]);
 
   const closeHandler = async () => {
     await refreshHandler();

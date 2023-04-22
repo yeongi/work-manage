@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Button } from "antd";
 import * as XLSX from "xlsx";
 import AdminHandler from "../../../lib/handler/AdminHandler";
@@ -6,15 +6,15 @@ import AdminHandler from "../../../lib/handler/AdminHandler";
 const MyExcelBtn = () => {
   const [empList, setEmpList] = useState([]);
 
-  useEffect(() => {
-    const getEmpList = async () => {
-      const list = await AdminHandler.getEmployeeList();
-      setEmpList(list);
-      return;
-    };
-    getEmpList();
-    console.log(empList);
+  const getEmpList = useCallback(async () => {
+    const list = await AdminHandler.getEmployeeList();
+    setEmpList(list);
+    return;
   }, []);
+
+  useEffect(() => {
+    getEmpList();
+  }, [getEmpList]);
 
   const getEmpExcelHandler = () => {
     console.log("write Excel ");

@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import AddWorkRecordForm from "../component/emp/AddWorkRecordForm";
 import EmpWorkRecord from "../component/emp/EmpWorkRecord";
 import LoginState from "../component/emp/LoginState";
@@ -26,22 +26,24 @@ const EmpMain = () => {
     filteredMonthMyRecordList(ym);
   };
 
-  const getWorkList = async () => {
+  const getWorkList = useCallback(async () => {
     const result = await empHandler.getWorkList();
-    console.log(result);
     setWorkList(result);
-  };
+  }, []);
 
-  const filteredMonthMyRecordList = (yearmonth) => {
-    const filteredList = workRecordList.filter((record) => {
-      return record.WORK_DATE.includes(yearmonth);
-    });
-    setFilteredList(filteredList);
-  };
+  const filteredMonthMyRecordList = useCallback(
+    (yearmonth) => {
+      const filteredList = workRecordList.filter((record) => {
+        return record.WORK_DATE.includes(yearmonth);
+      });
+      setFilteredList(filteredList);
+    },
+    [workRecordList]
+  );
 
   useEffect(() => {
     getWorkList();
-  }, []);
+  }, [getWorkList]);
 
   return (
     <>
@@ -60,7 +62,6 @@ const EmpMain = () => {
               addWorkRecordInfo={addList}
             />
           </article>
-
           <article className={classes["work-list"]}>
             <h3 className={classes["work-header"]}>금일 업무 내역 확인</h3>
             <TodayWorkList myList={myList} />

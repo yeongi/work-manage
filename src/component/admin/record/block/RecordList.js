@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import AdminHandler from "../../../../lib/handler/AdminHandler";
 import classes from "./RecordList.module.css";
-import { Divider, List, Typography } from "antd";
+import { Divider, List } from "antd";
 import HeaderItem from "./HeaderItem";
 import ListItem from "./ListItem";
 import dayjs from "dayjs";
@@ -14,7 +14,7 @@ const RecordList = ({ block }) => {
   const [workRecordList, setList] = useState([{}]);
   const [fileName, setFileName] = useState("");
 
-  const getWorkRecordList = async (block) => {
+  const getWorkRecordList = useCallback(async (block) => {
     const list = await AdminHandler.getWorkRecordList(block);
     setList(list);
     if (list.length > 0) {
@@ -25,11 +25,11 @@ const RecordList = ({ block }) => {
         )}`
       );
     }
-  };
+  }, []);
 
   useEffect(() => {
     getWorkRecordList(block);
-  }, [block]);
+  }, [getWorkRecordList, block]);
 
   return (
     <div className={classes.wrapper}>
@@ -46,12 +46,9 @@ const RecordList = ({ block }) => {
         bordered
         dataSource={workRecordList}
         renderItem={({
-          RECORD_NO,
           BLK_NO,
-          BLK_SQ,
           EMP_NAME,
           EMP_NO,
-          HULL_SQ,
           HULL_NO,
           HULL_TYPE,
           INP_MH,

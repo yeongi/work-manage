@@ -18,6 +18,7 @@ const AlertModal = ({ title, state, setIsModalOpen }) => {
           open={state.open}
           closable={true}
           onOk={handleOk}
+          onCancel={handleCancel}
           type="success"
         >
           <p>{state.message}</p>

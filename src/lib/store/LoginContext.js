@@ -1,5 +1,4 @@
 import { createContext, useContext, useState } from "react";
-
 const initState = {
   IS_LOGIN: false,
   EMP_NO: null,

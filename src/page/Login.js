@@ -11,21 +11,22 @@ const Login = () => {
   const { MyModal, openModalFunc } = useModalState("로그인 결과");
 
   const onFinish = async (values) => {
-    try {
-      const result = await empHandler.signIn(values);
-      if (result.status === 200) {
-        openModalFunc("로그인 성공", () => {
-          const { EMP_NAME, EMP_NO, ADMIN } = result.data;
-          loginCtx.onLogin({
-            IS_LOGIN: true,
-            EMP_NO,
-            EMP_NAME,
-            IS_ADMIN: ADMIN,
-          });
+    const result = await empHandler.signIn(values);
+    if (result.message === "로그인 성공") {
+      openModalFunc(result.message, () => {
+        const { EMP_NAME, EMP_NO, ADMIN } = result.data;
+        loginCtx.onLogin({
+          IS_LOGIN: true,
+          EMP_NO,
+          EMP_NAME,
+          IS_ADMIN: ADMIN,
         });
-      } else {
-      }
-    } catch (error) {}
+      });
+    }
+
+    if (result.message === "로그인 실패. 사번과 비밀번호를 확인 주세요.") {
+      openModalFunc(result.message);
+    }
   };
 
   const onFinishFailed = (errorInfo) => {
