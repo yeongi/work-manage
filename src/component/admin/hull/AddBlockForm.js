@@ -4,7 +4,7 @@ import classes from "./HullManage.module.css";
 import AdminHandler from "../../../lib/handler/AdminHandler";
 import useModalState from "../../../lib/state/useMyModal";
 
-const AddBlockForm = ({ hullList }) => {
+const AddBlockForm = ({ hullList, refreshHandler }) => {
   const [form] = Form.useForm();
 
   const { MyModal, openModalFunc } = useModalState("추가");
@@ -12,6 +12,7 @@ const AddBlockForm = ({ hullList }) => {
   const onFinish = async (values) => {
     const result = await AdminHandler.addBlock(values);
     if (result) openModalFunc(result.message);
+    refreshHandler();
     form.resetFields();
   };
 

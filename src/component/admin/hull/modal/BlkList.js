@@ -1,21 +1,21 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import AdminHandler from "../../../../lib/handler/AdminHandler";
 import BlkForm from "./BlkForm";
 
 const BlkList = ({ HULL_SQ }) => {
   const [blkList, setBlkList] = useState([]);
 
-  const listFetch = async () => {
+  const listFetch = useCallback(async () => {
     const result = await AdminHandler.getBlkList(HULL_SQ);
     console.log("blklist :", result);
 
     if (result !== undefined)
       setBlkList(result.sort((a, b) => (a.BLK_NO > b.BLK_NO ? 1 : -1)));
-  };
-
-  useEffect(async () => {
-    listFetch();
   }, [HULL_SQ]);
+
+  useEffect(() => {
+    listFetch();
+  }, [listFetch]);
 
   return (
     <>

@@ -21,23 +21,46 @@ const HullList = ({ hullList, refreshHandler }) => {
         footer={<div>제작자 ＠github : yeongi</div>}
         dataSource={hullList}
         renderItem={(hull) => {
-          const { HULL_NO, HULL_TYPE, SHIPYARD } = hull;
-          return (
-            <List.Item>
-              <div className={classes.wrapper}>
-                <p>{SHIPYARD}</p>
-                <p>{HULL_NO}</p>
-                <p>{HULL_TYPE}</p>
-                <Button
-                  onClick={() => {
-                    setHullselect(hull);
-                  }}
-                >
-                  선체 자세히 보기
-                </Button>
-              </div>
-            </List.Item>
-          );
+          const { HULL_NO, HULL_TYPE, SHIPYARD, complete } = hull;
+
+          if (!complete) {
+            return (
+              <List.Item>
+                <div className={classes.wrapper}>
+                  <p>{SHIPYARD}</p>
+                  <p>{HULL_NO}</p>
+                  <p>{HULL_TYPE}</p>
+                  <Button
+                    onClick={() => {
+                      setHullselect(hull);
+                    }}
+                  >
+                    선체 자세히 보기
+                  </Button>
+                </div>
+              </List.Item>
+            );
+          }
+
+          if (complete) {
+            return (
+              <List.Item>
+                <div className={classes["complete-wrapper"]}>
+                  <p>{SHIPYARD}</p>
+                  <p>{HULL_NO}</p>
+                  <p>{HULL_TYPE}</p>
+                  <Button
+                    onClick={() => {
+                      setHullselect(hull);
+                    }}
+                  >
+                    선체 자세히 보기
+                  </Button>
+                </div>
+                <b>{"완료"}</b>
+              </List.Item>
+            );
+          }
         }}
       />
     </>

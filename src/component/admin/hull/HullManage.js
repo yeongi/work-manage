@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import AdminHandler from "../../../lib/handler/AdminHandler";
 import AddBlockForm from "./AddBlockForm";
 import HullList from "./HullList";
@@ -8,17 +8,17 @@ import classes from "./HullManage.module.css";
 const HullManage = () => {
   const [hullList, setHullList] = useState([]);
 
-  const getList = async () => {
+  const getList = useCallback(async () => {
     const list = await AdminHandler.getHullList();
     const reverseList = [...list].reverse();
     reverseList.pop();
     setHullList(reverseList);
     return;
-  };
+  }, []);
 
   useEffect(() => {
     getList();
-  }, []);
+  }, [getList]);
 
   return (
     <div className={classes["manage-wrapper"]}>
@@ -29,7 +29,7 @@ const HullManage = () => {
         </section>
         <section className={classes["block-wrapper"]}>
           <h1>블럭 추가</h1>
-          <AddBlockForm hullList={hullList} />
+          <AddBlockForm hullList={hullList} refreshHandler={getList} />
         </section>
         <section className={classes["list-wrapper"]}>
           <HullList hullList={hullList} refreshHandler={getList} />
