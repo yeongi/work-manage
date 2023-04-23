@@ -78,6 +78,11 @@ const AdminHandler = {
     const result = await AdminApi.getHullInfo(hull_sq);
     return await result.json();
   },
+
+  deleteBlk: async (blk_sq) => {
+    const result = await AdminApi.deleteBlk(blk_sq);
+    return await result.json();
+  },
 };
 
 export default AdminHandler;

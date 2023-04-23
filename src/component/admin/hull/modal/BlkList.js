@@ -7,8 +7,10 @@ const BlkList = ({ HULL_SQ }) => {
 
   const listFetch = async () => {
     const result = await AdminHandler.getBlkList(HULL_SQ);
+    console.log("blklist :", result);
 
-    if (result !== undefined) setBlkList(result);
+    if (result !== undefined)
+      setBlkList(result.sort((a, b) => (a.BLK_NO > b.BLK_NO ? 1 : -1)));
   };
 
   useEffect(async () => {

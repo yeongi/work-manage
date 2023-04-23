@@ -115,6 +115,15 @@ const AdminApi = {
       },
     });
   },
+
+  deleteBlk: (blk_sq) => {
+    return fetch(`${API}/blk/delete/${blk_sq}`, {
+      method: "delete",
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+  },
 };
 
 export default AdminApi;

@@ -74,6 +74,23 @@ module.exports = {
     }
   },
 
+  deleteBlk: async (blk) => {
+    try {
+      const conn = await pool.getConnection();
+
+      const query = "DELETE FROM block WHERE BLK_SQ = ?;";
+
+      const result = await conn.query(query, [blk]);
+
+      conn.release();
+
+      return result;
+    } catch (err) {
+      console.log(err);
+      return err.message;
+    }
+  },
+
   addHullBlock: async (BLK) => {
     try {
       const conn = await pool.getConnection();

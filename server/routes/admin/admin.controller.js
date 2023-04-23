@@ -126,6 +126,22 @@ router.post("/blk/add", async (req, res) => {
   }
 });
 
+//블럭 삭제
+router.delete("/blk/delete/:blk", async (req, res) => {
+  const { blk } = req.params;
+
+  try {
+    const result = await AdminService.deleteBlk(blk);
+    return res.status(200).json({
+      status: 200,
+      data: result,
+      message: "블럭 삭제 성공",
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 //블럭 리스트 조회
 router.get("/blk/list/:hullno", async (req, res) => {
   const { hullno } = req.params;

@@ -28,6 +28,15 @@ const BlkForm = ({ blkInfo, refreshHandler }) => {
     }
   };
 
+  const deleteBlkHandler = async () => {
+    const res = await AdminHandler.deleteBlk(blkInfo.BLK_SQ);
+    console.log(res);
+    if (res.status === 200) {
+      openModalFunc(res.message);
+      await refreshHandler();
+    }
+  };
+
   return (
     <>
       <Form
@@ -62,6 +71,9 @@ const BlkForm = ({ blkInfo, refreshHandler }) => {
         <Form.Item>
           <Button type="primary" htmlType="submit">
             {"블럭 정보 업데이트"}
+          </Button>
+          <Button type="dashed" onClick={deleteBlkHandler}>
+            {"삭제 하기"}
           </Button>
         </Form.Item>
       </Form>
