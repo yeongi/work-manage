@@ -14,7 +14,7 @@ const SelectBlk = ({ onChangedBlk, selectHull }) => {
 
   useEffect(() => {
     getHullList();
-  }, []);
+  }, [getHullList]);
 
   return (
     <div>
