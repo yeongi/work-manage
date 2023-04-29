@@ -11,7 +11,13 @@ const AddBlockForm = ({ hullList, refreshHandler }) => {
 
   const onFinish = async (values) => {
     const result = await AdminHandler.addBlock(values);
-    if (result) openModalFunc(result.message);
+
+    const blkInfoMsg = `
+    블럭 번호 : ${values.BLK_NO}
+    표준 시수 : ${values.NORM_MH}
+    `;
+
+    if (result) openModalFunc(blkInfoMsg + result.message);
     refreshHandler();
     form.resetFields();
   };
@@ -31,18 +37,6 @@ const AddBlockForm = ({ hullList, refreshHandler }) => {
         autoComplete="off"
       >
         <Form.Item
-          label="블럭 번호"
-          name="BLK_NO"
-          rules={[
-            {
-              required: true,
-              message: "블럭 번호를 입력해 주세요!",
-            },
-          ]}
-        >
-          <Input placeholder="BLOCK_NO" />
-        </Form.Item>
-        <Form.Item
           label="선체 번호"
           name="HULL_SQ"
           rules={[
@@ -52,7 +46,7 @@ const AddBlockForm = ({ hullList, refreshHandler }) => {
             },
           ]}
         >
-          <Select style={{ width: 500 }} placeholder="선체를 선택해 주세요.">
+          <Select style={{ width: 400 }} placeholder="선체를 선택해 주세요.">
             {hullList.length > 0 &&
               hullList.map((hull) => {
                 return (
@@ -64,6 +58,19 @@ const AddBlockForm = ({ hullList, refreshHandler }) => {
                 );
               })}
           </Select>
+        </Form.Item>
+
+        <Form.Item
+          label="블럭 번호"
+          name="BLK_NO"
+          rules={[
+            {
+              required: true,
+              message: "블럭 번호를 입력해 주세요!",
+            },
+          ]}
+        >
+          <Input placeholder="BLOCK_NO" style={{ width: 400 }} />
         </Form.Item>
 
         <Form.Item

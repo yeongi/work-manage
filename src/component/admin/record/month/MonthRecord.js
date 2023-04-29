@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import AdminHandler from "../../../../lib/handler/AdminHandler";
 import classes from "./MonthRecord.module.css";
 import { List, Divider } from "antd";
@@ -13,13 +13,15 @@ const { HULL_LIST, WORK, BLK_LIST } = HEADER;
 const MonthRecord = ({ ym }) => {
   const [lists, setList] = useState([]);
 
-  useEffect(() => {
-    const getMonthWorkRecord = async () => {
-      const result = await AdminHandler.getWorkMonthRecordList(ym);
-      setList(result);
-    };
-    getMonthWorkRecord();
+  const getMonthWorkRecord = useCallback(async () => {
+    const result = await AdminHandler.getWorkMonthRecordList(ym);
+    setList(result);
   }, [ym]);
+
+  useEffect(() => {
+    getMonthWorkRecord();
+  }, [getMonthWorkRecord]);
+
   return (
     <div className={classes.wrapper}>
       <Divider orientation="left">{ym} 업무 기록 리스트</Divider>

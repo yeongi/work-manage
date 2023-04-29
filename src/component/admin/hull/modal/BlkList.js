@@ -7,7 +7,6 @@ const BlkList = ({ HULL_SQ }) => {
 
   const listFetch = useCallback(async () => {
     const result = await AdminHandler.getBlkList(HULL_SQ);
-    console.log("blklist :", result);
 
     if (result !== undefined)
       setBlkList(result.sort((a, b) => (a.BLK_NO > b.BLK_NO ? 1 : -1)));

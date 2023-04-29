@@ -11,7 +11,7 @@ const format = "YYYY-MM-DD HH:mm:ss";
 
 const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
   const loginCtx = useLoginCtx();
-  const { hullList, blockList, getHullList, getBlkList } = useGetBlkList();
+  const { hullList, blockList, getBlkList } = useGetBlkList();
   const [hull_no, setHullNo] = useState(0);
   const [filteredWorkList, setWorkList] = useState(workList);
   const [componentDisabled, setDisabled] = useState(true);
@@ -34,7 +34,6 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
   const { MyModal, openModalFunc } = useModalState("업무기록제출");
 
   useEffect(() => {
-    getHullList();
     setDisabled(false);
   }, []);
 

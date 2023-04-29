@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import AdminHandler from "../../../../lib/handler/AdminHandler";
 import { Divider, List } from "antd";
 import classes from "./HullRecordList.module.css";
@@ -9,15 +9,14 @@ import HullListExport from "../../sheet/HullListExport";
 const HullRecordList = ({ hull }) => {
   const [recordList, setList] = useState([{}]);
 
-  const getHullWorkRecordList = async (hull) => {
+  const getHullWorkRecordList = useCallback(async (hull) => {
     const hull_work_list = await AdminHandler.getWorkHullRecordList(hull);
     setList(hull_work_list);
-    console.log(hull_work_list);
-  };
+  }, []);
 
   useEffect(() => {
     getHullWorkRecordList(hull);
-  }, [hull]);
+  }, [getHullWorkRecordList, hull]);
 
   return (
     <>
@@ -42,9 +41,7 @@ const HullRecordList = ({ hull }) => {
             dataSource={recordList}
             renderItem={({
               BLK_NO,
-              BLK_SQ,
               HULL_NO,
-              HULL_SQ,
               HULL_TYPE,
               NORM_MH,
               RES_MH,
@@ -76,13 +73,7 @@ const HullRecordList = ({ hull }) => {
                       bordered
                       itemLayout="vertical"
                       dataSource={WORK_LIST}
-                      renderItem={({
-                        SUM_INP_MH,
-                        SUM_OVER_MH,
-                        WORK_CODE,
-                        WORK_DES,
-                        WORK_TYPE,
-                      }) => (
+                      renderItem={({ SUM_INP_MH, WORK_DES, WORK_TYPE }) => (
                         <List.Item>
                           <div className={classes["wlist-wrapper"]}>
                             <p>{WORK_TYPE}</p>

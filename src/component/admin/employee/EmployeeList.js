@@ -9,8 +9,9 @@ const EmployeeList = ({ empList }) => {
   const [workRecordList, getMyWorkRecordList] = useEmpRecordList(EMP_NO);
 
   useEffect(() => {
-    if (EMP_NO) getMyWorkRecordList();
-  }, [EMP_NO]);
+    if (EMP_NO) getMyWorkRecordList(EMP_NO);
+  }, [EMP_NO, getMyWorkRecordList]);
+
   return (
     <>
       <EmpRecordModal title={"작업 내역"} EMP_NO={EMP_NO}>

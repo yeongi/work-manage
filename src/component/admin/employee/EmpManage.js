@@ -1,21 +1,21 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import AddEmployeeForm from "./AddEmployeeForm";
 import EmployeeList from "./EmployeeList";
 import AdminHandler from "../../../lib/handler/AdminHandler";
 import classes from "./EmpManage.module.css";
-import MyExcelBtn from "../sheet/example";
+import EmpListExport from "../sheet/EmpListExport";
 
 const EmpManage = () => {
   const [empList, setEmpList] = useState({});
 
-  const getEmpList = async () => {
+  const getEmpList = useCallback(async () => {
     const list = await AdminHandler.getEmployeeList();
     setEmpList(list);
-  };
+  }, []);
 
   useEffect(() => {
     getEmpList();
-  }, []);
+  }, [getEmpList]);
 
   return (
     <div className={classes["emp-wrapper"]}>
@@ -30,7 +30,7 @@ const EmpManage = () => {
           <h1>사원 조회</h1>
           <EmployeeList empList={empList} />
         </section>
-        <MyExcelBtn />
+        <EmpListExport />
       </div>
     </div>
   );

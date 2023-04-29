@@ -3,7 +3,7 @@ import { Button } from "antd";
 import * as XLSX from "xlsx";
 import AdminHandler from "../../../lib/handler/AdminHandler";
 
-const MyExcelBtn = () => {
+const EmpListExport = () => {
   const [empList, setEmpList] = useState([]);
 
   const getEmpList = useCallback(async () => {
@@ -27,4 +27,4 @@ const MyExcelBtn = () => {
   return <Button onClick={getEmpExcelHandler}>사원 목록 가져오기</Button>;
 };
 
-export default MyExcelBtn;
+export default EmpListExport;

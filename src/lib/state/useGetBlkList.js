@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import AdminHandler from "../handler/AdminHandler";
 
 const useGetBlkList = () => {
@@ -17,6 +17,10 @@ const useGetBlkList = () => {
     const blkList = await AdminHandler.getBlkList(hull_no);
     setBlkList(blkList);
   }, []);
+
+  useEffect(() => {
+    getHullList();
+  }, [getHullList]);
 
   return {
     hullList,

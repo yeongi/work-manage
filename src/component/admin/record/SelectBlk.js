@@ -1,24 +1,22 @@
 import { Form, Select } from "antd";
-import { useEffect } from "react";
 import useGetBlkList from "../../../lib/state/useGetBlkList";
 
 const SelectBlk = ({ onChangedBlk, selectHull }) => {
   //선체, 블럭, 업무 기록 선택
   const { hullList, blockList, getHullList, getBlkList } = useGetBlkList();
 
-  const onChangedHull = async (hull) => {
-    selectHull(hull);
-    await getHullList();
-    await getBlkList(hull);
-  };
+  const [form] = Form.useForm();
 
-  useEffect(() => {
+  const onChangedHull = (hull) => {
+    selectHull(hull);
     getHullList();
-  }, [getHullList]);
+    getBlkList(hull);
+    form.setFieldValue("blk", null);
+  };
 
   return (
     <div>
-      <Form>
+      <Form form={form}>
         <Form.Item>
           <Select
             style={{ width: 400 }}
@@ -39,6 +37,7 @@ const SelectBlk = ({ onChangedBlk, selectHull }) => {
         <Form.Item>
           <Select
             style={{ width: 400 }}
+            fieldNames="blk"
             placeholder="블럭을 선택해 주세요."
             onChange={onChangedBlk}
           >
