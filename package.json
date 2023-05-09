@@ -1,6 +1,6 @@
 {
   "name": "work-manage",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
   "main": "public/main.js",
   "homepage": "./",

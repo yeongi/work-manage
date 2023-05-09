@@ -25,7 +25,7 @@ const WorkList = ({ myList }) => {
 
   useEffect(() => {
     todayMh(sumMhMyList(myList));
-  }, [myList]);
+  }, [todayMh, myList]);
 
   return (
     <>
