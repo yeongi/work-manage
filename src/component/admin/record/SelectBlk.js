@@ -1,9 +1,14 @@
 import { Form, Select } from "antd";
-import useGetBlkList from "../../../lib/state/useGetBlkList";
 
-const SelectBlk = ({ onChangedBlk, selectHull }) => {
+const SelectBlk = ({
+  onChangedBlk,
+  getHullList,
+  getBlkList,
+  hullList,
+  blockList,
+  selectHull,
+}) => {
   //선체, 블럭, 업무 기록 선택
-  const { hullList, blockList, getHullList, getBlkList } = useGetBlkList();
 
   const [form] = Form.useForm();
 

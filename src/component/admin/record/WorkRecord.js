@@ -6,22 +6,37 @@ import classes from "./WorkRecord.module.css";
 import { Button } from "antd";
 import { v4 } from "uuid";
 import HullRecordList from "./hull/HullRecordList";
+import useGetBlkList from "../../../lib/state/useGetBlkList";
+import { useHullRecordList } from "../../../lib/state/useHullRecordList";
+import { useBlkWorkRecordList } from "../../../lib/state/useBlkWorkRecordList";
 
 const HEADER_LIST = ["HULL", "BLOCK"];
 
 const WorkRecord = () => {
-  const [block, setBlk] = useState("");
-  const [hull, setHull] = useState("");
+  const [block, setBlk] = useState(0);
+  const [hull, setHull] = useState(0);
   const [header, setHeader] = useState("");
+  const { hullList, blockList, getHullList, getBlkList } = useGetBlkList();
+  // TODO: 언젠가 쓸 예정
+  const { hullRecordList, getHullWorkRecordList } = useHullRecordList(hull);
+  const { workRecordList, getBlkWorkRecordList, onChangeKeyword, fileName } =
+    useBlkWorkRecordList(block);
 
   let workList = <h1>업무 기록이 표시됩니다.</h1>;
 
   switch (header) {
     case "HULL":
-      workList = <HullRecordList hull={hull} />;
+      workList = <HullRecordList hullRecordList={hullRecordList} />;
       break;
     case "BLOCK":
-      workList = <RecordList block={block} />;
+      workList = (
+        <RecordList
+          workRecordList={workRecordList}
+          fileName={fileName}
+          getBlkWorkRecordList={getBlkWorkRecordList}
+          onChangeKeyword={onChangeKeyword}
+        />
+      );
       break;
     default:
       workList = <h1>업무 기록이 표시됩니다.</h1>;
@@ -46,7 +61,14 @@ const WorkRecord = () => {
       <div className={classes["select-wrapper"]}>
         <section>
           <h1>블럭 및 선체 선택</h1>
-          <SelectBlk onChangedBlk={onChangedBlk} selectHull={ohChangedHull} />
+          <SelectBlk
+            onChangedBlk={onChangedBlk}
+            selectHull={ohChangedHull}
+            hullList={hullList}
+            blockList={blockList}
+            getHullList={getHullList}
+            getBlkList={getBlkList}
+          />
         </section>
         <section>
           <h1>업무 기록 조회 하기</h1>

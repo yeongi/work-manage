@@ -1,5 +1,3 @@
-import { useCallback, useEffect, useState } from "react";
-import AdminHandler from "../../../../lib/handler/AdminHandler";
 import classes from "./RecordList.module.css";
 import { Button, Divider, Form, Input, List, Radio, Space } from "antd";
 import HeaderItem from "./HeaderItem";
@@ -19,36 +17,13 @@ const selectKeyword = [
   { label: "투입시수", value: "INP_MH" },
 ];
 
-const RecordList = ({ block }) => {
-  const [isLoading, setLoading] = useState(false);
-  const [workRecordList, setList] = useState([{}]);
-  const [fileName, setFileName] = useState("");
+const RecordList = ({
+  workRecordList,
+  fileName,
+  getBlkWorkRecordList,
+  onChangeKeyword,
+}) => {
   const [form] = useForm();
-
-  const getWorkRecordList = useCallback(async (block) => {
-    setLoading(true);
-    const list = await AdminHandler.getWorkRecordList(block);
-    setList(list);
-    if (list.length > 0) {
-      const { BLK_NO, HULL_NO, HULL_TYPE, SHIPYARD } = list[0];
-      setFileName(
-        `${SHIPYARD}-${HULL_TYPE}-${HULL_NO}-${BLK_NO}-${dayJsYMD(
-          dayjs(new Date())
-        )}`
-      );
-    }
-    setLoading(false);
-  }, []);
-
-  const onChangeKeyword = ({ condition, keyword }) => {
-    setList((prev) =>
-      prev.filter((list) => (list[condition] + "").includes(keyword + ""))
-    );
-  };
-
-  useEffect(() => {
-    getWorkRecordList(block);
-  }, [getWorkRecordList, block]);
 
   return (
     <div className={classes.wrapper}>
@@ -67,7 +42,7 @@ const RecordList = ({ block }) => {
           <Form.Item>
             <Button
               onClick={() => {
-                getWorkRecordList(block);
+                getBlkWorkRecordList();
                 form.resetFields();
               }}
             >
@@ -80,9 +55,7 @@ const RecordList = ({ block }) => {
         size="large"
         header={
           <div>
-            {!isLoading && (
-              <NoFilterdtoExcel list={workRecordList} fileName={fileName} />
-            )}
+            {<NoFilterdtoExcel list={workRecordList} fileName={fileName} />}
             <HeaderItem items={headers} />
           </div>
         }
@@ -112,6 +85,7 @@ const RecordList = ({ block }) => {
                 RECORD_NO={RECORD_NO}
                 INP_MH={INP_MH}
                 BLK_SQ={BLK_SQ}
+                getBlkWorkRecordList={getBlkWorkRecordList}
                 items={[
                   RECORD_NO,
                   SHIPYARD,

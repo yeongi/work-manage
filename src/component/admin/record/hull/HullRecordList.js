@@ -1,37 +1,23 @@
-import { useCallback, useEffect, useState } from "react";
-import AdminHandler from "../../../../lib/handler/AdminHandler";
 import { Divider, List } from "antd";
 import classes from "./HullRecordList.module.css";
 import { HEADER } from "../../../../lib/const/List";
 import mappingHeader from "../../../../lib/MappingHeader";
 import HullListExport from "../../sheet/HullListExport";
 
-const HullRecordList = ({ hull }) => {
-  const [recordList, setList] = useState([{}]);
-
-  const getHullWorkRecordList = useCallback(async (hull) => {
-    const hull_work_list = await AdminHandler.getWorkHullRecordList(hull);
-
-    setList(hull_work_list);
-  }, []);
-
-  useEffect(() => {
-    getHullWorkRecordList(hull);
-  }, [getHullWorkRecordList, hull]);
-
+const HullRecordList = ({ hullRecordList }) => {
   return (
     <>
-      {recordList.length === 0 && <h1>업무기록이 존재하지 않습니다.</h1>}
-      {recordList.length > 0 && (
+      {hullRecordList.length === 0 && <h1>업무기록이 존재하지 않습니다.</h1>}
+      {hullRecordList.length > 0 && (
         <div className={classes.wrapper}>
           <Divider orientation="left">
             <p>선체별 업무 기록 리스트</p>
             <HullListExport
-              list={recordList}
+              list={hullRecordList}
               fileName={[
-                recordList[0].SHIPYARD,
-                recordList[0].HULL_NO,
-                recordList[0].HULL_TYPE,
+                hullRecordList[0].SHIPYARD,
+                hullRecordList[0].HULL_NO,
+                hullRecordList[0].HULL_TYPE,
               ].join("-")}
             />
           </Divider>
@@ -39,7 +25,7 @@ const HullRecordList = ({ hull }) => {
             itemLayout="horizontal"
             bordered
             footer={<div>제작자 ＠github : yeongi</div>}
-            dataSource={recordList}
+            dataSource={hullRecordList}
             renderItem={({
               BLK_NO,
               HULL_NO,
