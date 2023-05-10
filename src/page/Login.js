@@ -1,5 +1,4 @@
 import { Button, Form, Input } from "antd";
-import { useRef } from "react";
 import empHandler from "../lib/handler/EmpHander";
 import { useLoginCtx } from "../lib/store/LoginContext";
 import classes from "./Login.module.css";
@@ -7,7 +6,6 @@ import useModalState from "../lib/state/useMyModal";
 
 const Login = () => {
   const loginCtx = useLoginCtx();
-  const inputRef = useRef();
   const { MyModal, openModalFunc } = useModalState("로그인 결과");
 
   const onFinish = async (values) => {
@@ -73,7 +71,7 @@ const Login = () => {
               },
             ]}
           >
-            <Input ref={inputRef} />
+            <Input />
           </Form.Item>
 
           <Form.Item

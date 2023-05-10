@@ -1,35 +1,26 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
+import { useLoginCtx } from "../lib/store/LoginContext";
+import useEmpRecordList from "../lib/state/useEmpRecordList";
+import useToDidWork from "../lib/state/useToDidWork";
+import useWorkList from "../lib/state/useWorkList";
 import AddWorkRecordForm from "../component/emp/AddWorkRecordForm";
 import EmpWorkRecord from "../component/emp/EmpWorkRecord";
 import LoginState from "../component/emp/LoginState";
 import SelectMonthEmp from "../component/emp/SelectMonthEmp";
-import empHandler from "../lib/handler/EmpHander";
-import useEmpRecordList from "../lib/state/useEmpRecordList";
-import useToDidWork from "../lib/state/useToDidWork";
-import { useLoginCtx } from "../lib/store/LoginContext";
 import classes from "./EmpMain.module.css";
 import shipURL from "../img/ship.jpg";
 import TodayWorkList from "../component/emp/TodayWorkList";
 
 const EmpMain = () => {
   const loginCtx = useLoginCtx();
-  const [workList, setWorkList] = useState([]);
-  const [workRecordList, getMyWorkRecordList] = useEmpRecordList(
-    loginCtx.state.EMP_NO
-  );
-
+  const [workList] = useWorkList();
+  const [workRecordList, getMyWorkRecordList] = useEmpRecordList();
   const [filteredRecordList, setFilteredList] = useState([]);
-
-  const [myList, addList] = useToDidWork();
+  const [myList, addList] = useToDidWork(workRecordList);
 
   const onSelectYmHandler = (ym) => {
     filteredMonthMyRecordList(ym);
   };
-
-  const getWorkList = useCallback(async () => {
-    const result = await empHandler.getWorkList();
-    setWorkList(result);
-  }, []);
 
   const filteredMonthMyRecordList = useCallback(
     (yearmonth) => {
@@ -40,10 +31,6 @@ const EmpMain = () => {
     },
     [workRecordList]
   );
-
-  useEffect(() => {
-    getWorkList();
-  }, [getWorkList]);
 
   return (
     <>

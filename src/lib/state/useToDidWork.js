@@ -1,28 +1,33 @@
-import { useCallback, useEffect, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from "react";
 import { dayJsYMD } from "../dayJs";
 import dayJs from "dayjs";
 import empHandler from "../handler/EmpHander";
 import { useLoginCtx } from "../store/LoginContext";
 
-const useToDidWork = () => {
+const useToDidWork = (workRecordList) => {
   const [myList, setList] = useState([]);
-
   const loginCtx = useLoginCtx();
 
-  const fetchMyWork = useCallback(async () => {
-    const result = await empHandler.getWorkRecordList(loginCtx.state.EMP_NO);
-    if (result.length > 0) {
-      const list = result.filter((record) => {
+  useEffect(() => {
+    const fetchMyWork = async () => {
+      if (workRecordList.length === 0) return;
+
+      const list = workRecordList.filter((record) => {
         return record.WORK_DATE.includes(dayJsYMD(dayJs()));
       });
 
       setList(list);
-    }
-  }, [loginCtx.state.EMP_NO]);
 
-  useEffect(() => {
+      const mh = myList.reduce((acc, cur) => {
+        return acc + cur.INP_MH;
+      }, 0);
+
+      loginCtx.setMH(mh);
+    };
+
     fetchMyWork();
-  }, [fetchMyWork]);
+  }, [workRecordList]);
 
   const addWorkRecordInfo = async (NO) => {
     const [list] = await empHandler.getWorkRecord(NO);

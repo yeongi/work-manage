@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useCallback, useContext, useState } from "react";
 const initState = {
   IS_LOGIN: false,
   EMP_NO: null,
@@ -21,19 +21,19 @@ export const useLoginCtx = () => {
 export const LoginProvider = ({ children }) => {
   const [loginState, setLogin] = useState(initState);
 
-  const onLoginHandler = (loginInfo) => {
+  const onLoginHandler = useCallback((loginInfo) => {
     setLogin(loginInfo);
-  };
+  }, []);
 
-  const onLogoutHandler = () => {
+  const onLogoutHandler = useCallback(() => {
     setLogin(initState);
-  };
+  }, []);
 
-  const setTodayMHHandler = (MH) => {
+  const setTodayMHHandler = useCallback((MH) => {
     setLogin((prev) => {
       return { ...prev, MH: MH };
     });
-  };
+  }, []);
 
   return (
     <LoginCtx.Provider
