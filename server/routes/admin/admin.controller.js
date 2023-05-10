@@ -175,6 +175,20 @@ router.put("/blk/info/edit", async (req, res) => {
   }
 });
 
+//블럭 시수 수정
+router.put("/blk/info/mh", async (req, res) => {
+  try {
+    const { body } = req;
+    const result = await AdminService.updateBlkMhInfo(body);
+    return res.status(200).json({
+      status: 200,
+      message: "블럭 정보 수정 업데이트 성공",
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 //업무 내역 조회 (블럭기준)
 router.get("/work/view/:blkno", async (req, res) => {
   const { blkno } = req.params;

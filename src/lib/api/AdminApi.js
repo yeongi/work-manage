@@ -116,6 +116,16 @@ const AdminApi = {
     });
   },
 
+  updateBlkMHInfo: (body) => {
+    return fetch(`${API}/blk/info/mh`, {
+      method: "put",
+      body: JSON.stringify(body),
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+  },
+
   deleteBlk: (blk_sq) => {
     return fetch(`${API}/blk/delete/${blk_sq}`, {
       method: "delete",

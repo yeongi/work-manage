@@ -162,6 +162,35 @@ module.exports = {
     }
   },
 
+  updateBlkMhInfo: async ({ PRE_MH, AFTER_MH, BLK_SQ, RECORD_NO }) => {
+    try {
+      const conn = await pool.getConnection();
+
+      const blkUpdateQuery =
+        "UPDATE block SET RES_MH = RES_MH - ? + ? WHERE BLK_SQ = ?";
+
+      const workRecordUpdateQuery =
+        "UPDATE work_record SET INP_MH = ? WHERE RECORD_NO = ?";
+
+      const [blkRes] = await conn.query(blkUpdateQuery, [
+        PRE_MH,
+        AFTER_MH,
+        BLK_SQ,
+      ]);
+      const [recordRes] = await conn.query(workRecordUpdateQuery, [
+        AFTER_MH,
+        RECORD_NO,
+      ]);
+
+      conn.release();
+
+      return { blkRes, recordRes };
+    } catch (err) {
+      console.log(err);
+      return err.message;
+    }
+  },
+
   getMonthRecordListOfBLK: async (YM) => {
     const BLK_QUERY = `    
     -- 블럭을 그룹화 해서 그 달의 RES_MH를 구함 --  

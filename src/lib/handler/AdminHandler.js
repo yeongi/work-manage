@@ -74,6 +74,11 @@ const AdminHandler = {
     return await result.json();
   },
 
+  updateBlkMH: async (body) => {
+    const result = await AdminApi.updateBlkMHInfo(body);
+    return await result.json();
+  },
+
   getHullInfo: async (hull_sq) => {
     const result = await AdminApi.getHullInfo(hull_sq);
     return await result.json();
