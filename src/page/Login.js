@@ -1,8 +1,8 @@
 import { Button, Form, Input } from "antd";
-import empHandler from "../lib/handler/EmpHander";
-import { useLoginCtx } from "../lib/store/LoginContext";
+import empHandler from "lib/handler/EmpHander";
+import { useLoginCtx } from "lib/store/LoginContext";
 import classes from "./Login.module.css";
-import useModalState from "../lib/state/useMyModal";
+import useModalState from "lib/state/useMyModal";
 
 const Login = () => {
   const loginCtx = useLoginCtx();

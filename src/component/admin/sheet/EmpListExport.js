@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Button } from "antd";
 import * as XLSX from "xlsx";
-import AdminHandler from "../../../lib/handler/AdminHandler";
+import AdminHandler from "lib/handler/AdminHandler";
 
 const EmpListExport = () => {
   const [empList, setEmpList] = useState([]);

@@ -1,6 +1,6 @@
-import { useLoginCtx } from "../../lib/store/LoginContext";
+import { useLoginCtx } from "lib/store/LoginContext";
 import dayJs from "dayjs";
-import { dayJsYMD } from "../../lib/dayJs";
+import { dayJsYMD } from "lib/dayJs";
 import classes from "./LoginState.module.css";
 
 const LoginState = () => {

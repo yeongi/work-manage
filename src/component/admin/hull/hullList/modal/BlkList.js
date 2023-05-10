@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import AdminHandler from "../../../../lib/handler/AdminHandler";
+import AdminHandler from "../../../../../lib/handler/AdminHandler";
 import BlkForm from "./BlkForm";
 
 const BlkList = ({ HULL_SQ }) => {

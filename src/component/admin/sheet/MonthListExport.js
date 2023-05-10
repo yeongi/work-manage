@@ -1,7 +1,7 @@
 import { Button } from "antd";
 import * as XLSX from "xlsx";
 import dayjs from "dayjs";
-import { dayJsYMD } from "../../../lib/dayJs";
+import { dayJsYMD } from "lib/dayJs";
 
 const MonthListExport = ({ list, fileName }) => {
   const getEmpExcelHandler = () => {

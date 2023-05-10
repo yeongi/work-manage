@@ -1,8 +1,8 @@
 import React from "react";
 import { Button, Form, Input, InputNumber, Select, Space } from "antd";
-import classes from "./HullManage.module.css";
-import AdminHandler from "../../../lib/handler/AdminHandler";
-import useModalState from "../../../lib/state/useMyModal";
+import classes from "../HullManage.module.css";
+import AdminHandler from "lib/handler/AdminHandler";
+import useModalState from "lib/state/useMyModal";
 
 const AddBlockForm = ({ hullList, refreshHandler }) => {
   const [form] = Form.useForm();

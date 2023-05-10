@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Form, Input } from "antd";
-import empHandler from "../../lib/handler/EmpHander";
+import empHandler from "lib/handler/EmpHander";
 
 const AddWorkForm = ({ workList, refreshHandler }) => {
   const [form] = Form.useForm();

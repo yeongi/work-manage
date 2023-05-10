@@ -1,13 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
-import AdminHandler from "../../../../lib/handler/AdminHandler";
+import AdminHandler from "lib/handler/AdminHandler";
 import BlkList from "./BlkList";
-import useModalState from "../../../../lib/state/useMyModal";
+import useModalState from "lib/state/useMyModal";
 import { Button, Form, Input, Modal, Checkbox } from "antd";
 import classes from "./HullModal.module.css";
 
 const HullModal = ({ hullInfo, refreshHandler }) => {
-  const [open, setOpen] = useState(false);
   const { MyModal, openModalFunc } = useModalState("업데이트 완료");
+
+  const [open, setOpen] = useState(false);
   const [hull, setHull] = useState({});
 
   const [form] = Form.useForm();

@@ -1,8 +1,8 @@
 import { Button, Form, InputNumber, Space } from "antd";
 import { useForm } from "antd/es/form/Form";
 import classes from "./BlockPutFrom.module.css";
-import useMyModal from "../../../../lib/state/useMyModal";
-import AdminHandler from "../../../../lib/handler/AdminHandler";
+import useMyModal from "lib/state/useMyModal";
+import AdminHandler from "lib/handler/AdminHandler";
 
 export const BlockPutForm = ({
   BLK_SQ,

@@ -1,6 +1,6 @@
 import { Button, List } from "antd";
 import classes from "./HullList.module.css";
-import mappingHeader from "../../../lib/MappingHeader";
+import mappingHeader from "../../../../lib/MappingHeader";
 import { useState } from "react";
 import HullModal from "./modal/HullModal";
 

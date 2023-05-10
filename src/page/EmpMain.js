@@ -1,15 +1,15 @@
 import { useCallback, useState } from "react";
-import { useLoginCtx } from "../lib/store/LoginContext";
-import useEmpRecordList from "../lib/state/useEmpRecordList";
-import useToDidWork from "../lib/state/useToDidWork";
-import useWorkList from "../lib/state/useWorkList";
-import AddWorkRecordForm from "../component/emp/AddWorkRecordForm";
-import EmpWorkRecord from "../component/emp/EmpWorkRecord";
-import LoginState from "../component/emp/LoginState";
-import SelectMonthEmp from "../component/emp/SelectMonthEmp";
+import { useLoginCtx } from "lib/store/LoginContext";
+import useEmpRecordList from "lib/state/useEmpRecordList";
+import useToDidWork from "lib/state/useToDidWork";
+import useWorkList from "lib/state/useWorkList";
+import AddWorkRecordForm from "component/emp/AddWorkRecordForm";
+import EmpWorkRecord from "component/emp/EmpWorkRecord";
+import LoginState from "component/emp/LoginState";
+import SelectMonthEmp from "component/emp/SelectMonthEmp";
 import classes from "./EmpMain.module.css";
-import shipURL from "../img/ship.jpg";
-import TodayWorkList from "../component/emp/TodayWorkList";
+import shipURL from "img/ship.jpg";
+import TodayWorkList from "component/emp/TodayWorkList";
 
 const EmpMain = () => {
   const loginCtx = useLoginCtx();

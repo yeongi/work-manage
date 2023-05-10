@@ -1,7 +1,7 @@
 import { Divider, List } from "antd";
 import classes from "./HullRecordList.module.css";
-import { HEADER } from "../../../../lib/const/List";
-import mappingHeader from "../../../../lib/MappingHeader";
+import { HEADER } from "lib/const/List";
+import mappingHeader from "lib/MappingHeader";
 import HullListExport from "../../sheet/HullListExport";
 
 const HullRecordList = ({ hullRecordList }) => {

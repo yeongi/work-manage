@@ -1,10 +1,10 @@
 import { Button } from "antd";
 import Admin from "./Admin";
 import EmpMain from "./EmpMain";
-import { useLoginCtx } from "../lib/store/LoginContext";
+import { useLoginCtx } from "lib/store/LoginContext";
 import classes from "./page.module.css";
 import CreatorFooter from "./CreatorFooter";
-import useMyModal from "../lib/state/useMyModal";
+import useMyModal from "lib/state/useMyModal";
 
 const Main = () => {
   const loginCtx = useLoginCtx();

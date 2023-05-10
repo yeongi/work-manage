@@ -1,7 +1,7 @@
 import { useState } from "react";
-import EmpManage from "../component/admin/employee/EmpManage";
-import HullManage from "../component/admin/hull/HullManage";
-import WorkRecord from "../component/admin/record/WorkRecord";
+import EmpManage from "component/admin/employee/EmpManage";
+import HullManage from "component/admin/hull/HullManage";
+import WorkRecord from "component/admin/record/WorkRecord";
 import classes from "./Admin.module.css";
 
 const pageArr = [
