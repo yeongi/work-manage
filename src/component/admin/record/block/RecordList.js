@@ -14,6 +14,8 @@ const headers = HEADER.BLK_LIST;
 const selectKeyword = [
   { label: "업무날짜", value: "WORK_DATE" },
   { label: "사원명", value: "EMP_NAME" },
+  { label: "업무 종류 ", value: "WORK_TYPE" },
+  { label: "업무 내용 ", value: "WORK_DES" },
   { label: "투입시수", value: "INP_MH" },
 ];
 
@@ -50,6 +52,7 @@ const RecordList = ({ block }) => {
 
   return (
     <div className={classes.wrapper}>
+      <Divider orientation="left"> 블럭별 업무 기록 리스트</Divider>
       <Form onFinish={onChangeKeyword} form={form}>
         <Space>
           <Form.Item name="condition" initialValue={["EMP_NAME"]}>
@@ -68,13 +71,11 @@ const RecordList = ({ block }) => {
                 form.resetFields();
               }}
             >
-              초기화
+              목록 초기화
             </Button>
           </Form.Item>
         </Space>
       </Form>
-
-      <Divider orientation="left"> 블럭별 업무 기록 리스트</Divider>
       <List
         size="large"
         header={
@@ -89,7 +90,9 @@ const RecordList = ({ block }) => {
         bordered
         dataSource={workRecordList}
         renderItem={({
+          RECORD_NO,
           BLK_NO,
+          BLK_SQ,
           EMP_NAME,
           EMP_NO,
           HULL_NO,
@@ -106,7 +109,11 @@ const RecordList = ({ block }) => {
           return (
             <List.Item>
               <ListItem
+                RECORD_NO={RECORD_NO}
+                INP_MH={INP_MH}
+                BLK_SQ={BLK_SQ}
                 items={[
+                  RECORD_NO,
                   SHIPYARD,
                   HULL_NO,
                   HULL_TYPE,

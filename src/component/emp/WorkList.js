@@ -5,32 +5,13 @@ import dayjs from "dayjs";
 import { dayJsYMD } from "../../lib/dayJs";
 import classes from "./WorkList.module.css";
 import sumMhMyList from "../../lib/sumMhList";
-import { useCallback, useEffect, useState } from "react";
-import { useLoginCtx } from "../../lib/store/LoginContext";
-
 const header = HEADER.BLK_LIST;
 
 const WorkList = ({ myList }) => {
-  const loginCtx = useLoginCtx();
-
-  const [todayInputMh, setMh] = useState(0);
-
-  const todayMh = useCallback(
-    (mh) => {
-      setMh(mh);
-      loginCtx.setMH(mh);
-    },
-    [loginCtx]
-  );
-
-  useEffect(() => {
-    todayMh(sumMhMyList(myList));
-  }, [todayMh, myList]);
-
   return (
     <>
       <div className={classes["des-wrapper"]}>
-        목록 총 투입 시수 : <b>{todayInputMh}</b>
+        목록 총 투입 시수 : <b>{sumMhMyList(myList)}</b>
       </div>
       <div className={classes.wrapper}>
         <List
