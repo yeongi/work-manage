@@ -3,13 +3,7 @@ import classes from "./ListItem.module.css";
 import { v4 } from "uuid";
 import { BlockPutForm } from "./BlockPutForm";
 
-const ListItem = ({
-  BLK_SQ,
-  INP_MH,
-  RECORD_NO,
-  items,
-  getBlkWorkRecordList,
-}) => {
+const ListItem = ({ BLK_SQ, INP_MH, RECORD_NO, items, resetHandler }) => {
   const [putMode, setPutMode] = useState(false);
 
   const changeModeHandler = () => {
@@ -32,7 +26,7 @@ const ListItem = ({
           INP_MH={INP_MH}
           BLK_SQ={BLK_SQ}
           RECORD_NO={RECORD_NO}
-          getBlkWorkRecordList={getBlkWorkRecordList}
+          resetHandler={resetHandler}
           closeHandler={changeModeHandler}
         />
       )}

@@ -6,6 +6,7 @@ export const useHullRecordList = (hull) => {
 
   const getHullWorkRecordList = useCallback(async () => {
     const hull_work_list = await AdminHandler.getWorkHullRecordList(hull);
+
     setList(hull_work_list);
   }, [hull]);
 

@@ -8,7 +8,7 @@ export const BlockPutForm = ({
   BLK_SQ,
   INP_MH: PRE_MH,
   RECORD_NO,
-  getBlkWorkRecordList,
+  resetHandler,
   closeHandler,
 }) => {
   const [formRef] = useForm();
@@ -23,14 +23,10 @@ export const BlockPutForm = ({
     });
 
     if (res.status === 200)
-      openModalFunc(
-        "성공적으로 수정되었습니다." +
-          `블럭 sq: ${BLK_SQ} 전 투입 시수 :${PRE_MH} 후 투입시수 ${AFTER_MH} 기록 번호 :${RECORD_NO}`,
-        () => {
-          closeHandler();
-          getBlkWorkRecordList();
-        }
-      );
+      openModalFunc("성공적으로 수정되었습니다.", () => {
+        closeHandler();
+        resetHandler();
+      });
   };
 
   return (

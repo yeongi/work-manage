@@ -21,6 +21,7 @@ const RecordList = ({
   workRecordList,
   fileName,
   getBlkWorkRecordList,
+  resetHandler,
   onChangeKeyword,
 }) => {
   const [form] = useForm();
@@ -85,7 +86,7 @@ const RecordList = ({
                 RECORD_NO={RECORD_NO}
                 INP_MH={INP_MH}
                 BLK_SQ={BLK_SQ}
-                getBlkWorkRecordList={getBlkWorkRecordList}
+                resetHandler={resetHandler}
                 items={[
                   RECORD_NO,
                   SHIPYARD,

@@ -13,14 +13,27 @@ import { useBlkWorkRecordList } from "../../../lib/state/useBlkWorkRecordList";
 const HEADER_LIST = ["HULL", "BLOCK"];
 
 const WorkRecord = () => {
-  const [block, setBlk] = useState(0);
-  const [hull, setHull] = useState(0);
   const [header, setHeader] = useState("");
-  const { hullList, blockList, getHullList, getBlkList } = useGetBlkList();
-  // TODO: 언젠가 쓸 예정
-  const { hullRecordList, getHullWorkRecordList } = useHullRecordList(hull);
+  const {
+    blk_sq,
+    hull_sq,
+    onChangedBlk,
+    onChangedHull,
+    hullList,
+    blockList,
+    getHullList,
+    getBlkList,
+  } = useGetBlkList();
+
+  const { hullRecordList, getHullWorkRecordList } = useHullRecordList(hull_sq);
   const { workRecordList, getBlkWorkRecordList, onChangeKeyword, fileName } =
-    useBlkWorkRecordList(block);
+    useBlkWorkRecordList(blk_sq);
+
+  const resetHandler = () => {
+    getHullWorkRecordList();
+    getBlkWorkRecordList();
+    getBlkList(hull_sq);
+  };
 
   let workList = <h1>업무 기록이 표시됩니다.</h1>;
 
@@ -33,7 +46,7 @@ const WorkRecord = () => {
         <RecordList
           workRecordList={workRecordList}
           fileName={fileName}
-          getBlkWorkRecordList={getBlkWorkRecordList}
+          resetHandler={resetHandler}
           onChangeKeyword={onChangeKeyword}
         />
       );
@@ -42,15 +55,6 @@ const WorkRecord = () => {
       workList = <h1>업무 기록이 표시됩니다.</h1>;
       break;
   }
-
-  const onChangedBlk = (blk) => {
-    setBlk(blk);
-  };
-
-  const ohChangedHull = (hull) => {
-    setHull(hull);
-    setBlk("");
-  };
 
   const onClickListBtn = (value) => {
     setHeader(value.target.outerText);
@@ -63,7 +67,7 @@ const WorkRecord = () => {
           <h1>블럭 및 선체 선택</h1>
           <SelectBlk
             onChangedBlk={onChangedBlk}
-            selectHull={ohChangedHull}
+            onChangedHull={onChangedHull}
             hullList={hullList}
             blockList={blockList}
             getHullList={getHullList}
