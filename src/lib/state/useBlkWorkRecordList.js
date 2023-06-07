@@ -13,7 +13,7 @@ export const useBlkWorkRecordList = (block_sq) => {
     if (list.length > 0) {
       const { BLK_NO, HULL_NO, HULL_TYPE, SHIPYARD } = list[0];
       setFileName(
-        `${SHIPYARD}-${HULL_TYPE}-${HULL_NO}-${BLK_NO}-${dayJsYMD(
+        `${SHIPYARD}${HULL_TYPE}${HULL_NO}${BLK_NO}${dayJsYMD(
           dayjs(new Date())
         )}`
       );
