@@ -86,7 +86,6 @@ router.post("/work/record", async (req, res) => {
     if (!Array.isArray(insertResult))
       return res.status(200).json({
         status: 204,
-        data: result,
         message: "오류 발생",
       });
   } catch (err) {

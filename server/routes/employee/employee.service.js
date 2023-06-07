@@ -1,6 +1,6 @@
 const pool = require("../../config/dbConfig");
 
-module.exports = empService = {
+export const empService = {
   empLogin: async (body) => {
     try {
       const { emp_no, password } = body;

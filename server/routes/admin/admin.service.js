@@ -282,8 +282,6 @@ module.exports = {
         BLK_RES.map(async (RES) => {
           const [WORK_LIST] = await conn.query(BlockWorkSum, [RES.BLK_SQ]);
 
-          console.log(BLK_RES);
-
           const [DATE_LIST] = await conn.query(WORKLIST_QUERY, [RES.BLK_SQ]);
 
           return { DATE_LIST, WORK_LIST, ...RES };
