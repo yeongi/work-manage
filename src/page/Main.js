@@ -11,18 +11,7 @@ const Main = () => {
   const { MyModal, openModalFunc } = useMyModal("알림");
 
   const logoutHandler = () => {
-    if (loginCtx.state.IS_ADMIN) {
-      openModalFunc("로그아웃 됐습니다.", loginCtx.onLogout);
-      return;
-    }
-    if (loginCtx.state.MH < 8) {
-      openModalFunc("금일 투입 시수를 다 채우지 않았습니다.");
-      return;
-    }
-    if (loginCtx.state.MH >= 8) {
-      openModalFunc("로그아웃 됐습니다.", loginCtx.onLogout);
-      return;
-    }
+    openModalFunc("로그아웃 됐습니다.", loginCtx.onLogout);
   };
 
   return (
