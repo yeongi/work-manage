@@ -1,6 +1,6 @@
 import { Form, Button, Input } from "antd";
 import AdminHandler from "lib/handler/AdminHandler";
-import useModalState from "lib/state/useMyModal";
+import useModalState from "hooks/useMyModal";
 
 // { BLK_NO, BLK_SQ, HULL_SQ, NORM_MH, RES_MH }
 

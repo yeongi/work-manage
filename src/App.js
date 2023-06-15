@@ -1,4 +1,4 @@
-import { useLoginCtx } from "./lib/store/LoginContext";
+import { useLoginCtx } from "./store/LoginContext";
 import Login from "./page/Login";
 import Main from "./page/Main";
 

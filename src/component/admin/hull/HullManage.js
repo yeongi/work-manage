@@ -2,7 +2,7 @@ import AddBlockForm from "./block/AddBlockForm";
 import HullList from "./hullList/HullList";
 import AddHullForm from "./hull/AddHullForm";
 import classes from "./HullManage.module.css";
-import { useAdminHullList } from "../../../lib/state/useAdminHullList";
+import { useAdminHullList } from "../../../hooks/useAdminHullList";
 
 const HullManage = () => {
   const { hullList, getHullList } = useAdminHullList();

@@ -1,6 +1,6 @@
 import classes from "./Login.module.css";
-import useModalState from "lib/state/useMyModal";
-import { LoginForm } from "form/LoginForm";
+import useModalState from "hooks/useMyModal";
+import { LoginForm } from "component/login/LoginForm";
 
 const Login = () => {
   const { MyModal, openModalFunc } = useModalState("로그인 결과");

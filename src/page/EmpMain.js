@@ -1,8 +1,8 @@
 import { useCallback, useState } from "react";
-import { useLoginCtx } from "lib/store/LoginContext";
-import useEmpRecordList from "lib/state/useEmpRecordList";
-import useToDidWork from "lib/state/useToDidWork";
-import useWorkList from "lib/state/useWorkList";
+import { useLoginCtx } from "store/LoginContext";
+import useEmpRecordList from "hooks/useEmpRecordList";
+import useToDidWork from "hooks/useToDidWork";
+import useWorkList from "hooks/useWorkList";
 import AddWorkRecordForm from "component/emp/form/AddWorkRecordForm";
 import EmpWorkRecord from "component/emp/record/EmpWorkRecord";
 import LoginState from "component/emp/profile/LoginState";

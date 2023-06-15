@@ -1,10 +1,10 @@
-import { HEADER } from "lib/const/List";
+import { HEADER } from "constant/List";
 import mappingHeader from "lib/MappingHeader";
 import { List } from "antd";
+import { dayJsYMD } from "utils/dayJs";
 import dayjs from "dayjs";
-import { dayJsYMD } from "lib/dayJs";
 import classes from "./WorkList.module.css";
-import sumMhMyList from "lib/sumMhList";
+import sumMhMyList from "utils/sumMhList";
 const header = HEADER.BLK_LIST;
 
 const WorkList = ({ myList }) => {

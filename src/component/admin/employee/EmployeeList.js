@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { List, Button } from "antd";
 import EmpRecordModal from "./EmpRecordModal";
-import useEmpRecordList from "../../../lib/state/useEmpRecordList";
+import useEmpRecordList from "../../../hooks/useEmpRecordList";
 import EmpWorkRecord from "../../emp/record/EmpWorkRecord";
 const EmployeeList = ({ empList }) => {
   const [EMP_NO, setEmpNo] = useState(0);

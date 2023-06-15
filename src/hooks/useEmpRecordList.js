@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import empHandler from "../handler/EmpHander";
+import empHandler from "../lib/handler/EmpHander";
 import { useLoginCtx } from "../store/LoginContext";
 
 const useEmpRecordList = () => {

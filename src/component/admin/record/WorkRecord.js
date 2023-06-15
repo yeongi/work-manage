@@ -6,9 +6,9 @@ import classes from "./WorkRecord.module.css";
 import { Button } from "antd";
 import { v4 } from "uuid";
 import HullRecordList from "./hull/HullRecordList";
-import useGetBlkList from "lib/state/useGetBlkList";
-import { useHullRecordList } from "lib/state/useHullRecordList";
-import { useBlkWorkRecordList } from "lib/state/useBlkWorkRecordList";
+import useGetBlkList from "hooks/useGetBlkList";
+import { useHullRecordList } from "hooks/useHullRecordList";
+import { useBlkWorkRecordList } from "hooks/useBlkWorkRecordList";
 
 const HEADER_LIST = ["HULL", "BLOCK"];
 

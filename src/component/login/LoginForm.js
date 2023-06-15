@@ -1,6 +1,6 @@
 import { Button, Form, Input } from "antd";
 import empHandler from "lib/handler/EmpHander";
-import { useLoginCtx } from "lib/store/LoginContext";
+import { useLoginCtx } from "store/LoginContext";
 
 export const LoginForm = ({ openModalFunc }) => {
   const loginCtx = useLoginCtx();

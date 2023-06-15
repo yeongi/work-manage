@@ -1,4 +1,4 @@
-import { CREATE_API } from "../createApi";
+import { CREATE_API } from "utils/createApi";
 
 const API = CREATE_API("admin");
 

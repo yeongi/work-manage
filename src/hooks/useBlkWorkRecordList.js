@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
-import AdminHandler from "../handler/AdminHandler";
-import { dayJsYMD } from "../dayJs";
+import AdminHandler from "../lib/handler/AdminHandler";
+import { dayJsYMD } from "utils/dayJs";
 import dayjs from "dayjs";
 
 export const useBlkWorkRecordList = (block_sq) => {

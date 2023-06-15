@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import AdminHandler from "lib/handler/AdminHandler";
 import BlkList from "./BlkList";
-import useModalState from "lib/state/useMyModal";
+import useModalState from "hooks/useMyModal";
 import { Button, Form, Input, Modal, Checkbox } from "antd";
 import classes from "./HullModal.module.css";
 

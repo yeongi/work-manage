@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import AdminHandler from "../handler/AdminHandler";
+import AdminHandler from "../lib/handler/AdminHandler";
 
 export const useAdminHullList = () => {
   const [hullList, setHullList] = useState([]);

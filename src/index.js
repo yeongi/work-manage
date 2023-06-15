@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import { LoginProvider } from "./lib/store/LoginContext";
+import { LoginProvider } from "./store/LoginContext";
 
 ReactDOM.render(
   <React.StrictMode>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import AlertModal from "../../component/AlertModal";
+import AlertModal from "../../component/modal/AlertModal";
 
 const initialState = { open: false, message: "", handler: () => {} };
 

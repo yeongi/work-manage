@@ -1,6 +1,6 @@
 import React from "react";
 import { DatePicker } from "antd";
-import { dayJsYM } from "lib/dayJs";
+import { dayJsYM } from "utils/dayJs";
 
 const SelectMonthEmp = ({ onSelectYmHandler }) => {
   const onChangeMonth = (value) => {
