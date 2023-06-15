@@ -1,4 +1,4 @@
-import WorkList from "./WorkList";
+import WorkList from "./list/WorkList";
 
 const EmpWorkRecord = ({ recordList }) => {
   return <div>{recordList.length > 0 && <WorkList myList={recordList} />}</div>;

@@ -1,4 +1,4 @@
-import WorkList from "./WorkList";
+import WorkList from "./list/WorkList";
 
 const TodayWorkList = ({ myList }) => {
   return (

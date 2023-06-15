@@ -1,0 +1,13 @@
+.form-wrapper {
+  padding: 20px;
+  margin-top: 20px;
+  background-color: #fffffb;
+  border: 3px dotted #b3c9d3;
+  border-radius: 20px;
+}
+
+.description {
+  font-size: 13px;
+  color: rgb(78, 112, 157);
+  text-align: left;
+}

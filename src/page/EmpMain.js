@@ -3,13 +3,13 @@ import { useLoginCtx } from "lib/store/LoginContext";
 import useEmpRecordList from "lib/state/useEmpRecordList";
 import useToDidWork from "lib/state/useToDidWork";
 import useWorkList from "lib/state/useWorkList";
-import AddWorkRecordForm from "component/emp/AddWorkRecordForm";
-import EmpWorkRecord from "component/emp/EmpWorkRecord";
-import LoginState from "component/emp/LoginState";
-import SelectMonthEmp from "component/emp/SelectMonthEmp";
+import AddWorkRecordForm from "component/emp/form/AddWorkRecordForm";
+import EmpWorkRecord from "component/emp/record/EmpWorkRecord";
+import LoginState from "component/emp/profile/LoginState";
+import SelectMonthEmp from "component/emp/record/SelectMonthEmp";
 import classes from "./EmpMain.module.css";
 import shipURL from "img/ship.jpg";
-import TodayWorkList from "component/emp/TodayWorkList";
+import TodayWorkList from "component/emp/record/TodayWorkList";
 
 const EmpMain = () => {
   const loginCtx = useLoginCtx();
