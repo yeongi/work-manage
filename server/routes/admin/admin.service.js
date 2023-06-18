@@ -23,15 +23,32 @@ module.exports = {
 
   getEmployeeList: async () => {
     try {
+      const query = "select EMP_NO, EMP_NAME, EMP_PW, ADMIN from employee";
+
+      //금일 업무 내역 조회
+      const dayRecordQuery = `
+      SELECT EMP_NO ,EMP_NAME, SUM(INP_MH) as INP_MH, WORK_TYPE 
+      FROM workmanage.ad_work_record
+      where date_format(WORK_DATE, '%y-%m-%d') = date_format(curdate(), '%y-%m-%d')
+      Group by EMP_NAME;
+      `;
+
       const conn = await pool.getConnection();
 
-      const query = "select EMP_NO, EMP_NAME, EMP_PW from employee ";
+      const [empListRes] = await conn.query(query);
+      const [dayRecordRes] = await conn.query(dayRecordQuery);
 
-      const [result] = await conn.query(query);
+      dayRecordRes.forEach((info) => {
+        empListRes.forEach((emp) => {
+          if (info.EMP_NO === emp.EMP_NO) {
+            emp.DAY_RECORD = { work_type: info.WORK_TYPE, INP_MH: info.INP_MH };
+          }
+        });
+      });
 
       conn.release();
 
-      return result;
+      return empListRes;
     } catch (err) {
       console.log(err);
       return err.message;
