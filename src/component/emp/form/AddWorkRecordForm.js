@@ -1,35 +1,22 @@
 import { Button, DatePicker, Form, InputNumber, Select, Space } from "antd";
 import { useEffect, useState } from "react";
+import useModalState from "hooks/useMyModal";
+import useWorkList from "hooks/useWorkList";
+import useGetBlkList from "hooks/useGetBlkList";
 import dayjs from "dayjs";
 import empHandler from "lib/handler/EmpHander";
 import { useLoginCtx } from "store/LoginContext";
-import useGetBlkList from "hooks/useGetBlkList";
+
 import classes from "./Form.module.css";
-import useModalState from "hooks/useMyModal";
 
 const format = "YYYY-MM-DD HH:mm:ss";
 
-const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
+const AddWorkRecordForm = ({ refreshHandler, addWorkRecordInfo }) => {
   const loginCtx = useLoginCtx();
   const { hullList, blockList, getBlkList } = useGetBlkList();
+  const { workList, filteredWorkList, workListFiltered } = useWorkList();
   const [hull_no, setHullNo] = useState(0);
-  const [filteredWorkList, setWorkList] = useState(workList);
   const [componentDisabled, setDisabled] = useState(true);
-
-  const workListFitered = (hullsq) => {
-    if (hullsq === 1) {
-      const filteredList = workList.filter((work) => {
-        return !(work.WORK_TYPE === "본작업" || work.WORK_TYPE === "개정작업");
-      });
-      setWorkList(filteredList);
-    }
-    if (hullsq !== 1) {
-      const filteredList = workList.filter((work) => {
-        return work.WORK_TYPE === "본작업" || work.WORK_TYPE === "개정작업";
-      });
-      setWorkList(filteredList);
-    }
-  };
 
   const { MyModal, openModalFunc } = useModalState("업무기록제출");
 
@@ -41,7 +28,7 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
 
   const onChangedHull = async (hull) => {
     setHullNo(hull);
-    workListFitered(hull);
+    workListFiltered(hull, workList);
     await getBlkList(hull);
     form.setFieldValue("BLK_SQ", undefined);
     form.setFieldValue("WORK_CODE", undefined);

@@ -2,7 +2,6 @@ import { useCallback, useState } from "react";
 import { useLoginCtx } from "store/LoginContext";
 import useEmpRecordList from "hooks/useEmpRecordList";
 import useToDidWork from "hooks/useToDidWork";
-import useWorkList from "hooks/useWorkList";
 import AddWorkRecordForm from "component/emp/form/AddWorkRecordForm";
 import EmpWorkRecord from "component/emp/record/EmpWorkRecord";
 import LoginState from "component/emp/profile/LoginState";
@@ -13,7 +12,6 @@ import TodayWorkList from "component/emp/record/TodayWorkList";
 
 const EmpMain = () => {
   const loginCtx = useLoginCtx();
-  const [workList] = useWorkList();
   const [workRecordList, getMyWorkRecordList] = useEmpRecordList();
   const [filteredRecordList, setFilteredList] = useState([]);
   const [myList, addList] = useToDidWork(workRecordList);
@@ -44,7 +42,6 @@ const EmpMain = () => {
           </article>
           <article className={classes.form}>
             <AddWorkRecordForm
-              workList={workList}
               refreshHandler={getMyWorkRecordList}
               addWorkRecordInfo={addList}
             />
