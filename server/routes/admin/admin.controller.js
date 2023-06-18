@@ -179,7 +179,7 @@ router.put("/blk/info/edit", async (req, res) => {
 router.put("/blk/info/mh", async (req, res) => {
   try {
     const { body } = req;
-    const result = await AdminService.updateBlkMhInfo(body);
+    await AdminService.updateBlkMhInfo(body);
     return res.status(200).json({
       status: 200,
       message: "블럭 정보 수정 업데이트 성공",
