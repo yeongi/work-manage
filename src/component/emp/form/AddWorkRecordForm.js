@@ -1,35 +1,23 @@
 import { Button, DatePicker, Form, InputNumber, Select, Space } from "antd";
 import { useEffect, useState } from "react";
-import dayjs from "dayjs";
-import empHandler from "lib/handler/EmpHander";
-import { useLoginCtx } from "store/LoginContext";
-import useGetBlkList from "hooks/useGetBlkList";
-import classes from "./Form.module.css";
 import useModalState from "hooks/useMyModal";
+import useWorkList from "hooks/useWorkList";
+import useGetBlkList from "hooks/useGetBlkList";
+import empHandler from "lib/handler/EmpHander";
+import { DForm, DCheckFormItem, DFormItem } from "component/common/form/DForm";
+import { BoldDescription } from "component/common/description/Description";
+import { twoDateDisable, todayDayJs } from "utils/dayJs";
+import classes from "./Form.module.css";
 
 const format = "YYYY-MM-DD HH:mm:ss";
 
-const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
-  const loginCtx = useLoginCtx();
-  const { hullList, blockList, getBlkList } = useGetBlkList();
-  const [hull_no, setHullNo] = useState(0);
-  const [filteredWorkList, setWorkList] = useState(workList);
-  const [componentDisabled, setDisabled] = useState(true);
+const AddWorkRecordForm = ({ refreshHandler, addWorkRecordInfo, emp_no }) => {
+  const { hullList, hullArray, blockList, getBlkList } = useGetBlkList();
+  const { workList, filteredWorkList, workListFiltered } = useWorkList();
+  const [hull_sq, setHullSq] = useState(0);
+  const [hullInfo, setHullInfo] = useState({ HULL_TYPE: 0, SHIPYARD: 0 });
 
-  const workListFitered = (hullsq) => {
-    if (hullsq === 1) {
-      const filteredList = workList.filter((work) => {
-        return !(work.WORK_TYPE === "본작업" || work.WORK_TYPE === "개정작업");
-      });
-      setWorkList(filteredList);
-    }
-    if (hullsq !== 1) {
-      const filteredList = workList.filter((work) => {
-        return work.WORK_TYPE === "본작업" || work.WORK_TYPE === "개정작업";
-      });
-      setWorkList(filteredList);
-    }
-  };
+  const [componentDisabled, setDisabled] = useState(true);
 
   const { MyModal, openModalFunc } = useModalState("업무기록제출");
 
@@ -39,19 +27,33 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
 
   const [form] = Form.useForm();
 
-  const onChangedHull = async (hull) => {
-    setHullNo(hull);
-    workListFitered(hull);
-    await getBlkList(hull);
+  const onChangedHullType = async (HULL_SQ) => {
+    workListFiltered(HULL_SQ, workList);
+    const { HULL_TYPE, SHIPYARD } = hullArray.find(
+      (hull) => hull.HULL_SQ === HULL_SQ
+    );
+    setHullInfo(() => {
+      return { HULL_TYPE, SHIPYARD };
+    });
+
+    form.setFieldValue("HULL_SQ", undefined);
     form.setFieldValue("BLK_SQ", undefined);
     form.setFieldValue("WORK_CODE", undefined);
     form.setFieldValue("INP_MH", undefined);
+
+    if (HULL_SQ === 1) {
+      setHullSq(1);
+      form.setFieldValue("HULL_SQ", "기타업무");
+      form.setFieldValue("BLK_SQ", 1);
+    }
   };
 
-  const disabledDate = (current) => {
-    return !(
-      dayjs().subtract(3, "day") < current && current < dayjs().add(2, "day")
-    );
+  const onChangedHullNo = async (HULL_SQ) => {
+    setHullSq(HULL_SQ);
+    await getBlkList(HULL_SQ);
+    form.setFieldValue("BLK_SQ", undefined);
+    form.setFieldValue("WORK_CODE", undefined);
+    form.setFieldValue("INP_MH", undefined);
   };
 
   const onFinish = async ({
@@ -62,14 +64,13 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
     WORK_CODE,
   }) => {
     setDisabled(true);
-
     const result = await empHandler.addWorkRecord({
       BLK_SQ,
-      HULL_SQ,
+      HULL_SQ: hull_sq,
       INP_MH: Math.floor(INP_MH * 10) / 10,
       WORK_CODE,
       DATE_TIME: DATE_TIME.format(),
-      EMP_NO: loginCtx.state.EMP_NO,
+      EMP_NO: emp_no,
     });
 
     //이걸 이용해서 redux로 전역으로 관리 하자.
@@ -90,160 +91,147 @@ const AddWorkRecordForm = ({ workList, refreshHandler, addWorkRecordInfo }) => {
     <div className={classes["form-wrapper"]}>
       <h3>업무 내역 추가 하기</h3>
       <MyModal />
-      <Form
-        form={form}
-        name="basic"
-        size="large"
-        disabled={componentDisabled}
-        onFinish={onFinish}
-        autoComplete="off"
-      >
-        <Form.Item
+      <DForm formRef={form} disabled={componentDisabled} onFinish={onFinish}>
+        <DCheckFormItem
           label="날짜를 선택해주세요"
           name="DATE_TIME"
-          rules={[
-            {
-              required: true,
-              message: "날짜를 선택해주세요",
-            },
-          ]}
+          checkMessage="날짜를 선택해주세요"
         >
           <DatePicker
             placeholder="날짜를 선택해주세요"
-            initialValues={dayjs()}
-            disabledDate={disabledDate}
+            initialValues={todayDayJs}
+            disabledDate={twoDateDisable}
             format={format}
           />
-        </Form.Item>
-        <p className={classes.description}>
-          날짜는 금일 기준 <b>2일</b>까지 선택가능 합니다.
-        </p>
-        <Form.Item
-          label="HULL"
-          name="HULL_SQ"
-          rules={[
-            {
-              required: true,
-              message: "선체를 선택해주세요!",
-            },
-          ]}
+        </DCheckFormItem>
+        <BoldDescription ment={"날짜는 금일 기준 2일까지 선택가능 합니다."} />
+
+        <DCheckFormItem
+          label="HULL_TYPE"
+          name="HULL_TYPE"
+          checkMessage="조선소/ 선체종류를 선택해주세요!"
         >
           <Select
             style={{ width: 450 }}
-            placeholder="선체를 선택해 주세요."
-            onChange={onChangedHull}
-            options={[
-              {
-                label: "기타 업무",
-                options: [{ label: "기타 업무", value: 1 }],
-              },
-              {
-                label: "선체",
-                options: hullList.map(
-                  ({ HULL_NO, HULL_SQ, HULL_TYPE, SHIPYARD }) => {
-                    return {
-                      label: `
-                      선체 번호 : ${HULL_NO} /선체 종류 : ${HULL_TYPE} / 조선소 : ${SHIPYARD}`,
-                      value: HULL_SQ,
-                    };
-                  }
-                ),
-              },
-            ]}
+            placeholder="조선소/ 선체종류를 선택해주세요!"
+            onChange={onChangedHullType}
+            options={hullArray.map(({ HULL_TYPE, SHIPYARD, HULL_SQ }) => {
+              return {
+                key: HULL_SQ,
+                label: `선체 종류 : ${HULL_TYPE} / 조선소 : ${SHIPYARD}`,
+                value: HULL_SQ,
+              };
+            })}
           ></Select>
-        </Form.Item>
-        <p className={classes.description}>
-          선체와 블럭이 필요없는 업무기록의 경우에는 <b>"기타 업무"</b>를
-          선택해주세요.
-        </p>
-        <Form.Item
+        </DCheckFormItem>
+        <DCheckFormItem
+          label="HULL"
+          name="HULL_SQ"
+          checkMessage="선체를 선택해주세요!"
+        >
+          <Select
+            style={{ width: 450 }}
+            placeholder="선체 번호를 선택해 주세요."
+            onChange={onChangedHullNo}
+            // TODO: 기타블럭 처리필요
+            options={hullList
+              .filter(({ HULL_TYPE, SHIPYARD }) => {
+                return (
+                  HULL_TYPE === hullInfo.HULL_TYPE &&
+                  SHIPYARD === hullInfo.SHIPYARD
+                );
+              })
+              .map(({ HULL_NO, HULL_SQ, HULL_TYPE, SHIPYARD }) => {
+                return {
+                  key: HULL_SQ,
+                  label: `선체 번호 : ${HULL_NO} /선체 종류 : ${HULL_TYPE} / 조선소 : ${SHIPYARD}`,
+                  value: HULL_SQ,
+                };
+              })}
+          ></Select>
+        </DCheckFormItem>
+        <BoldDescription ment="선체와 블럭이 필요없는 업무기록의 경우에는 기타 업무를 선택해주세요." />
+        <DCheckFormItem
           label="BLOCK"
           name="BLK_SQ"
-          rules={[
-            {
-              required: true,
-              message: "블럭을 선택하세요!",
-            },
-          ]}
+          checkMessage="블럭을 선택하세요!"
         >
-          <Select style={{ width: 450 }} placeholder="블럭을 선택해 주세요.">
-            {hull_no === 1 && (
-              <Select.Option value={1} key={1}>
-                기타 업무
-              </Select.Option>
-            )}
-            {hull_no !== 1 &&
-              blockList.map(
-                ({ BLK_NO, BLK_SQ, COMPLETE, HULL_SQ, NORM_MH, RES_MH }) => {
-                  return (
-                    <Select.Option value={BLK_SQ} key={BLK_SQ}>
-                      {`블럭 번호 : ${BLK_NO} / 
-                  실적 시수 : ${RES_MH} / 
-                  계획 시수 : ${NORM_MH}`}
-                    </Select.Option>
-                  );
-                }
-              )}
-          </Select>
-        </Form.Item>
-        <Form.Item
+          <Select
+            style={{ width: 450 }}
+            placeholder="블럭을 선택해 주세요."
+            options={
+              hull_sq === 1
+                ? [
+                    {
+                      key: 1,
+                      label: "기타 업무",
+                      value: 1,
+                    },
+                  ]
+                : blockList.map(
+                    ({
+                      BLK_NO,
+                      BLK_SQ,
+                      COMPLETE,
+                      HULL_SQ,
+                      NORM_MH,
+                      RES_MH,
+                    }) => {
+                      return {
+                        key: BLK_SQ,
+                        label: `블럭 번호 : ${BLK_NO} / 실적 시수 : ${RES_MH} / 계획 시수 : ${NORM_MH}`,
+                        value: BLK_SQ,
+                      };
+                    }
+                  )
+            }
+          />
+        </DCheckFormItem>
+        <DCheckFormItem
           label="WORK"
           name="WORK_CODE"
-          rules={[
-            {
-              required: true,
-              message: "업무를 선택해 주세요!",
-            },
-          ]}
+          checkMessage="업무를 선택해 주세요!"
         >
-          <Select style={{ width: 450 }} placeholder="업무를 선택해 주세요.">
-            {filteredWorkList.map(({ WORK_CODE, WORK_TYPE, WORK_DES }) => {
-              return (
-                <Select.Option value={WORK_CODE} key={WORK_CODE}>
-                  {`업무 구분 : ${WORK_TYPE} / 
-                  세부 사항 : ${WORK_DES}`}
-                </Select.Option>
-              );
-            })}
-          </Select>
-        </Form.Item>
-        <p className={classes.description}>
-          업무를 추가적으로 입력하시려면 관리자님께 문의해주세요!
-        </p>
-
-        <Form.Item
+          <Select
+            style={{ width: 450 }}
+            placeholder="업무를 선택해 주세요."
+            options={filteredWorkList.map(
+              ({ WORK_CODE, WORK_TYPE, WORK_DES }) => {
+                return {
+                  label: `업무 구분 : ${WORK_TYPE} / 
+                  세부 사항 : ${WORK_DES}`,
+                  value: WORK_CODE,
+                };
+              }
+            )}
+          />
+        </DCheckFormItem>
+        <BoldDescription
+          ment={"업무를 추가적으로 입력하시려면 관리자님께 문의해주세요!"}
+        />
+        <DCheckFormItem
           label="투입 M/H"
           name="INP_MH"
-          rules={[
-            {
-              required: true,
-              message: "투입 시수를 입력해 주세요!",
-            },
-          ]}
+          checkMessage="투입 시수를 입력해 주세요!"
         >
           <InputNumber placeholder="M/H" step={0.5} min={0} max={24} />
-        </Form.Item>
-        <p className={classes.description}>
-          투입시수는 0.5 M/H 단위로 입력가능하며 필수로 입력해야 합니다.
-        </p>
-        <div>
-          <Form.Item>
-            <Space>
-              <Button htmlType="button" onClick={resetHandler}>
-                Reset
-              </Button>
-
-              <Button
-                type="primary"
-                htmlType="submit"
-                className="login-form-button"
-              >
-                등록하기
-              </Button>
-            </Space>
-          </Form.Item>
-        </div>
-      </Form>
+        </DCheckFormItem>
+        <BoldDescription ment="투입시수는 0.5 M/H 단위로 입력가능하며 필수로 입력해야 합니다." />
+        <DFormItem>
+          <Space>
+            <Button htmlType="button" onClick={resetHandler}>
+              Reset
+            </Button>
+            <Button
+              type="primary"
+              htmlType="submit"
+              className="login-form-button"
+            >
+              등록하기
+            </Button>
+          </Space>
+        </DFormItem>
+      </DForm>
     </div>
   );
 };
