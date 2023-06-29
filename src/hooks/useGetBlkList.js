@@ -13,17 +13,18 @@ const useGetBlkList = () => {
     setHullList(serverHullList);
 
     const stateSetting = async (hList) => {
-      const filteredHullArr = await hList.map(
-        ({ HULL_TYPE, SHIPYARD, HULL_SQ }) => {
-          return { HULL_TYPE, SHIPYARD, HULL_SQ };
-        }
-      );
-
       if (hList.length) {
-        setHullArray(filteredHullArr);
         hList.reverse();
         hList.pop();
         setHullList(hList.filter((list) => list.complete === 0));
+
+        const filteredHullArr = await hList.map(
+          ({ HULL_TYPE, SHIPYARD, HULL_SQ }) => {
+            return { HULL_TYPE, SHIPYARD, HULL_SQ };
+          }
+        );
+
+        setHullArray(filteredHullArr);
       }
     };
 
