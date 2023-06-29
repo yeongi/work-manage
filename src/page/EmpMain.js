@@ -44,6 +44,7 @@ const EmpMain = () => {
             <AddWorkRecordForm
               refreshHandler={getMyWorkRecordList}
               addWorkRecordInfo={addList}
+              emp_no={loginCtx.state.EMP_NO}
             />
           </article>
           <article className={classes["work-list"]}>

@@ -6,12 +6,28 @@ const useGetBlkList = () => {
   const [hull_sq, setHullSq] = useState(0);
   const [blockList, setBlkList] = useState([]);
   const [hullList, setHullList] = useState([]);
+  const [hullArray, setHullArray] = useState([]);
 
   const getHullList = useCallback(async () => {
     const serverHullList = await AdminHandler.getHullList();
-    serverHullList.reverse();
-    serverHullList.pop();
-    setHullList(serverHullList.filter((list) => list.complete === 0));
+    setHullList(serverHullList);
+
+    const stateSetting = async (hList) => {
+      const filteredHullArr = await hList.map(
+        ({ HULL_TYPE, SHIPYARD, HULL_SQ }) => {
+          return { HULL_TYPE, SHIPYARD, HULL_SQ };
+        }
+      );
+
+      if (hList.length) {
+        setHullArray(filteredHullArr);
+        hList.reverse();
+        hList.pop();
+        setHullList(hList.filter((list) => list.complete === 0));
+      }
+    };
+
+    stateSetting(serverHullList);
   }, []);
 
   const getBlkList = useCallback(async (hull) => {
@@ -38,6 +54,7 @@ const useGetBlkList = () => {
     onChangedBlk,
     onChangedHull,
     hullList,
+    hullArray,
     blockList,
     getHullList,
     getBlkList,
