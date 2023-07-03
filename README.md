@@ -10,7 +10,7 @@
 git clone 후에
 
 ```tsx
-yarn
+yarn;
 ```
 
 **start**
@@ -32,38 +32,28 @@ cd server && yarn start
 ### 개발환경
 
 ```tsx
-Front : React.js, Electron, css module, antd, yarn, context API, sheetjs 
+Front : React.js, Electron, css module, antd, yarn, context API, sheetjs
 
 Back :  Node, mysql
 ```
 
 ---
 
-# 🕒 TodoList 6-16
+# 🕒 유지보수 내역 🏁
 
 ### 유지보수 사용자 Feedback
 
-**조선소-호선/ 선체 목록 기능 구현 ( emp & admin )**
+[조선소-호선/ 선체 목록 기능 구현 ( emp & admin ) #hull/filter✅](https://github.com/yeongi/work-manage/pull/3)
 
-- 문제 : 같은 호선의 꼬리를 무는 자식 선체 목록이 많아 져서 선체 블럭을 찾는데에 어려움이 있음.
-- 추가 기능 : 조선소-호선 선택 후 필터링된 선체 목록을 선택할 수 있게 수정하기
-
-→ 어드민, 사원 페이지에 전부 추가 하기
-
-**Dialog 관련 에러 ( emp )**
-
-- 문제 : 업무 기록 제출 시 dialog 창에 취소 버튼을 눌러도 데이터 전송 및 form 데이터 조작 불가 현상
+[modal 창 관련 에러 ( emp ) #issue/modal✅](https://github.com/yeongi/work-manage/pull/5)
 
 ### 추가 기능
 
-**ID & PW 저장 기능 구현 하기 ( Login )**
+[ID & PW 저장 기능 구현 하기 ( Login ) #login✅](https://github.com/yeongi/work-manage/pull/6)
 
-- 문제 매번 아이디, 비밀번호를 치는것에 대한 불편함
+[금일 업무 내역 조회 기능 ( admin ) #todayrecord✅](https://github.com/yeongi/work-manage/pull/2)
 
-**금일 업무 내역 조회 기능 ( admin )**
-
-- 문제 : 관리자 입장에서 사원이 금일에 시수를 입력했는지 확인 할 수 있는 화면 부재.
-- 추가 기능 : 모든 사원이 업무 시수를 입력했는지 확인할 수 있는 화면이 필요.
+---
 
 ### 시험 기능
 
@@ -84,9 +74,9 @@ Back :  Node, mysql
 - 사원별로 한달 시수 계획 조회 기능
 - 사원이 개인이 짠 한달 계획을 볼 수 있다.
 
+---
 ### 🚀 기능 목록 버전 v1.0
 
----
 
 ### 공통
 
@@ -105,3 +95,138 @@ Back :  Node, mysql
 - 조선소/선체/업무 리스트 CRUD
 - 사원 리스트 및 관리 하기
 - 월별/선체별/블럭별/사원별 업무내역 조회 및 내보내기
+
+### Refactoring 기록
+
+---
+
+- 디렉토리 구조 개선
+  - 관심사에 따라 폴더 분리
+  - util : 순수함수만 모음
+  - lib : 통신 및 컴포넌트의 util 함수 모음
+
+```
+📦src
+ ┣ 📂component
+ ┃ ┣ 📂admin
+ ┃ ┃ ┣ 📂employee
+ ┃ ┃ ┃ ┣ 📜AddEmployeeForm.js
+ ┃ ┃ ┃ ┣ 📜EmployeeList.js
+ ┃ ┃ ┃ ┣ 📜EmpManage.js
+ ┃ ┃ ┃ ┣ 📜EmpManage.module.css
+ ┃ ┃ ┃ ┗ 📜EmpRecordModal.js
+ ┃ ┃ ┣ 📂hull
+ ┃ ┃ ┃ ┣ 📂block
+ ┃ ┃ ┃ ┃ ┗ 📜AddBlockForm.js
+ ┃ ┃ ┃ ┣ 📂hull
+ ┃ ┃ ┃ ┃ ┗ 📜AddHullForm.js
+ ┃ ┃ ┃ ┣ 📂hullList
+ ┃ ┃ ┃ ┃ ┣ 📂modal
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜BlkForm.js
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜BlkList.js
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜HullModal.js
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜HullModal.module.css
+ ┃ ┃ ┃ ┃ ┣ 📜HullList.js
+ ┃ ┃ ┃ ┃ ┗ 📜HullList.module.css
+ ┃ ┃ ┃ ┣ 📜HullManage.js
+ ┃ ┃ ┃ ┗ 📜HullManage.module.css
+ ┃ ┃ ┣ 📂record
+ ┃ ┃ ┃ ┣ 📂block
+ ┃ ┃ ┃ ┃ ┣ 📜BlockPutForm.js
+ ┃ ┃ ┃ ┃ ┣ 📜BlockPutFrom.module.css
+ ┃ ┃ ┃ ┃ ┣ 📜HeaderItem.js
+ ┃ ┃ ┃ ┃ ┣ 📜HeaderItem.module.css
+ ┃ ┃ ┃ ┃ ┣ 📜ListItem.js
+ ┃ ┃ ┃ ┃ ┣ 📜ListItem.module.css
+ ┃ ┃ ┃ ┃ ┣ 📜RecordList.js
+ ┃ ┃ ┃ ┃ ┗ 📜RecordList.module.css
+ ┃ ┃ ┃ ┣ 📂hull
+ ┃ ┃ ┃ ┃ ┣ 📜HullRecordList.js
+ ┃ ┃ ┃ ┃ ┗ 📜HullRecordList.module.css
+ ┃ ┃ ┃ ┣ 📂month
+ ┃ ┃ ┃ ┃ ┣ 📜InstantModal.js
+ ┃ ┃ ┃ ┃ ┣ 📜MonthRecord.js
+ ┃ ┃ ┃ ┃ ┗ 📜MonthRecord.module.css
+ ┃ ┃ ┃ ┣ 📜SelectBlk.js
+ ┃ ┃ ┃ ┣ 📜SelectMonth.js
+ ┃ ┃ ┃ ┣ 📜WorkRecord.js
+ ┃ ┃ ┃ ┗ 📜WorkRecord.module.css
+ ┃ ┃ ┗ 📂sheet
+ ┃ ┃ ┃ ┣ 📜EmpListExport.js
+ ┃ ┃ ┃ ┣ 📜HullListExport.js
+ ┃ ┃ ┃ ┣ 📜MonthListExport.js
+ ┃ ┃ ┃ ┗ 📜NoFilterdtoExcel.js
+ ┃ ┣ 📂common
+ ┃ ┃ ┣ 📂description
+ ┃ ┃ ┃ ┣ 📜Description.js
+ ┃ ┃ ┃ ┗ 📜Description.module.css
+ ┃ ┃ ┗ 📂form
+ ┃ ┃ ┃ ┗ 📜DForm.js
+ ┃ ┣ 📂emp
+ ┃ ┃ ┣ 📂form
+ ┃ ┃ ┃ ┣ 📜AddWorkForm.js
+ ┃ ┃ ┃ ┣ 📜AddWorkRecordForm.js
+ ┃ ┃ ┃ ┗ 📜Form.module.css
+ ┃ ┃ ┣ 📂profile
+ ┃ ┃ ┃ ┣ 📜LoginState.js
+ ┃ ┃ ┃ ┗ 📜LoginState.module.css
+ ┃ ┃ ┗ 📂record
+ ┃ ┃ ┃ ┣ 📂list
+ ┃ ┃ ┃ ┃ ┣ 📜WorkList.js
+ ┃ ┃ ┃ ┃ ┗ 📜WorkList.module.css
+ ┃ ┃ ┃ ┣ 📜EmpWorkRecord.js
+ ┃ ┃ ┃ ┣ 📜SelectMonthEmp.js
+ ┃ ┃ ┃ ┗ 📜TodayWorkList.js
+ ┃ ┣ 📂login
+ ┃ ┃ ┗ 📜LoginForm.js
+ ┃ ┗ 📂modal
+ ┃ ┃ ┗ 📜AlertModal.js
+ ┣ 📂constant
+ ┃ ┗ 📜List.js
+ ┣ 📂hooks
+ ┃ ┣ 📜useAdminHullList.js
+ ┃ ┣ 📜useBlkWorkRecordList.js
+ ┃ ┣ 📜useEmpRecordList.js
+ ┃ ┣ 📜useGetBlkList.js
+ ┃ ┣ 📜useHullRecordList.js
+ ┃ ┣ 📜useModalState.js
+ ┃ ┣ 📜useToDidWork.js
+ ┃ ┗ 📜useWorkList.js
+ ┣ 📂img
+ ┃ ┣ 📜blue_print.jpg
+ ┃ ┣ 📜junsu.jpg
+ ┃ ┣ 📜logo.png
+ ┃ ┣ 📜note_book.jpg
+ ┃ ┗ 📜ship.jpg
+ ┣ 📂lib
+ ┃ ┣ 📂api
+ ┃ ┃ ┣ 📜AdminApi.js
+ ┃ ┃ ┗ 📜EmpApi.js
+ ┃ ┣ 📂handler
+ ┃ ┃ ┣ 📜AdminHandler.js
+ ┃ ┃ ┗ 📜EmpHander.js
+ ┃ ┣ 📜Hull.js
+ ┃ ┗ 📜MappingHeader.js
+ ┣ 📂page
+ ┃ ┣ 📜Admin.js
+ ┃ ┣ 📜Admin.module.css
+ ┃ ┣ 📜CreatorFooter.js
+ ┃ ┣ 📜EmpMain.js
+ ┃ ┣ 📜EmpMain.module.css
+ ┃ ┣ 📜Login.js
+ ┃ ┣ 📜Login.module.css
+ ┃ ┣ 📜Main.js
+ ┃ ┗ 📜page.module.css
+ ┣ 📂store
+ ┃ ┗ 📜LoginContext.js
+ ┣ 📂utils
+ ┃ ┣ 📜createApi.js
+ ┃ ┣ 📜dayJs.js
+ ┃ ┣ 📜LoginSaveClient.js
+ ┃ ┗ 📜sumMhList.js
+ ┣ 📜App.css
+ ┣ 📜App.js
+ ┗ 📜index.js
+```
+
+---
