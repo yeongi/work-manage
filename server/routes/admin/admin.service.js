@@ -213,7 +213,6 @@ module.exports = {
     -- 블럭을 그룹화 해서 그 달의 RES_MH를 구함 --  
     SELECT BLK_SQ, BLK_NO,HULL_SQ,HULL_NO,HULL_TYPE,SHIPYARD
     ,sum(INP_MH) AS SUM_INP_MH
-    ,sum(OVERTIME_MH)AS SUM_OVER_MH
     ,RES_MH ,NORM_MH 
     FROM ad_work_record 
     where DATE_FORMAT(WORK_DATE,'%Y-%m') = ?
@@ -223,7 +222,6 @@ module.exports = {
     const WORK_SUM_QUERY = `
     -- 그 달의 업무에 대한 총합을 가져옴 --
     SELECT WORK_CODE ,WORK_TYPE, WORK_DES, SUM(INP_MH) as SUM_INP_MH
-    , SUM(OVERTIME_MH) as SUM_OVER_MH 
     FROM (
     SELECT * FROM ad_work_record
     where DATE_FORMAT(WORK_DATE,'%Y-%m') = ? and blk_sq = ?
@@ -270,7 +268,6 @@ module.exports = {
     const BlockListOfHull = `    
     SELECT BLK_SQ, BLK_NO,HULL_SQ,HULL_NO,HULL_TYPE,SHIPYARD
     ,sum(INP_MH) AS SUM_INP_MH
-    ,sum(OVERTIME_MH)AS SUM_OVER_MH
     ,RES_MH ,NORM_MH 
     FROM ad_work_record where hull_sq = ?
     GROUP BY BLK_SQ 
@@ -279,7 +276,6 @@ module.exports = {
     const BlockWorkSum = `
     -- 블럭 업무에 대한 총합을 가져옴 --
     SELECT WORK_CODE ,WORK_TYPE, WORK_DES, SUM(INP_MH) as SUM_INP_MH
-    , SUM(OVERTIME_MH) as SUM_OVER_MH 
     FROM (
     SELECT * FROM ad_work_record
     where blk_sq = ?

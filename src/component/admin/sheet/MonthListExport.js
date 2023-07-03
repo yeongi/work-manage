@@ -56,27 +56,11 @@ const listToOneJson = (lists) => {
     );
     arr.push(
       ...DATE_LIST.map(
-        ({
-          SHIPYARD,
-          HULL_NO,
-          HULL_TYPE,
-          BLK_NO,
-          EMP_NAME,
-          EMP_NO,
-          INP_MH,
-          NORM_MH,
-          OVERTIME_MH,
-          RES_MH,
-          WORK_CODE,
-          WORK_DATE,
-          WORK_DES,
-          WORK_TYPE,
-        }) => {
+        ({ EMP_NAME, EMP_NO, INP_MH, WORK_DATE, WORK_DES, WORK_TYPE }) => {
           return {
             EMP_NAME,
             EMP_NO,
             INP_MH,
-            OVERTIME_MH,
             WORK_DATE: dayJsYMD(dayjs(WORK_DATE)),
             업무: WORK_DES + "/" + WORK_TYPE,
           };
