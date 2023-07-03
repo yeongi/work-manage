@@ -2,18 +2,23 @@ import React from "react";
 import { Button, Form, Input, Space } from "antd";
 import classes from "../HullManage.module.css";
 import AdminHandler from "lib/handler/AdminHandler";
-import useModalState from "hooks/useMyModal";
+import useModalState from "hooks/useModalState";
 
 const AddHullForm = ({ refreshHandler }) => {
   const [form] = Form.useForm();
 
-  const { MyModal, openModalFunc } = useModalState("추가");
+  const { ModalElement, openModalWithSetting } = useModalState("추가");
 
   const onFinish = async (values) => {
     const result = await AdminHandler.addHull(values);
-    if (result) openModalFunc(result.message);
-    refreshHandler();
-    form.resetFields();
+    if (result)
+      openModalWithSetting({
+        message: result.message,
+        okHandler: () => {
+          refreshHandler();
+          form.resetFields();
+        },
+      });
   };
 
   const resetHandler = () => {
@@ -22,7 +27,7 @@ const AddHullForm = ({ refreshHandler }) => {
 
   return (
     <div className={classes["hull-input"]}>
-      <MyModal />
+      <ModalElement />
       <Form
         form={form}
         name="basic"

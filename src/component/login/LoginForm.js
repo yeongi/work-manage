@@ -2,30 +2,29 @@ import { Button, Form, Input } from "antd";
 import empHandler from "lib/handler/EmpHander";
 import { useLoginCtx } from "store/LoginContext";
 
-export const LoginForm = ({ openModalFunc }) => {
+export const LoginForm = ({ openModalWithSetting }) => {
   const loginCtx = useLoginCtx();
 
   const onFinish = async (values) => {
     const result = await empHandler.signIn(values);
     if (result.message === "로그인 성공") {
-      openModalFunc(result.message, () => {
-        const { EMP_NAME, EMP_NO, ADMIN } = result.data;
-        loginCtx.onLogin({
-          IS_LOGIN: true,
-          EMP_NO,
-          EMP_NAME,
-          IS_ADMIN: ADMIN,
-        });
+      openModalWithSetting({
+        message: result.message,
+        okHandler: () => {
+          const { EMP_NAME, EMP_NO, ADMIN } = result.data;
+          loginCtx.onLogin({
+            IS_LOGIN: true,
+            EMP_NO,
+            EMP_NAME,
+            IS_ADMIN: ADMIN,
+          });
+        },
       });
     }
 
     if (result.message === "로그인 실패. 사번과 비밀번호를 확인 주세요.") {
-      openModalFunc(result.message);
+      openModalWithSetting(result.message);
     }
-  };
-
-  const onFinishFailed = (errorInfo) => {
-    alert("에러", errorInfo);
   };
 
   return (
@@ -41,7 +40,6 @@ export const LoginForm = ({ openModalFunc }) => {
         remember: true,
       }}
       onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
       <Form.Item

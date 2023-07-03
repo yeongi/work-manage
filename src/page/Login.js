@@ -1,13 +1,13 @@
 import classes from "./Login.module.css";
-import useModalState from "hooks/useMyModal";
+import useModalState from "hooks/useModalState";
 import { LoginForm } from "component/login/LoginForm";
 
 const Login = () => {
-  const { MyModal, openModalFunc } = useModalState("로그인 결과");
+  const { ModalElement, openModalWithSetting } = useModalState("로그인 결과");
 
   return (
     <div className={classes["login-wrapper"]}>
-      {<MyModal />}
+      <ModalElement />
       <section className={classes["header-section"]}>
         <div>
           <h1>하나 E&T 시수관리</h1>
@@ -20,7 +20,7 @@ const Login = () => {
         <hr />
       </section>
       <div className={classes["login-form"]}>
-        <LoginForm openModalFunc={openModalFunc} />
+        <LoginForm openModalWithSetting={openModalWithSetting} />
       </div>
     </div>
   );

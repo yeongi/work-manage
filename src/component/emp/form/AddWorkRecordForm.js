@@ -1,6 +1,6 @@
 import { Button, DatePicker, Form, InputNumber, Select, Space } from "antd";
 import { useEffect, useState } from "react";
-import useModalState from "hooks/useMyModal";
+import useModalState from "hooks/useModalState";
 import useWorkList from "hooks/useWorkList";
 import useGetBlkList from "hooks/useGetBlkList";
 import empHandler from "lib/handler/EmpHander";
@@ -20,7 +20,7 @@ const AddWorkRecordForm = ({ refreshHandler, addWorkRecordInfo, emp_no }) => {
 
   const [componentDisabled, setDisabled] = useState(true);
 
-  const { MyModal, openModalFunc } = useModalState("업무기록제출");
+  const { ModalElement, openModalWithSetting } = useModalState("업무기록제출");
 
   useEffect(() => {
     setDisabled(false);
@@ -78,10 +78,13 @@ const AddWorkRecordForm = ({ refreshHandler, addWorkRecordInfo, emp_no }) => {
 
     addWorkRecordInfo(result.RECORD_ID);
 
-    openModalFunc("업무기록 제출을 완료하였습니다.", () => {
-      form.resetFields();
-      refreshHandler();
-      setDisabled(false);
+    openModalWithSetting({
+      message: "업무기록 제출을 완료하였습니다.",
+      okHandler: () => {
+        form.resetFields();
+        refreshHandler();
+        setDisabled(false);
+      },
     });
   };
 
@@ -92,7 +95,7 @@ const AddWorkRecordForm = ({ refreshHandler, addWorkRecordInfo, emp_no }) => {
   return (
     <div className={classes["form-wrapper"]}>
       <h3>업무 내역 추가 하기</h3>
-      <MyModal />
+      <ModalElement />
       <DForm formRef={form} disabled={componentDisabled} onFinish={onFinish}>
         <DCheckFormItem
           label="날짜를 선택해주세요"
