@@ -1,29 +1,41 @@
 import { Modal } from "antd";
+import { useState } from "react";
 
-const AlertModal = ({ title, state, setIsModalOpen }) => {
-  const handleOk = () => {
-    state.handler();
-    setIsModalOpen(false);
+const AlertModal = ({
+  title,
+  isOepn,
+  setCloseModal,
+  message,
+  handleOpen = () => {},
+  handleClose = () => {},
+}) => {
+  const [confirmLoading, setConfirmLoading] = useState(false);
+
+  const handleOk = async () => {
+    setConfirmLoading(true);
+    await handleOpen();
+    setConfirmLoading(false);
+    setCloseModal();
   };
 
-  const handleCancel = () => {
-    setIsModalOpen(false);
+  const handleCancel = async () => {
+    setConfirmLoading(true);
+    await handleClose();
+    setConfirmLoading(false);
+    setCloseModal();
   };
 
   return (
     <>
-      {state.open && (
-        <Modal
-          title={title}
-          open={state.open}
-          closable={true}
-          onOk={handleOk}
-          onCancel={handleCancel}
-          type="success"
-        >
-          <p>{state.message}</p>
-        </Modal>
-      )}
+      <Modal
+        title={title}
+        open={isOepn}
+        onOk={handleOk}
+        confirmLoading={confirmLoading}
+        onCancel={handleCancel}
+      >
+        <p>{message}</p>
+      </Modal>
     </>
   );
 };
