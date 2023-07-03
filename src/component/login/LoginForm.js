@@ -1,13 +1,37 @@
 import { Button, Form, Input } from "antd";
+import { useForm } from "antd/es/form/Form";
 import empHandler from "lib/handler/EmpHander";
+import { useEffect } from "react";
 import { useLoginCtx } from "store/LoginContext";
+import LoginSaveClient from "utils/LoginSaveClient";
+
+const loginSaveClient = new LoginSaveClient();
 
 export const LoginForm = ({ openModalWithSetting }) => {
   const loginCtx = useLoginCtx();
 
+  const [form] = useForm();
+
+  useEffect(() => {
+    if (loginSaveClient.isSaved) {
+      const [id, pw] = loginSaveClient.getId();
+
+      form.setFieldsValue({
+        emp_no: id,
+        password: pw,
+      });
+    }
+  }, [form]);
+
   const onFinish = async (values) => {
     const result = await empHandler.signIn(values);
     if (result.message === "로그인 성공") {
+      if (loginSaveClient.isSaved) {
+        loginSaveClient.createInfo(values.emp_no, values.password);
+      } else {
+        loginSaveClient.updateInfo(values.emp_no, values.password);
+      }
+
       openModalWithSetting({
         message: result.message,
         okHandler: () => {
@@ -36,10 +60,8 @@ export const LoginForm = ({ openModalWithSetting }) => {
       wrapperCol={{
         span: 16,
       }}
-      initialValues={{
-        remember: true,
-      }}
       onFinish={onFinish}
+      form={form}
       autoComplete="off"
     >
       <Form.Item
