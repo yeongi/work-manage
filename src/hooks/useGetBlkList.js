@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import AdminHandler from "../lib/handler/AdminHandler";
+import { depulicateRemoveHullArray } from "lib/Hull";
 
 const useGetBlkList = () => {
   const [blk_sq, setBlkSq] = useState(0);
@@ -17,14 +18,7 @@ const useGetBlkList = () => {
         hList.reverse();
         hList.pop();
         setHullList(hList.filter((list) => list.complete === 0));
-
-        const filteredHullArr = await hList.map(
-          ({ HULL_TYPE, SHIPYARD, HULL_SQ }) => {
-            return { HULL_TYPE, SHIPYARD, HULL_SQ };
-          }
-        );
-
-        setHullArray(filteredHullArr);
+        setHullArray(depulicateRemoveHullArray(hList));
       }
     };
 

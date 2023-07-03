@@ -8,6 +8,7 @@ import { DForm, DCheckFormItem, DFormItem } from "component/common/form/DForm";
 import { BoldDescription } from "component/common/description/Description";
 import { twoDateDisable, todayDayJs } from "utils/dayJs";
 import classes from "./Form.module.css";
+import { filterListWithHullTypeShipYard } from "lib/Hull";
 
 const format = "YYYY-MM-DD HH:mm:ss";
 
@@ -29,9 +30,11 @@ const AddWorkRecordForm = ({ refreshHandler, addWorkRecordInfo, emp_no }) => {
 
   const onChangedHullType = async (HULL_SQ) => {
     workListFiltered(HULL_SQ, workList);
+
     const { HULL_TYPE, SHIPYARD } = hullArray.find(
       (hull) => hull.HULL_SQ === HULL_SQ
     );
+
     setHullInfo(() => {
       return { HULL_TYPE, SHIPYARD };
     });
@@ -73,7 +76,6 @@ const AddWorkRecordForm = ({ refreshHandler, addWorkRecordInfo, emp_no }) => {
       EMP_NO: emp_no,
     });
 
-    //이걸 이용해서 redux로 전역으로 관리 하자.
     addWorkRecordInfo(result.RECORD_ID);
 
     openModalFunc("업무기록 제출을 완료하였습니다.", () => {
@@ -133,21 +135,7 @@ const AddWorkRecordForm = ({ refreshHandler, addWorkRecordInfo, emp_no }) => {
             style={{ width: 450 }}
             placeholder="선체 번호를 선택해 주세요."
             onChange={onChangedHullNo}
-            // TODO: 기타블럭 처리필요
-            options={hullList
-              .filter(({ HULL_TYPE, SHIPYARD }) => {
-                return (
-                  HULL_TYPE === hullInfo.HULL_TYPE &&
-                  SHIPYARD === hullInfo.SHIPYARD
-                );
-              })
-              .map(({ HULL_NO, HULL_SQ, HULL_TYPE, SHIPYARD }) => {
-                return {
-                  key: HULL_SQ,
-                  label: `선체 번호 : ${HULL_NO} /선체 종류 : ${HULL_TYPE} / 조선소 : ${SHIPYARD}`,
-                  value: HULL_SQ,
-                };
-              })}
+            options={filterListWithHullTypeShipYard(hullList, hullInfo)}
           ></Select>
         </DCheckFormItem>
         <BoldDescription ment="선체와 블럭이 필요없는 업무기록의 경우에는 기타 업무를 선택해주세요." />
