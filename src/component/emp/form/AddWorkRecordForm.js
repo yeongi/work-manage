@@ -29,9 +29,11 @@ const AddWorkRecordForm = ({ refreshHandler, addWorkRecordInfo, emp_no }) => {
 
   const onChangedHullType = async (HULL_SQ) => {
     workListFiltered(HULL_SQ, workList);
+
     const { HULL_TYPE, SHIPYARD } = hullArray.find(
       (hull) => hull.HULL_SQ === HULL_SQ
     );
+
     setHullInfo(() => {
       return { HULL_TYPE, SHIPYARD };
     });
@@ -73,7 +75,6 @@ const AddWorkRecordForm = ({ refreshHandler, addWorkRecordInfo, emp_no }) => {
       EMP_NO: emp_no,
     });
 
-    //이걸 이용해서 redux로 전역으로 관리 하자.
     addWorkRecordInfo(result.RECORD_ID);
 
     openModalFunc("업무기록 제출을 완료하였습니다.", () => {

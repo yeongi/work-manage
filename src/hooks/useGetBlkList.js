@@ -13,18 +13,37 @@ const useGetBlkList = () => {
     setHullList(serverHullList);
 
     const stateSetting = async (hList) => {
+      const hash = {};
+
       if (hList.length) {
         hList.reverse();
         hList.pop();
         setHullList(hList.filter((list) => list.complete === 0));
 
-        const filteredHullArr = await hList.map(
-          ({ HULL_TYPE, SHIPYARD, HULL_SQ }) => {
-            return { HULL_TYPE, SHIPYARD, HULL_SQ };
+        hList.forEach(({ HULL_TYPE, SHIPYARD, HULL_SQ }) => {
+          const key = [HULL_TYPE, SHIPYARD].join(",");
+          if (!(key in hash)) {
+            hash[key] = HULL_SQ;
           }
-        );
+        });
 
-        setHullArray(filteredHullArr);
+        const result = [];
+        for (const hullStr in hash) {
+          const [HULL_TYPE, SHIPYARD] = hullStr.split(",");
+          result.push({
+            HULL_TYPE,
+            SHIPYARD,
+            HULL_SQ: hash[hullStr],
+          });
+        }
+
+        result.unshift({
+          HULL_TYPE: "기타 업무",
+          SHIPYARD: "기타 업무",
+          HULL_SQ: 1,
+        });
+
+        setHullArray(result);
       }
     };
 

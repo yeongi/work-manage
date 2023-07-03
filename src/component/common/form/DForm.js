@@ -23,7 +23,7 @@ export const DCheckFormItem = ({ label, name, checkMessage, children }) => {
       rules={[
         {
           required: true,
-          message: { checkMessage },
+          message: checkMessage,
         },
       ]}
     >
