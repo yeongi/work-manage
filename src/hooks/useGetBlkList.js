@@ -1,17 +1,28 @@
 import { useCallback, useEffect, useState } from "react";
 import AdminHandler from "../lib/handler/AdminHandler";
+import { depulicateRemoveHullArray } from "lib/Hull";
 
 const useGetBlkList = () => {
   const [blk_sq, setBlkSq] = useState(0);
   const [hull_sq, setHullSq] = useState(0);
   const [blockList, setBlkList] = useState([]);
   const [hullList, setHullList] = useState([]);
+  const [hullArray, setHullArray] = useState([]);
 
   const getHullList = useCallback(async () => {
     const serverHullList = await AdminHandler.getHullList();
-    serverHullList.reverse();
-    serverHullList.pop();
-    setHullList(serverHullList.filter((list) => list.complete === 0));
+    setHullList(serverHullList);
+
+    const stateSetting = async (hList) => {
+      if (hList.length) {
+        hList.reverse();
+        hList.pop();
+        setHullList(hList.filter((list) => list.complete === 0));
+        setHullArray(depulicateRemoveHullArray(hList));
+      }
+    };
+
+    stateSetting(serverHullList);
   }, []);
 
   const getBlkList = useCallback(async (hull) => {
@@ -38,6 +49,7 @@ const useGetBlkList = () => {
     onChangedBlk,
     onChangedHull,
     hullList,
+    hullArray,
     blockList,
     getHullList,
     getBlkList,
