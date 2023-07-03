@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import AdminHandler from "../lib/handler/AdminHandler";
+import { depulicateRemoveHullArray } from "lib/Hull";
 
 const useGetBlkList = () => {
   const [blk_sq, setBlkSq] = useState(0);
@@ -13,37 +14,11 @@ const useGetBlkList = () => {
     setHullList(serverHullList);
 
     const stateSetting = async (hList) => {
-      const hash = {};
-
       if (hList.length) {
         hList.reverse();
         hList.pop();
         setHullList(hList.filter((list) => list.complete === 0));
-
-        hList.forEach(({ HULL_TYPE, SHIPYARD, HULL_SQ }) => {
-          const key = [HULL_TYPE, SHIPYARD].join(",");
-          if (!(key in hash)) {
-            hash[key] = HULL_SQ;
-          }
-        });
-
-        const result = [];
-        for (const hullStr in hash) {
-          const [HULL_TYPE, SHIPYARD] = hullStr.split(",");
-          result.push({
-            HULL_TYPE,
-            SHIPYARD,
-            HULL_SQ: hash[hullStr],
-          });
-        }
-
-        result.unshift({
-          HULL_TYPE: "기타 업무",
-          SHIPYARD: "기타 업무",
-          HULL_SQ: 1,
-        });
-
-        setHullArray(result);
+        setHullArray(depulicateRemoveHullArray(hList));
       }
     };
 
