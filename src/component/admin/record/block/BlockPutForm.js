@@ -1,7 +1,7 @@
 import { Button, Form, InputNumber, Space } from "antd";
 import { useForm } from "antd/es/form/Form";
 import classes from "./BlockPutFrom.module.css";
-import useMyModal from "hooks/useMyModal";
+import useModalState from "hooks/useModalState";
 import AdminHandler from "lib/handler/AdminHandler";
 
 export const BlockPutForm = ({
@@ -12,7 +12,7 @@ export const BlockPutForm = ({
   closeHandler,
 }) => {
   const [formRef] = useForm();
-  const { MyModal, openModalFunc } = useMyModal("알림");
+  const { ModalElement, openModalWithSetting } = useModalState("알림");
 
   const onFinishHandler = async ({ INP_MH: AFTER_MH }) => {
     const res = await AdminHandler.updateBlkMH({
@@ -23,9 +23,12 @@ export const BlockPutForm = ({
     });
 
     if (res.status === 200)
-      openModalFunc("성공적으로 수정되었습니다.", () => {
-        closeHandler();
-        resetHandler();
+      openModalWithSetting({
+        message: "성공적으로 수정되었습니다.",
+        okHandler: () => {
+          closeHandler();
+          resetHandler();
+        },
       });
   };
 
@@ -45,7 +48,7 @@ export const BlockPutForm = ({
           <Button htmlType="submit">수정 하기</Button>
         </Space>
       </Form>
-      <MyModal />
+      <ModalElement />
     </>
   );
 };

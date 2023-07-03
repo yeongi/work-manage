@@ -3,13 +3,13 @@ import { Button, Form, Input, InputNumber, Select, Space } from "antd";
 import { DForm, DCheckFormItem, DFormItem } from "component/common/form/DForm";
 import classes from "../HullManage.module.css";
 import AdminHandler from "lib/handler/AdminHandler";
-import useModalState from "hooks/useMyModal";
+import useModalState from "hooks/useModalState";
 import { filterListWithHullTypeShipYard } from "lib/Hull";
 
 const AddBlockForm = ({ hullArray, hullList, refreshHandler }) => {
   const [form] = Form.useForm();
 
-  const { MyModal, openModalFunc } = useModalState("추가");
+  const { ModalElement, openModalWithSetting } = useModalState("추가");
   const [hullInfo, setHullInfo] = useState({ HULL_TYPE: 0, SHIPYARD: 0 });
 
   const onFinish = async (values) => {
@@ -20,7 +20,12 @@ const AddBlockForm = ({ hullArray, hullList, refreshHandler }) => {
     표준 시수 : ${values.NORM_MH}
     `;
 
-    if (result) openModalFunc(blkInfoMsg + result.message);
+    if (result) {
+      openModalWithSetting({
+        message: blkInfoMsg + result.message,
+      });
+    }
+
     refreshHandler();
     form.resetFields();
   };
@@ -46,8 +51,7 @@ const AddBlockForm = ({ hullArray, hullList, refreshHandler }) => {
 
   return (
     <div className={classes["block-input"]}>
-      <MyModal />
-
+      <ModalElement />
       <DForm formRef={form} onFinish={onFinish}>
         <DCheckFormItem
           label="HULL_TYPE"

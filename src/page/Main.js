@@ -4,19 +4,22 @@ import EmpMain from "./EmpMain";
 import { useLoginCtx } from "store/LoginContext";
 import classes from "./page.module.css";
 import CreatorFooter from "./CreatorFooter";
-import useMyModal from "hooks/useMyModal";
+import useModalState from "hooks/useModalState";
 
 const Main = () => {
   const loginCtx = useLoginCtx();
-  const { MyModal, openModalFunc } = useMyModal("알림");
+  const { ModalElement, openModalWithSetting } = useModalState("알림");
 
   const logoutHandler = () => {
-    openModalFunc("로그아웃 됐습니다.", loginCtx.onLogout);
+    openModalWithSetting({
+      message: "로그아웃 됐습니다.",
+      okHandler: loginCtx.onLogout,
+    });
   };
 
   return (
     <div className={classes.wrapper}>
-      <MyModal />
+      <ModalElement />
       <section className={classes.main}>
         <div className={classes["header-section"]}>
           <div className={classes.header}>

@@ -1,13 +1,13 @@
 import { Form, Button, Input } from "antd";
 import AdminHandler from "lib/handler/AdminHandler";
-import useModalState from "hooks/useMyModal";
+import useModalState from "hooks/useModalState";
 
 // { BLK_NO, BLK_SQ, HULL_SQ, NORM_MH, RES_MH }
 
 const BlkForm = ({ blkInfo, refreshHandler }) => {
   const [form] = Form.useForm();
 
-  const { MyModal, openModalFunc } = useModalState("알림");
+  const { ModalElement, openModalWithSetting } = useModalState("알림");
 
   form.setFieldsValue({
     BLK_NO: blkInfo.BLK_NO,
@@ -23,8 +23,11 @@ const BlkForm = ({ blkInfo, refreshHandler }) => {
     const result = await AdminHandler.updateBlkInfo(body);
 
     if (result.status === 200) {
-      openModalFunc(result.message, async () => {
-        await refreshHandler();
+      openModalWithSetting({
+        message: result.message,
+        okHandler: async () => {
+          await refreshHandler();
+        },
       });
     }
   };
@@ -32,8 +35,12 @@ const BlkForm = ({ blkInfo, refreshHandler }) => {
   const deleteBlkHandler = async () => {
     const res = await AdminHandler.deleteBlk(blkInfo.BLK_SQ);
     if (res.status === 200) {
-      openModalFunc(res.message);
-      await refreshHandler();
+      openModalWithSetting({
+        message: res.message,
+        okHandler: async () => {
+          await refreshHandler();
+        },
+      });
     }
   };
 
@@ -78,7 +85,7 @@ const BlkForm = ({ blkInfo, refreshHandler }) => {
         </Form.Item>
       </Form>
 
-      <MyModal />
+      <ModalElement />
     </>
   );
 };

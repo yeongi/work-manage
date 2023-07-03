@@ -13,7 +13,6 @@ export const useAdminHullList = () => {
     reverseList.sort((a, b) => a.complete - b.complete);
     setHullArray(depulicateRemoveHullArray(reverseList));
     setHullList(reverseList);
-    return;
   }, []);
 
   useEffect(() => {

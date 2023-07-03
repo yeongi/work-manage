@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 import AdminHandler from "lib/handler/AdminHandler";
 import BlkList from "./BlkList";
-import useModalState from "hooks/useMyModal";
+import useModalState from "hooks/useModalState";
 import { Button, Form, Input, Modal, Checkbox } from "antd";
 import classes from "./HullModal.module.css";
 
 const HullModal = ({ hullInfo, refreshHandler }) => {
-  const { MyModal, openModalFunc } = useModalState("업데이트 완료");
+  const { ModalElement, openModalWithSetting } = useModalState("업데이트 완료");
 
   const [open, setOpen] = useState(false);
   const [hull, setHull] = useState({});
@@ -21,7 +21,9 @@ const HullModal = ({ hullInfo, refreshHandler }) => {
     });
 
     if (result.status === 200) {
-      openModalFunc(result.message);
+      openModalWithSetting({
+        message: result.message,
+      });
       setHull(values);
     }
   };
@@ -58,6 +60,7 @@ const HullModal = ({ hullInfo, refreshHandler }) => {
   if (hull !== undefined) {
     return (
       <>
+        {/* TODO: fix modal form element */}
         <Modal
           title="선체 정보 조회 및 수정"
           centered
@@ -155,7 +158,7 @@ const HullModal = ({ hullInfo, refreshHandler }) => {
             )}
           </section>
 
-          <MyModal />
+          <ModalElement />
         </Modal>
       </>
     );
