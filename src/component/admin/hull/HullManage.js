@@ -5,7 +5,7 @@ import classes from "./HullManage.module.css";
 import { useAdminHullList } from "../../../hooks/useAdminHullList";
 
 const HullManage = () => {
-  const { hullList, getHullList } = useAdminHullList();
+  const { hullArray, hullList, getHullList } = useAdminHullList();
 
   return (
     <div className={classes["manage-wrapper"]}>
@@ -16,7 +16,11 @@ const HullManage = () => {
         </section>
         <section className={classes["block-wrapper"]}>
           <h1>블럭 추가</h1>
-          <AddBlockForm hullList={hullList} refreshHandler={getHullList} />
+          <AddBlockForm
+            hullArray={hullArray}
+            hullList={hullList}
+            refreshHandler={getHullList}
+          />
         </section>
         <section className={classes["list-wrapper"]}>
           <HullList hullList={hullList} refreshHandler={getHullList} />
