@@ -1,0 +1,20 @@
+@font-face {
+  font-family: "GowunBatang";
+  font-style: normal;
+  font-weight: 100;
+  src: url(./GowunBatang-Bold.ttf);
+}
+
+@font-face {
+  font-family: "Sans Regular";
+  font-style: normal;
+  font-weight: 100;
+  src: url(./IBMPlexSansKR-Regular.ttf);
+}
+
+@font-face {
+  font-family: "Sans bold";
+  font-style: normal;
+  font-weight: 100;
+  src: url(./IBMPlexSansKR-SemiBold.ttf);
+}
