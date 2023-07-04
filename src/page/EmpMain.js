@@ -7,7 +7,7 @@ import EmpWorkRecord from "component/emp/record/EmpWorkRecord";
 import LoginState from "component/emp/profile/LoginState";
 import SelectMonthEmp from "component/emp/record/SelectMonthEmp";
 import classes from "./EmpMain.module.css";
-import shipURL from "img/ship.jpg";
+import shipURL from "asset/img/ship.jpg";
 import TodayWorkList from "component/emp/record/TodayWorkList";
 
 const EmpMain = () => {

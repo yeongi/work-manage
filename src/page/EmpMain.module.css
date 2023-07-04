@@ -1,35 +1,9 @@
-@media (max-width: 1100px) {
-  .list-des {
-    display: none;
-  }
-  .emp-main .state {
-    display: none;
-  }
-  .emp-main .work-list {
-    width: 90%;
-  }
-}
-
-@media (min-width: 1100px) {
-  .list-des {
-    display: none;
-  }
-  .emp-main .state {
-    display: none;
-  }
-  .emp-main .work-list {
-    width: 90%;
-  }
-}
-
 .emp-wrapper {
+  box-sizing: border-box;
+  width: 100%;
   height: auto;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  margin-bottom: 10px;
   margin: 0 auto;
   padding: 10px;
-  width: 100%;
 }
 
 .emp-main {
@@ -37,21 +11,23 @@
   height: auto;
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
+  gap: 20px;
   justify-content: space-between;
 }
 
 .emp-main h3 {
-  font-size: 20px;
+  font-size: 2vw;
+  padding: 10px 5px;
+  font-family: "Sans Bold";
   text-align: center;
 }
 
 .emp-main article {
+  width: 80%;
   background-color: #406d87;
-  width: 50%;
-  min-width: 600px;
-  border: 8px double #b3c9d3;
+  border: 2px solid #1f333e;
   margin: 0 auto;
-  margin-bottom: 10px;
   padding: 10px;
   border-radius: 30px;
   height: auto;

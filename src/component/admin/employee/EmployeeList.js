@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { List, Button } from "antd";
+import React from "react";
+import { List } from "antd";
 import useEmpRecordList from "hooks/useEmpRecordList";
 // import EmpWorkRecord from "emp/record/EmpWorkRecord";
 // import EmpRecordModal from "./EmpRecordModal";
@@ -78,38 +78,3 @@ const EmployeeList = ({ empList }) => {
 };
 
 export default EmployeeList;
-
-// {
-//   if(emp.ADMIN) {
-
-//   }
-
-//   return (
-//     <List.Item>
-//     <List.Item.Meta
-//       title={
-//         <>
-//           <p>
-//             사원명 :<b>{emp.EMP_NAME}</b>{" "}
-//           </p>
-//           <p>
-//             사번 :<b>{emp.EMP_NO}</b>{" "}
-//           </p>
-//           <p>
-//             비밀번호 :<b>{emp.EMP_PW}</b>{" "}
-//           </p>
-//         </>
-//       }
-//       description={`${emp.EMP_NAME}님의 업무내역을 조회하시려면 버튼을 클릭하세요. `}
-//     />
-//     {/* <Button
-//       onClick={(e) => {
-//         setEmpNo(emp.EMP_NO);
-//         setName(emp.EMP_NAME);
-//       }}
-//     >
-//       내역 보기
-//     </Button> */}
-//   </List.Item>
-//   )
-// }

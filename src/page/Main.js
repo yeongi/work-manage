@@ -20,20 +20,18 @@ const Main = () => {
   return (
     <div className={classes.wrapper}>
       <ModalElement />
-      <section className={classes.main}>
-        <div className={classes["header-section"]}>
-          <div className={classes.header}>
-            <h1> 하나 이엔티 시수관리 </h1>
-          </div>
-          <Button className={classes.button} onClick={logoutHandler}>
-            로그아웃 하기
-          </Button>
+      <header className={classes["header-wrapper"]}>
+        <div className={classes.header}>
+          <h1> 하나 이엔티 시수관리 </h1>
         </div>
-      </section>
+        <Button className={classes.button} onClick={logoutHandler}>
+          로그아웃 하기
+        </Button>
+      </header>
       <section className={classes["body-section"]}>
         {loginCtx.state.IS_ADMIN ? <Admin /> : <EmpMain />}
-        <CreatorFooter />
       </section>
+      <CreatorFooter />
     </div>
   );
 };

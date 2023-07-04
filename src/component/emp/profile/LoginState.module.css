@@ -1,27 +1,16 @@
 .wrapper {
-  height: auto;
-  width: 100%;
-}
-
-.state-wrapper {
   display: flex;
-  justify-content: space-evenly;
-  padding: 10px;
-  margin: 0 auto;
+  justify-content: center;
   gap: 20px;
-  margin-bottom: 10px;
+  margin: 0 auto;
 }
 
-.state-wrapper section {
+.wrapper section {
   background-color: white;
   width: 40%;
   border: 2px dotted #b3c9d3;
   padding: 14px;
   border-radius: 20px;
-}
-
-.work {
-  width: 60%;
 }
 
 .work h3 {
@@ -30,20 +19,23 @@
 }
 
 .state-box {
-  border: 2px dotted #192b36;
+  height: 60%;
+  border: 1px solid #192b36;
+  font-size: 0.8rem;
+  font-family: "Sans Bold";
+  letter-spacing: 2px;
   background-color: #7c9bb0;
   border-radius: 20px;
-  padding: 30px 30px 30px;
+  padding: 10px 20px 10px 40px;
 }
 
 .state-box p {
   color: #fffffb;
-  font-size: 12px;
 }
 
 .state-box b {
-  color: #192b36;
-  font-size: 15px;
+  color: #081720;
+  font-size: 1rem;
 }
 
 .MH {
@@ -53,27 +45,28 @@
   background: linear-gradient(to top, rgb(218, 112, 209) 30%, transparent 50%);
 }
 
-.login {
-  width: 30%;
-}
-
-.login h3 {
-  text-align: center;
-}
-
 .login-box {
-  padding-left: 40px;
+  height: 60%;
+  padding: 10px 20px 10px 40px;
   display: flex;
   flex-direction: column;
-  border: 2px dotted #192b36;
+  font-family: "Sans Bold";
   background-color: #7c9bb0;
   border-radius: 20px;
   justify-content: space-evenly;
-  gap: 3px;
 }
 
 .login-box p {
   font-weight: bold;
   color: #fffffb;
   height: 20px;
+}
+
+@media screen and (max-width: 900px) {
+  .work {
+    display: none;
+  }
+  .wrapper section {
+    width: 90%;
+  }
 }
