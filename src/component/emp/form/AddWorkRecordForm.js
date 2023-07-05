@@ -35,9 +35,7 @@ const AddWorkRecordForm = ({ refreshHandler, addWorkRecordInfo, emp_no }) => {
       (hull) => hull.HULL_SQ === HULL_SQ
     );
 
-    setHullInfo(() => {
-      return { HULL_TYPE, SHIPYARD };
-    });
+    setHullInfo({ HULL_TYPE, SHIPYARD });
 
     form.setFieldValue("HULL_SQ", undefined);
     form.setFieldValue("BLK_SQ", undefined);
@@ -46,8 +44,6 @@ const AddWorkRecordForm = ({ refreshHandler, addWorkRecordInfo, emp_no }) => {
 
     if (HULL_SQ === 1) {
       setHullSq(1);
-      form.setFieldValue("HULL_SQ", "기타업무");
-      form.setFieldValue("BLK_SQ", 1);
     }
   };
 
@@ -69,7 +65,7 @@ const AddWorkRecordForm = ({ refreshHandler, addWorkRecordInfo, emp_no }) => {
     setDisabled(true);
     const result = await empHandler.addWorkRecord({
       BLK_SQ,
-      HULL_SQ: hull_sq,
+      HULL_SQ,
       INP_MH: Math.floor(INP_MH * 10) / 10,
       WORK_CODE,
       DATE_TIME: DATE_TIME.format(),
@@ -98,9 +94,9 @@ const AddWorkRecordForm = ({ refreshHandler, addWorkRecordInfo, emp_no }) => {
       <ModalElement />
       <DForm formRef={form} disabled={componentDisabled} onFinish={onFinish}>
         <DCheckFormItem
-          label="날짜를 선택해주세요"
+          label="투입 날짜"
           name="DATE_TIME"
-          checkMessage="날짜를 선택해주세요"
+          checkMessage="날짜를 선택해주세요."
         >
           <DatePicker
             placeholder="날짜를 선택해주세요"
@@ -117,8 +113,8 @@ const AddWorkRecordForm = ({ refreshHandler, addWorkRecordInfo, emp_no }) => {
           checkMessage="조선소/ 선체종류를 선택해주세요!"
         >
           <Select
-            style={{ width: 450 }}
-            placeholder="조선소/ 선체종류를 선택해주세요!"
+            style={{ width: "25vw" }}
+            placeholder="조선소/ 선체종류를 선택해주세요."
             onChange={onChangedHullType}
             options={hullArray.map(({ HULL_TYPE, SHIPYARD, HULL_SQ }) => {
               return {
@@ -129,37 +125,33 @@ const AddWorkRecordForm = ({ refreshHandler, addWorkRecordInfo, emp_no }) => {
             })}
           ></Select>
         </DCheckFormItem>
+        <BoldDescription ment={"선체 종류/조선소를 선택해주세요."} />
+
         <DCheckFormItem
           label="HULL"
           name="HULL_SQ"
-          checkMessage="선체를 선택해주세요!"
+          checkMessage="선체를 선택해주세요"
         >
           <Select
-            style={{ width: 450 }}
+            style={{ width: "25vw" }}
             placeholder="선체 번호를 선택해 주세요."
             onChange={onChangedHullNo}
             options={filterListWithHullTypeShipYard(hullList, hullInfo)}
           ></Select>
         </DCheckFormItem>
         <BoldDescription ment="선체와 블럭이 필요없는 업무기록의 경우에는 기타 업무를 선택해주세요." />
+
         <DCheckFormItem
           label="BLOCK"
           name="BLK_SQ"
           checkMessage="블럭을 선택하세요!"
         >
           <Select
-            style={{ width: 450 }}
+            style={{ width: "25vw" }}
             placeholder="블럭을 선택해 주세요."
             options={
-              hull_sq === 1
-                ? [
-                    {
-                      key: 1,
-                      label: "기타 업무",
-                      value: 1,
-                    },
-                  ]
-                : blockList.map(
+              blockList.length > 0
+                ? blockList.map(
                     ({
                       BLK_NO,
                       BLK_SQ,
@@ -175,6 +167,13 @@ const AddWorkRecordForm = ({ refreshHandler, addWorkRecordInfo, emp_no }) => {
                       };
                     }
                   )
+                : [
+                    {
+                      key: 1,
+                      label: "기타 업무",
+                      value: 1,
+                    },
+                  ]
             }
           />
         </DCheckFormItem>
@@ -184,7 +183,7 @@ const AddWorkRecordForm = ({ refreshHandler, addWorkRecordInfo, emp_no }) => {
           checkMessage="업무를 선택해 주세요!"
         >
           <Select
-            style={{ width: 450 }}
+            style={{ width: "25vw" }}
             placeholder="업무를 선택해 주세요."
             options={filteredWorkList.map(
               ({ WORK_CODE, WORK_TYPE, WORK_DES }) => {
@@ -200,6 +199,7 @@ const AddWorkRecordForm = ({ refreshHandler, addWorkRecordInfo, emp_no }) => {
         <BoldDescription
           ment={"업무를 추가적으로 입력하시려면 관리자님께 문의해주세요!"}
         />
+
         <DCheckFormItem
           label="투입 M/H"
           name="INP_MH"
@@ -208,6 +208,7 @@ const AddWorkRecordForm = ({ refreshHandler, addWorkRecordInfo, emp_no }) => {
           <InputNumber placeholder="M/H" step={0.5} min={0} max={24} />
         </DCheckFormItem>
         <BoldDescription ment="투입시수는 0.5 M/H 단위로 입력가능하며 필수로 입력해야 합니다." />
+
         <DFormItem>
           <Space>
             <Button htmlType="button" onClick={resetHandler}>

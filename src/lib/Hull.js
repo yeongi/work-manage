@@ -29,6 +29,16 @@ export const depulicateRemoveHullArray = (hullList) => {
 };
 
 export const filterListWithHullTypeShipYard = (hullList, cur) => {
+  if (cur.HULL_TYPE === "기타 업무") {
+    return [
+      {
+        key: 1,
+        label: "기타 업무",
+        value: 1,
+      },
+    ];
+  }
+
   return hullList
     .filter(({ HULL_TYPE, SHIPYARD }) => {
       return HULL_TYPE === cur.HULL_TYPE && SHIPYARD === cur.SHIPYARD;

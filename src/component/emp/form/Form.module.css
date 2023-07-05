@@ -1,7 +1,12 @@
 .form-wrapper {
   padding: 20px;
-  margin-top: 20px;
+  margin: 20px;
   background-color: #fffffb;
   border: 3px dotted #b3c9d3;
   border-radius: 20px;
+}
+
+.form-wrapper label {
+  width: 100px;
+  font-family: "Sans Regular";
 }

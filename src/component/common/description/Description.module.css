@@ -1,4 +1,7 @@
 .description {
+  position: relative;
+  bottom: 2em;
+  padding-left: 100px;
   font-size: 13px;
   color: rgb(78, 112, 157);
   text-align: left;

@@ -37,9 +37,9 @@ const EmpMain = () => {
         className={classes["emp-wrapper"]}
       >
         <section className={classes["emp-main"]}>
-          <article className={classes.state}>
+          {/* <article className={classes.state}>
             <LoginState />
-          </article>
+          </article> */}
           <article className={classes.form}>
             <AddWorkRecordForm
               refreshHandler={getMyWorkRecordList}
