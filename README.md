@@ -53,6 +53,8 @@ Back :  Node, mysql
 
 [금일 업무 내역 조회 기능 ( admin ) #todayrecord✅](https://github.com/yeongi/work-manage/pull/2)
 
+[반응형 UI로 변경해 사용자 경험 향상 ✅](https://github.com/yeongi/work-manage/wiki/%EB%B0%98%EC%9D%91%ED%98%95-ui%EB%A1%9C-%EB%A6%AC%ED%8E%99%ED%86%A0%EB%A7%81-%ED%95%98%EA%B8%B0)
+
 ---
 
 ### 시험 기능
