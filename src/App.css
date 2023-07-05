@@ -1,9 +1,8 @@
 .App {
   text-align: center;
   width: 100%;
-  padding: 10px;
   margin: 0 auto;
-  height: 100%;
+  height: 100vh;
   background-color: #456f7b;
 }
 
