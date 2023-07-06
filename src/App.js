@@ -1,7 +1,7 @@
 import Login from "./page/Login";
 import Main from "./page/Main";
 import { GlobalStyle } from "lib/GlobalStyle";
-import { useLoginRecoilValue } from "atom/Hook";
+import { useLoginRecoilValue } from "atom/LoginHook";
 
 function App() {
   const loginState = useLoginRecoilValue();

@@ -7,7 +7,7 @@ import SelectMonthEmp from "component/emp/record/SelectMonthEmp";
 import classes from "./EmpMain.module.css";
 import shipURL from "asset/img/ship.jpg";
 import TodayWorkList from "component/emp/record/TodayWorkList";
-import { useLoginRecoilValue } from "atom/Hook";
+import { useLoginRecoilValue } from "atom/LoginHook";
 
 const EmpMain = () => {
   const loginState = useLoginRecoilValue();

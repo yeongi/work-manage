@@ -1,7 +1,7 @@
 import dayJs from "dayjs";
 import { dayJsYMD } from "utils/dayJs";
 import classes from "./LoginState.module.css";
-import { useLoginRecoilValue } from "atom/Hook";
+import { useLoginRecoilValue } from "atom/LoginHook";
 
 const LoginState = () => {
   const loginState = useLoginRecoilValue();

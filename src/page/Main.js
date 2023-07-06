@@ -4,7 +4,7 @@ import EmpMain from "./EmpMain";
 import classes from "./page.module.css";
 import CreatorFooter from "./CreatorFooter";
 import useModalState from "hooks/useModalState";
-import { useLoginRecoilValue, useLogOutRecoil } from "atom/Hook";
+import { useLoginRecoilValue, useLogOutRecoil } from "atom/LoginHook";
 
 const Main = () => {
   const loginState = useLoginRecoilValue();

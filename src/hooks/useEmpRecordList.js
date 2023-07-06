@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import empHandler from "../lib/handler/EmpHander";
-import { useLoginStateGetEmpNo } from "atom/Hook";
+import { useLoginStateGetEmpNo } from "atom/LoginHook";
 
 const useEmpRecordList = () => {
   const emp_no = useLoginStateGetEmpNo();
