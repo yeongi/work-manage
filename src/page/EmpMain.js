@@ -1,17 +1,16 @@
 import { useCallback, useState } from "react";
-import { useLoginCtx } from "store/LoginContext";
 import useEmpRecordList from "hooks/useEmpRecordList";
 import useToDidWork from "hooks/useToDidWork";
 import AddWorkRecordForm from "component/emp/form/AddWorkRecordForm";
 import EmpWorkRecord from "component/emp/record/EmpWorkRecord";
-import LoginState from "component/emp/profile/LoginState";
 import SelectMonthEmp from "component/emp/record/SelectMonthEmp";
 import classes from "./EmpMain.module.css";
 import shipURL from "asset/img/ship.jpg";
 import TodayWorkList from "component/emp/record/TodayWorkList";
+import { useLoginRecoilValue } from "atom/Hook";
 
 const EmpMain = () => {
-  const loginCtx = useLoginCtx();
+  const loginState = useLoginRecoilValue();
   const [workRecordList, getMyWorkRecordList] = useEmpRecordList();
   const [filteredRecordList, setFilteredList] = useState([]);
   const [myList, addList] = useToDidWork(workRecordList);
@@ -44,7 +43,7 @@ const EmpMain = () => {
             <AddWorkRecordForm
               refreshHandler={getMyWorkRecordList}
               addWorkRecordInfo={addList}
-              emp_no={loginCtx.state.EMP_NO}
+              emp_no={loginState.EMP_NO}
             />
           </article>
           <article className={classes["work-list"]}>
@@ -54,7 +53,7 @@ const EmpMain = () => {
             <div className={classes["list-des"]}>
               <div>
                 <p>연,월을 선택하면 본인의 업무 내역을 확인할 수 있습니다.</p>
-                <h1> {loginCtx.state.EMP_NAME}님 업무 기록 내역</h1>
+                <h1> {loginState.EMP_NAME}님 업무 기록 내역</h1>
               </div>
               <SelectMonthEmp onSelectYmHandler={onSelectYmHandler} />
             </div>

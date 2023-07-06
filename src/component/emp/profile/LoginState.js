@@ -1,10 +1,10 @@
-import { useLoginCtx } from "store/LoginContext";
 import dayJs from "dayjs";
 import { dayJsYMD } from "utils/dayJs";
 import classes from "./LoginState.module.css";
+import { useLoginRecoilValue } from "atom/Hook";
 
 const LoginState = () => {
-  const loginCtx = useLoginCtx();
+  const loginState = useLoginRecoilValue();
   const today = dayJsYMD(dayJs());
 
   return (
@@ -12,8 +12,8 @@ const LoginState = () => {
       <section className={classes.login}>
         <h3>현재 로그인 정보</h3>
         <div className={classes["login-box"]}>
-          <p>사번 : {loginCtx.state.EMP_NO}</p>
-          <p>이름 : {loginCtx.state.EMP_NAME}</p>
+          <p>사번 : {loginState.EMP_NO}</p>
+          <p>이름 : {loginState.EMP_NAME}</p>
           <p>날짜 : {today}</p>
         </div>
       </section>
@@ -29,7 +29,7 @@ const LoginState = () => {
           </p>
           <p>
             <b>금일 총 투입 시수 (M/H)</b> :
-            <b className={classes.MH}> {loginCtx.state.MH}</b> M/H
+            <b className={classes.MH}> {loginState.MH}</b> M/H
           </p>
         </div>
       </section>

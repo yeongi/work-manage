@@ -1,14 +1,14 @@
 import { Button, Form, Input } from "antd";
 import { useForm } from "antd/es/form/Form";
+import { useLoginRecoilState } from "atom/Hook";
 import empHandler from "lib/handler/EmpHander";
 import { useEffect } from "react";
-import { useLoginCtx } from "store/LoginContext";
 import LoginSaveClient from "utils/LoginSaveClient";
 
 const loginSaveClient = new LoginSaveClient();
 
 export const LoginForm = ({ openModalWithSetting }) => {
-  const loginCtx = useLoginCtx();
+  const [, setLoginState] = useLoginRecoilState();
 
   const [form] = useForm();
 
@@ -36,7 +36,7 @@ export const LoginForm = ({ openModalWithSetting }) => {
         message: result.message,
         okHandler: () => {
           const { EMP_NAME, EMP_NO, ADMIN } = result.data;
-          loginCtx.onLogin({
+          setLoginState({
             IS_LOGIN: true,
             EMP_NO,
             EMP_NAME,
