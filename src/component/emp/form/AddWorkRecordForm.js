@@ -15,7 +15,6 @@ const format = "YYYY-MM-DD HH:mm:ss";
 const AddWorkRecordForm = ({ refreshHandler, addWorkRecordInfo, emp_no }) => {
   const { hullList, hullArray, blockList, getBlkList } = useGetBlkList();
   const { workList, filteredWorkList, workListFiltered } = useWorkList();
-  const [hull_sq, setHullSq] = useState(0);
   const [hullInfo, setHullInfo] = useState({ HULL_TYPE: 0, SHIPYARD: 0 });
 
   const [componentDisabled, setDisabled] = useState(true);
@@ -41,14 +40,9 @@ const AddWorkRecordForm = ({ refreshHandler, addWorkRecordInfo, emp_no }) => {
     form.setFieldValue("BLK_SQ", undefined);
     form.setFieldValue("WORK_CODE", undefined);
     form.setFieldValue("INP_MH", undefined);
-
-    if (HULL_SQ === 1) {
-      setHullSq(1);
-    }
   };
 
   const onChangedHullNo = async (HULL_SQ) => {
-    setHullSq(HULL_SQ);
     await getBlkList(HULL_SQ);
     form.setFieldValue("BLK_SQ", undefined);
     form.setFieldValue("WORK_CODE", undefined);
