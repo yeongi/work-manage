@@ -55,6 +55,8 @@ Back :  Node, mysql
 
 [반응형 UI로 변경해 사용자 경험 향상 ✅](https://github.com/yeongi/work-manage/wiki/%EB%B0%98%EC%9D%91%ED%98%95-ui%EB%A1%9C-%EB%A6%AC%ED%8E%99%ED%86%A0%EB%A7%81-%ED%95%98%EA%B8%B0)
 
+[로그인 상태관리 Context -> Recoil로 변경하기 #recoil✅](https://github.com/yeongi/work-manage/pull/7)
+
 ---
 
 ### 시험 기능
@@ -77,8 +79,8 @@ Back :  Node, mysql
 - 사원이 개인이 짠 한달 계획을 볼 수 있다.
 
 ---
-### 🚀 기능 목록 버전 v1.0
 
+### 🚀 기능 목록 버전 v1.0
 
 ### 공통
 

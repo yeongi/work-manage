@@ -5,6 +5,7 @@ import { useLoginRecoilValue } from "atom/LoginHook";
 
 function App() {
   const loginState = useLoginRecoilValue();
+
   return (
     <div className="App">
       <GlobalStyle />
