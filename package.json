@@ -1,6 +1,6 @@
 {
   "name": "work-manage",
-  "version": "0.4.0",
+  "version": "1.1.0",
   "private": true,
   "main": "public/main.js",
   "homepage": "./",
@@ -18,7 +18,9 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
+    "recoil": "^0.7.7",
     "styled-component": "^2.8.0",
+    "styled-components": "^6.0.2",
     "styled-reset": "^4.5.1",
     "wait-on": "^7.0.1",
     "web-vitals": "^3.3.2",

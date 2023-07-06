@@ -1,19 +1,20 @@
 import { Button } from "antd";
 import Admin from "./Admin";
 import EmpMain from "./EmpMain";
-import { useLoginCtx } from "store/LoginContext";
 import classes from "./page.module.css";
 import CreatorFooter from "./CreatorFooter";
 import useModalState from "hooks/useModalState";
+import { useLoginRecoilValue, useLogOutRecoil } from "atom/LoginHook";
 
 const Main = () => {
-  const loginCtx = useLoginCtx();
+  const loginState = useLoginRecoilValue();
+  const logOut = useLogOutRecoil();
   const { ModalElement, openModalWithSetting } = useModalState("알림");
 
   const logoutHandler = () => {
     openModalWithSetting({
       message: "로그아웃 됐습니다.",
-      okHandler: loginCtx.onLogout,
+      okHandler: logOut,
     });
   };
 
@@ -29,7 +30,7 @@ const Main = () => {
         </Button>
       </header>
       <section className={classes["body-section"]}>
-        {loginCtx.state.IS_ADMIN ? <Admin /> : <EmpMain />}
+        {loginState.IS_ADMIN ? <Admin /> : <EmpMain />}
       </section>
       <CreatorFooter />
     </div>

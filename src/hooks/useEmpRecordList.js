@@ -1,15 +1,15 @@
 import { useState, useEffect, useCallback } from "react";
 import empHandler from "../lib/handler/EmpHander";
-import { useLoginCtx } from "../store/LoginContext";
+import { useLoginStateGetEmpNo } from "atom/LoginHook";
 
 const useEmpRecordList = () => {
-  const loginCtx = useLoginCtx();
+  const emp_no = useLoginStateGetEmpNo();
   const [workRecordList, setRecordList] = useState([]);
 
   const getMyWorkRecordList = useCallback(async () => {
-    const result = await empHandler.getWorkRecordList(loginCtx.state.EMP_NO);
+    const result = await empHandler.getWorkRecordList(emp_no);
     setRecordList(result);
-  }, [loginCtx.state.EMP_NO]);
+  }, [emp_no]);
 
   useEffect(() => {
     getMyWorkRecordList();

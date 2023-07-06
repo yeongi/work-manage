@@ -1,14 +1,12 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import App from "./App";
-import { LoginProvider } from "./store/LoginContext";
-import "asset/font/font.css";
+import { RecoilRoot } from "recoil";
 
-ReactDOM.render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <LoginProvider>
+    <RecoilRoot>
       <App />
-    </LoginProvider>
-  </React.StrictMode>,
-  document.getElementById("root")
+    </RecoilRoot>
+  </React.StrictMode>
 );

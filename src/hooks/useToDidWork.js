@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import { dayJsYMD } from "utils/dayJs";
 import dayJs from "dayjs";
 import empHandler from "lib/handler/EmpHander";
-import { useLoginCtx } from "store/LoginContext";
+import { useLoginRecoilState } from "atom/LoginHook";
 
 const useToDidWork = (workRecordList) => {
   const [myList, setList] = useState([]);
-  const loginCtx = useLoginCtx();
+  const [, setLoginState] = useLoginRecoilState();
 
   useEffect(() => {
     const fetchMyWork = async () => {
@@ -23,7 +23,9 @@ const useToDidWork = (workRecordList) => {
         return acc + cur.INP_MH;
       }, 0);
 
-      loginCtx.setMH(mh);
+      setLoginState((prev) => {
+        return { ...prev, mh };
+      });
     };
 
     fetchMyWork();

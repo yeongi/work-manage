@@ -1,15 +1,15 @@
-import { useLoginCtx } from "./store/LoginContext";
 import Login from "./page/Login";
 import Main from "./page/Main";
 import { GlobalStyle } from "lib/GlobalStyle";
+import { useLoginRecoilValue } from "atom/LoginHook";
 
 function App() {
-  const loginCtx = useLoginCtx();
+  const loginState = useLoginRecoilValue();
   return (
     <div className="App">
       <GlobalStyle />
-      {!loginCtx.state.IS_LOGIN && <Login />}
-      {loginCtx.state.IS_LOGIN && <Main />}
+      {!loginState.IS_LOGIN && <Login />}
+      {loginState.IS_LOGIN && <Main />}
     </div>
   );
 }
