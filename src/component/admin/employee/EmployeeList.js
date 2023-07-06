@@ -49,9 +49,9 @@ const EmployeeList = ({ empList }) => {
 
             if ("DAY_RECORD" in emp) {
               const { work_type, INP_MH } = emp.DAY_RECORD;
-              content = `금일 시수 투입 여부 : O / 총 투입 시수:${INP_MH} / 작업:${work_type}`;
+              content = `금일 시수 투입 여부 : 🆗 / 총 투입 시수:${INP_MH} / 작업:${work_type}`;
             } else {
-              content = `금일 시수 투입 여부 : X`;
+              content = `금일 시수 투입 여부 : ❌`;
             }
 
             return (

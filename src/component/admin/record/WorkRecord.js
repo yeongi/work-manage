@@ -52,7 +52,7 @@ const WorkRecord = () => {
       );
       break;
     default:
-      workList = <h1>업무 기록이 표시됩니다.</h1>;
+      workList = <p className={classes.main}>업무 기록이 표시됩니다...</p>;
       break;
   }
 

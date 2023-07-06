@@ -46,7 +46,7 @@ const Admin = () => {
           );
         })}
       </section>
-      <section>{myPage}</section>
+      <section className={classes["page-wrapper"]}>{myPage}</section>
     </div>
   );
 };
