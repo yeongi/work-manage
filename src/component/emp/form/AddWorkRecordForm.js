@@ -56,21 +56,21 @@ const AddWorkRecordForm = ({ refreshHandler, addWorkRecordInfo, emp_no }) => {
     INP_MH,
     WORK_CODE,
   }) => {
-    setDisabled(true);
-    const result = await empHandler.addWorkRecord({
-      BLK_SQ,
-      HULL_SQ,
-      INP_MH: Math.floor(INP_MH * 10) / 10,
-      WORK_CODE,
-      DATE_TIME: DATE_TIME.format(),
-      EMP_NO: emp_no,
-    });
-
-    addWorkRecordInfo(result.RECORD_ID);
-
     openModalWithSetting({
       message: "업무기록 제출을 완료하였습니다.",
-      okHandler: () => {
+      okHandler: async () => {
+        setDisabled(true);
+        const result = await empHandler.addWorkRecord({
+          BLK_SQ,
+          HULL_SQ,
+          INP_MH: Math.floor(INP_MH * 10) / 10,
+          WORK_CODE,
+          DATE_TIME: DATE_TIME.format(),
+          EMP_NO: emp_no,
+        });
+
+        addWorkRecordInfo(result.RECORD_ID);
+
         form.resetFields();
         refreshHandler();
         setDisabled(false);
