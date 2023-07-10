@@ -43,7 +43,7 @@ const RecordList = ({
           <Form.Item>
             <Button
               onClick={() => {
-                getBlkWorkRecordList();
+                resetHandler();
                 form.resetFields();
               }}
             >
