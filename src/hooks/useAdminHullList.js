@@ -19,5 +19,11 @@ export const useAdminHullList = () => {
     getHullList();
   }, [getHullList]);
 
-  return { hullList, hullArray, getHullList };
+  const hullTypeArr = hullArray.map(({ HULL_TYPE }) => {
+    return HULL_TYPE.split(" ")[1];
+  });
+
+  const filterHullTypeArr = [...new Set(hullTypeArr)];
+
+  return { hullList, hullArray, filterHullTypeArr, getHullList };
 };

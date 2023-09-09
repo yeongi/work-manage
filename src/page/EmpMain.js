@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import useEmpRecordList from "hooks/useEmpRecordList";
 import useToDidWork from "hooks/useToDidWork";
 import AddWorkRecordForm from "component/emp/form/AddWorkRecordForm";
@@ -8,6 +8,7 @@ import classes from "./EmpMain.module.css";
 import shipURL from "asset/img/ship.jpg";
 import TodayWorkList from "component/emp/record/TodayWorkList";
 import { useLoginRecoilValue } from "atom/LoginHook";
+import empHandler from "lib/handler/EmpHander";
 
 const EmpMain = () => {
   const loginState = useLoginRecoilValue();

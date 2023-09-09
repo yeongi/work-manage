@@ -20,7 +20,6 @@ const Main = () => {
 
   return (
     <div className={classes.wrapper}>
-      <ModalElement />
       <header className={classes["header-wrapper"]}>
         <div className={classes.header}>
           <h1> 하나 이엔티 시수관리 </h1>
@@ -29,6 +28,8 @@ const Main = () => {
           로그아웃 하기
         </Button>
       </header>
+      <ModalElement />
+
       <section className={classes["body-section"]}>
         {loginState.IS_ADMIN ? <Admin /> : <EmpMain />}
       </section>

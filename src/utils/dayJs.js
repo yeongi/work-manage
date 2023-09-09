@@ -26,9 +26,9 @@ export const dayJsMD = (day) => {
   return [month, date].join("-");
 };
 
-export const twoDateDisable = (current) => {
+export const sevenDateDisable = (current) => {
   return !(
-    dayjs().subtract(3, "day") < current && current < dayjs().add(2, "day")
+    dayjs().subtract(7, "day") < current && current < dayjs().add(7, "day")
   );
 };
 

@@ -15,10 +15,15 @@
 .hull-item {
   display: flex;
   flex-wrap: wrap;
+  gap: 2rem;
   justify-content: space-around;
   background-color: white;
   min-width: 700px;
   height: auto;
+}
+
+.hull-item h1 {
+  margin-bottom: 2rem;
 }
 
 .hull-wrapper {

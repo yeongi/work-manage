@@ -6,7 +6,7 @@ import useGetBlkList from "hooks/useGetBlkList";
 import empHandler from "lib/handler/EmpHander";
 import { DForm, DCheckFormItem, DFormItem } from "component/common/form/DForm";
 import { BoldDescription } from "component/common/description/Description";
-import { twoDateDisable, todayDayJs } from "utils/dayJs";
+import { sevenDateDisable, todayDayJs } from "utils/dayJs";
 import classes from "./Form.module.css";
 import { filterListWithHullTypeShipYard } from "lib/Hull";
 
@@ -95,7 +95,7 @@ const AddWorkRecordForm = ({ refreshHandler, addWorkRecordInfo, emp_no }) => {
           <DatePicker
             placeholder="날짜를 선택해주세요"
             initialValues={todayDayJs}
-            disabledDate={twoDateDisable}
+            disabledDate={sevenDateDisable}
             format={format}
           />
         </DCheckFormItem>
