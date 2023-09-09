@@ -9,13 +9,17 @@ import { BoldDescription } from "component/common/description/Description";
 import { sevenDateDisable, todayDayJs } from "utils/dayJs";
 import classes from "./Form.module.css";
 import { filterListWithHullTypeShipYard } from "lib/Hull";
+import { useAdminHullList } from "hooks/useAdminHullList";
 
 const format = "YYYY-MM-DD HH:mm:ss";
 
 const AddWorkRecordForm = ({ refreshHandler, addWorkRecordInfo, emp_no }) => {
   const { hullList, hullArray, blockList, getBlkList } = useGetBlkList();
+  const { filterHullTypeArr } = useAdminHullList();
   const { workList, filteredWorkList, workListFiltered } = useWorkList();
   const [hullInfo, setHullInfo] = useState({ HULL_TYPE: 0, SHIPYARD: 0 });
+
+  const [hullType, setHullType] = useState();
 
   const [componentDisabled, setDisabled] = useState(true);
 
@@ -100,7 +104,20 @@ const AddWorkRecordForm = ({ refreshHandler, addWorkRecordInfo, emp_no }) => {
           />
         </DCheckFormItem>
         <BoldDescription ment={"날짜는 금일 기준 2일까지 선택가능 합니다."} />
-
+        {filterHullTypeArr.map((hullType) => {
+          return (
+            <Button
+              type="dashed"
+              shape="circle"
+              size="nomarl"
+              onClick={() => {
+                setHullType(hullType);
+              }}
+            >
+              {hullType}
+            </Button>
+          );
+        })}
         <DCheckFormItem
           label="HULL_TYPE"
           name="HULL_TYPE"
@@ -110,13 +127,15 @@ const AddWorkRecordForm = ({ refreshHandler, addWorkRecordInfo, emp_no }) => {
             style={{ width: "25vw" }}
             placeholder="조선소/ 선체종류를 선택해주세요."
             onChange={onChangedHullType}
-            options={hullArray.map(({ HULL_TYPE, SHIPYARD, HULL_SQ }) => {
-              return {
-                key: HULL_SQ,
-                label: `선체 종류 : ${HULL_TYPE} / 조선소 : ${SHIPYARD}`,
-                value: HULL_SQ,
-              };
-            })}
+            options={hullArray
+              .filter(({ HULL_TYPE }) => HULL_TYPE.split(" ")[1] === hullType)
+              .map(({ HULL_TYPE, SHIPYARD, HULL_SQ }) => {
+                return {
+                  key: HULL_SQ,
+                  label: `선체 종류 : ${HULL_TYPE} / 조선소 : ${SHIPYARD}`,
+                  value: HULL_SQ,
+                };
+              })}
           ></Select>
         </DCheckFormItem>
         <BoldDescription ment={"선체 종류/조선소를 선택해주세요."} />
