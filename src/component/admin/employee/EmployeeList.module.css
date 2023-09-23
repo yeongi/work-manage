@@ -1,0 +1,26 @@
+.workContainer {
+  display: flex;
+  justify-content: space-around;
+  padding: 0.3rem;
+}
+
+.workFlexBox {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+}
+
+.workDate {
+  font-weight: 300;
+  font-size: 0.8rem;
+}
+
+.workDes {
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.workMh {
+  font-weight: 600;
+  font-size: 1.2rem;
+}

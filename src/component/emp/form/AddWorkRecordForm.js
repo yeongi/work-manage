@@ -104,20 +104,39 @@ const AddWorkRecordForm = ({ refreshHandler, addWorkRecordInfo, emp_no }) => {
           />
         </DCheckFormItem>
         <BoldDescription ment={"날짜는 금일 기준 2일까지 선택가능 합니다."} />
-        {filterHullTypeArr.map((hullType) => {
-          return (
-            <Button
-              type="dashed"
-              shape="circle"
-              size="nomarl"
-              onClick={() => {
-                setHullType(hullType);
-              }}
-            >
-              {hullType}
-            </Button>
-          );
-        })}
+        <div className={classes["filter-wrapper"]}>
+          {filterHullTypeArr.map((hullType) => {
+            if (hullType === "업무") {
+              return (
+                <Button
+                  type="dashed"
+                  shape="circle"
+                  size="nomarl"
+                  onClick={() => {
+                    setHullType(hullType);
+                  }}
+                >
+                  기타업무
+                </Button>
+              );
+            }
+            return (
+              <Button
+                type="dashed"
+                shape="circle"
+                size="nomarl"
+                onClick={() => {
+                  setHullType(hullType);
+                }}
+              >
+                {hullType}
+              </Button>
+            );
+          })}
+        </div>
+        <p>필터를 누르시면 오름 차순으로 정렬됩니다.</p>
+        <br />
+
         <DCheckFormItem
           label="HULL_TYPE"
           name="HULL_TYPE"
@@ -129,6 +148,11 @@ const AddWorkRecordForm = ({ refreshHandler, addWorkRecordInfo, emp_no }) => {
             onChange={onChangedHullType}
             options={hullArray
               .filter(({ HULL_TYPE }) => HULL_TYPE.split(" ")[1] === hullType)
+              .sort(
+                (a, b) =>
+                  parseInt(a.HULL_TYPE.split(" ")[0]) -
+                  parseInt(b.HULL_TYPE.split(" ")[0])
+              )
               .map(({ HULL_TYPE, SHIPYARD, HULL_SQ }) => {
                 return {
                   key: HULL_SQ,

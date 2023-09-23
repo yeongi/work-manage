@@ -1,17 +1,9 @@
 import React from "react";
 import { List } from "antd";
-// import useEmpRecordList from "hooks/useEmpRecordList";
-// import EmpWorkRecord from "emp/record/EmpWorkRecord";
-// import EmpRecordModal from "./EmpRecordModal";
+
+import classes from "./EmployeeList.module.css";
 
 const EmployeeList = ({ empList }) => {
-  // const [EMP_NO, setEmpNo] = useState(0);
-  // const [EMP_NAME, setName] = useState("");
-  // const [workRecordList, getMyWorkRecordList] = useEmpRecordList(EMP_NO);
-  // useEffect(() => {
-  //   if (EMP_NO) getMyWorkRecordList(EMP_NO);
-  // }, [EMP_NO, getMyWorkRecordList]);
-
   return (
     <>
       {/* FIXME: 사원 리스트 안나오는 이슈
@@ -30,28 +22,19 @@ const EmployeeList = ({ empList }) => {
                     title={
                       <>
                         <p>
-                          관리자 :<b>{emp.EMP_NAME}</b>{" "}
+                          관리자 :<strong>{emp.EMP_NAME}</strong>
                         </p>
                         <p>
-                          아이디 :<b>{emp.EMP_NO}</b>{" "}
+                          아이디 :<strong>{emp.EMP_NO}</strong>
                         </p>
                         <p>
-                          비밀번호 :<b>{emp.EMP_PW}</b>{" "}
+                          비밀번호 :<strong>{emp.EMP_PW}</strong>
                         </p>
                       </>
                     }
                   />
                 </List.Item>
               );
-            }
-
-            let content;
-
-            if ("DAY_RECORD" in emp) {
-              const { work_type, INP_MH } = emp.DAY_RECORD;
-              content = `금일 시수 투입 여부 : 🆗 / 총 투입 시수:${INP_MH} / 작업:${work_type}`;
-            } else {
-              content = `금일 시수 투입 여부 : ❌`;
             }
 
             return (
@@ -62,9 +45,23 @@ const EmployeeList = ({ empList }) => {
                       <span>사원명 : {emp.EMP_NAME} /</span>
                       <span>사번(아이디) : {emp.EMP_NO} /</span>
                       <span>비밀번호 : {emp.EMP_PW} </span>
-                      <p>
-                        <strong>{content}</strong>
-                      </p>
+                      <div className={classes.workContainer}>
+                        {emp.record
+                          .map(({ WORK_DATE, INP_MH }) => {
+                            return (
+                              <div className={classes.workFlexBox}>
+                                <p className={classes.workDate}>{WORK_DATE}</p>
+                                <div>
+                                  <p className={classes.workDes}>투입 시수</p>
+                                  <strong className={classes.workMh}>
+                                    {INP_MH}
+                                  </strong>
+                                </div>
+                              </div>
+                            );
+                          })
+                          .reverse()}
+                      </div>
                     </div>
                   }
                 />

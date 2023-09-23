@@ -1,4 +1,6 @@
+const dayjs = require("dayjs");
 const pool = require("../../config/dbConfig");
+const { workRecordArr, dayJsDDMMYYYY } = require("../../lib/dayLib");
 
 module.exports = {
   addEmployee: async (body) => {
@@ -25,30 +27,46 @@ module.exports = {
     try {
       const query = "select EMP_NO, EMP_NAME, EMP_PW, ADMIN from employee";
 
-      //금일 업무 내역 조회
+      // 1주일 업무 내역 조회
       const dayRecordQuery = `
-      SELECT EMP_NO ,EMP_NAME, SUM(INP_MH) as INP_MH, WORK_TYPE 
-      FROM workmanage.ad_work_record
-      where date_format(WORK_DATE, '%y-%m-%d') = date_format(curdate(), '%y-%m-%d')
-      Group by EMP_NAME;
+      SELECT EMP_NO ,EMP_NAME, SUM(INP_MH) AS INP_MH , WORK_DATE
+      FROM workmanage.ad_work_record 
+      WHERE WORK_DATE
+      BETWEEN  DATE_ADD(NOW(), INTERVAL -1 WEEK ) AND NOW()
+      AND EMP_NO = ?
+      GROUP BY WORK_DATE
+      ORDER BY WORK_DATE
+      ;
+      
       `;
-
       const conn = await pool.getConnection();
 
       const [empListRes] = await conn.query(query);
-      const [dayRecordRes] = await conn.query(dayRecordQuery);
 
-      dayRecordRes.forEach((info) => {
-        empListRes.forEach((emp) => {
-          if (info.EMP_NO === emp.EMP_NO) {
-            emp.DAY_RECORD = { work_type: info.WORK_TYPE, INP_MH: info.INP_MH };
-          }
-        });
-      });
+      const work_record = await Promise.all(
+        empListRes.map(async (emp) => {
+          const [dayRecordRes] = await conn.query(dayRecordQuery, [emp.EMP_NO]);
+
+          const tempArray = workRecordArr();
+
+          tempArray.forEach((a) => {
+            const dayWorkDate = dayRecordRes.filter(
+              (b) => a.WORK_DATE === dayJsDDMMYYYY(dayjs(b.WORK_DATE))
+            );
+            a.INP_MH = dayWorkDate.reduce((acc, cur) => {
+              return acc + cur.INP_MH;
+            }, 0);
+          });
+
+          return { ...emp, record: tempArray };
+        })
+      );
+
+      console.log("work_record", work_record);
 
       conn.release();
 
-      return empListRes;
+      return work_record;
     } catch (err) {
       console.log(err);
       return err.message;
