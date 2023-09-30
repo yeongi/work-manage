@@ -13,7 +13,12 @@ import { useAdminHullList } from "hooks/useAdminHullList";
 
 const format = "YYYY-MM-DD HH:mm:ss";
 
-const AddWorkRecordForm = ({ refreshHandler, addWorkRecordInfo, emp_no }) => {
+const AddWorkRecordForm = ({
+  emp_no,
+  isAdmin = false,
+  refreshHandler = () => {},
+  addWorkRecordInfo = () => {},
+}) => {
   const { hullList, hullArray, blockList, getBlkList } = useGetBlkList();
   const { filterHullTypeArr } = useAdminHullList();
   const { workList, filteredWorkList, workListFiltered } = useWorkList();
@@ -60,6 +65,13 @@ const AddWorkRecordForm = ({ refreshHandler, addWorkRecordInfo, emp_no }) => {
     INP_MH,
     WORK_CODE,
   }) => {
+    if (!emp_no) {
+      openModalWithSetting({
+        message: "사원을 입력해주세요",
+      });
+      return;
+    }
+
     openModalWithSetting({
       message: "업무기록 제출을 완료하였습니다.",
       okHandler: async () => {
@@ -99,7 +111,7 @@ const AddWorkRecordForm = ({ refreshHandler, addWorkRecordInfo, emp_no }) => {
           <DatePicker
             placeholder="날짜를 선택해주세요"
             initialValues={todayDayJs}
-            disabledDate={sevenDateDisable}
+            disabledDate={!isAdmin && sevenDateDisable}
             format={format}
           />
         </DCheckFormItem>

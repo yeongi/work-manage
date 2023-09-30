@@ -1,11 +1,15 @@
 import { useState } from "react";
+
 import EmpManage from "component/admin/employee/EmpManage";
 import HullManage from "component/admin/hull/HullManage";
 import WorkRecord from "component/admin/record/WorkRecord";
+import { WorkRecordAdmin } from "component/admin/workRecordAdmin/WorkRecordAdmin";
+
 import classes from "./Admin.module.css";
 
 const pageArr = [
   { id: "HULL/BLOCK", name: "선체/블록 관리" },
+  { id: "WORK/RECORD", name: "업무기록 넣기" },
   { id: "WORK", name: "업무기록 조회" },
   { id: "EMPLOYEE", name: "사원 관리" },
 ];
@@ -24,6 +28,9 @@ const Admin = () => {
       break;
     case "EMPLOYEE":
       myPage = <EmpManage />;
+      break;
+    case "WORK/RECORD":
+      myPage = <WorkRecordAdmin />;
       break;
     default:
       myPage = <h1>페이지를 선택 하세요.</h1>;
